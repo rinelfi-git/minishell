@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 09:55:03 by erijania         ###   ########.fr       */
+/*   Created: 2024/02/22 18:17:58 by erijania          #+#    #+#             */
+/*   Updated: 2024/02/23 21:55:14 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_strchr(const char *s, int c)
 {
-	t_mini	minishell;
-
-	(void)ac;
-	(void)av;
-	minishell_init(&minishell);
-	minishell_env(&minishell, env);
-	return (0);
+	return (ft_memchr(s, c, ft_strlen(s) + 1));
 }

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 09:55:03 by erijania         ###   ########.fr       */
+/*   Created: 2024/02/20 19:05:37 by erijania          #+#    #+#             */
+/*   Updated: 2024/02/25 18:33:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+size_t	ft_strlen(const char *s)
 {
-	t_mini	minishell;
+	size_t	ret;
 
-	(void)ac;
-	(void)av;
-	minishell_init(&minishell);
-	minishell_env(&minishell, env);
-	return (0);
+	ret = 0;
+	while (s[ret])
+		ret++;
+	return (ret);
 }

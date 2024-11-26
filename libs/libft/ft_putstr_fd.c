@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 09:55:03 by erijania         ###   ########.fr       */
+/*   Created: 2024/02/23 09:35:42 by erijania          #+#    #+#             */
+/*   Updated: 2024/02/23 09:40:17 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_mini	minishell;
-
-	(void)ac;
-	(void)av;
-	minishell_init(&minishell);
-	minishell_env(&minishell, env);
-	return (0);
+	while (*s)
+		ft_putchar_fd(*(s++), fd);
 }

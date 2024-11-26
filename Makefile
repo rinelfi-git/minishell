@@ -1,20 +1,29 @@
 NAME = minishell
 CC = cc
 CARG = -Werror -Wextra -Wall
-SRCs = src/main.c
+SRCs = src/main.c \
+		src/core/minishell_init.c
 OBJs = $(SRCs:.c=.o)
-INCs = include
+INCs = -Iinclude \
+		-Ilibs/libft
+LIBs = -Llibs/libft -lft
+FT = libs/libft/libft.a
 
-$(NAME) : $(OBJs)
-	$(CC) $(CARG) $(INCs) $(OBJs) -o $@
+$(NAME) : $(OBJs) $(FT)
+	$(CC) $(CARG) $(LIBs) $(INCs) $(OBJs) -o $@
+
+$(FT) :
+	make -C libs/libft
 
 all : $(NAME)
 
 clean :
 	rm -rf $(OBJs)
+	rm -rf libs/libft/*.o
 
 fclean : clean
 	rm -rf $(NAME)
+	rm -rf libs/libft/libft.a
 
 re : fclean all
 

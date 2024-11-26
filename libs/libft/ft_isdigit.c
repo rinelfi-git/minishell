@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 09:55:03 by erijania         ###   ########.fr       */
+/*   Created: 2024/02/20 18:44:32 by erijania          #+#    #+#             */
+/*   Updated: 2024/02/21 09:04:58 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int	main(int ac, char **av, char **env)
+int	ft_isdigit(int c)
 {
-	t_mini	minishell;
-
-	(void)ac;
-	(void)av;
-	minishell_init(&minishell);
-	minishell_env(&minishell, env);
-	return (0);
+	return (c >= '0' && c <= '9');
 }

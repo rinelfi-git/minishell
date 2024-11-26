@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 09:24:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/26 09:54:31 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,7 @@ struct s_env
 	char	*value;
 	t_env	*next;
 };
+
+void	minishell_init(t_mini *mini);
+void	minishell_env(t_mini *mini, char **env);
 #endif

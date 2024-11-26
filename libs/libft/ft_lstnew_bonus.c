@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 09:55:03 by erijania         ###   ########.fr       */
+/*   Created: 2024/02/23 10:00:07 by erijania          #+#    #+#             */
+/*   Updated: 2024/02/25 14:27:23 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	main(int ac, char **av, char **env)
+t_list	*ft_lstnew(void *content)
 {
-	t_mini	minishell;
+	t_list	*ret;
 
-	(void)ac;
-	(void)av;
-	minishell_init(&minishell);
-	minishell_env(&minishell, env);
-	return (0);
+	ret = (t_list *)malloc(sizeof(t_list));
+	if (!ret)
+		return (NULL);
+	ret->content = content;
+	ret->next = NULL;
+	return (ret);
 }
