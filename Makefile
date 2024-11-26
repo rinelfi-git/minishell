@@ -10,7 +10,7 @@ LIBs = -Llibs/libft -lft
 FT = libs/libft/libft.a
 
 $(NAME) : $(OBJs) $(FT)
-	$(CC) $(CARG) $(LIBs) $(INCs) $(OBJs) -o $@
+	$(CC) $(CARG) $(OBJs) $(LIBs) -o $@
 
 $(FT) :
 	make -C libs/libft

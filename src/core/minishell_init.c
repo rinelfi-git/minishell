@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 09:56:22 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/26 10:08:31 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static void	create_env(t_env **head, char *var)
 	while (var[limits[0]] && var[limits[0]] != '=')
 		limits[0]++;
 	name = ft_substr(var, 0, limits[0]);
-	limits[1] = limits[0];
+	limits[1] = ++limits[0];
 	while (var[limits[1]])
 		limits[1]++;
 	value = ft_substr(var, limits[0], limits[1]);
 	last_env = head;
-	while (last_env)
+	while (*last_env)
 		last_env = &((*last_env)->next);
 	*last_env = (t_env *)malloc(sizeof(t_env));
 	if (!(*last_env))
