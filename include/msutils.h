@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   msutils.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/28 08:43:41 by erijania         ###   ########.fr       */
+/*   Created: 2024/11/28 08:52:26 by erijania          #+#    #+#             */
+/*   Updated: 2024/11/28 09:13:16 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MSUTILS_H
+# define MSUTILS_H
 
-int	main(int ac, char **av, char **env)
-{
-	t_mini	minishell;
-
-	(void)ac;
-	(void)av;
-	minishell_init(&minishell);
-	minishell_env(&minishell, env);
-	prompt(&minishell);
-	return (minishell.ret);
-}
+void	str_append(char **dest, char *src);
+#endif

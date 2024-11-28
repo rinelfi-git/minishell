@@ -6,13 +6,14 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 10:04:51 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/28 09:19:17 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdio.h>
+# define PATH_LEN 1024
 
 typedef struct s_minishell	t_mini;
 typedef struct s_env		t_env;
@@ -32,4 +33,6 @@ struct s_env
 
 void	minishell_init(t_mini *mini);
 void	minishell_env(t_mini *mini, char **env);
+void	prompt(t_mini *mini);
+char	*ft_getenv(char *var, t_mini *mini);
 #endif

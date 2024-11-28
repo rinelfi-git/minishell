@@ -2,11 +2,15 @@ NAME = minishell
 CC = cc
 CARG = -Werror -Wextra -Wall
 SRCs = src/main.c \
-		src/core/minishell_init.c
+		src/core/env.c \
+		src/core/init.c \
+		src/core/prompt.c \
+		src/utils/string.c
 OBJs = $(SRCs:.c=.o)
 INCs = -Iinclude \
 		-Ilibs/libft
-LIBs = -Llibs/libft -lft
+LIBs = -Llibs/libft -lft \
+		-lreadline
 FT = libs/libft/libft.a
 
 $(NAME) : $(OBJs) $(FT)

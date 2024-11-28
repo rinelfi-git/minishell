@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/28 08:43:41 by erijania         ###   ########.fr       */
+/*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
+/*   Updated: 2024/11/28 09:09:55 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+char	*ft_getenv(char *var, t_mini *mini)
 {
-	t_mini	minishell;
+	char	*val;
+	t_env	*loop;
+	size_t	length;
 
-	(void)ac;
-	(void)av;
-	minishell_init(&minishell);
-	minishell_env(&minishell, env);
-	prompt(&minishell);
-	return (minishell.ret);
+	loop = mini->env;
+	val = 0;
+	length = ft_strlen(var);
+	while (loop && !val)
+	{
+		if (ft_strncmp(loop->name, var, length) == 0)
+			val = loop->value;
+		loop = loop->next;
+	}
+	return (val);
 }
