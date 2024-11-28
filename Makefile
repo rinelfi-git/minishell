@@ -4,7 +4,11 @@ CARG = -Werror -Wextra -Wall
 SRCs = src/main.c \
 		src/core/env.c \
 		src/core/init.c \
+		src/core/list_token.c \
 		src/core/prompt.c \
+		src/core/token.c \
+		src/utils/is.c \
+		src/utils/quote.c \
 		src/utils/string.c
 OBJs = $(SRCs:.c=.o)
 INCs = -Iinclude \

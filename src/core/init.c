@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_init.c                                   :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/26 10:08:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:34:18 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	create_env(t_env **head, char *var)
 	last_env = head;
 	while (*last_env)
 		last_env = &((*last_env)->next);
-	*last_env = (t_env *)malloc(sizeof(t_env));
+	*last_env = malloc(sizeof(t_env));
 	if (!(*last_env))
 		exit(1);
 	(*last_env)->name = name;
@@ -44,6 +44,7 @@ void	minishell_init(t_mini *mini)
 {
 	mini->ret = 0;
 	mini->env = 0;
+	mini->token = 0;
 }
 
 void	minishell_env(t_mini *mini, char **env)
