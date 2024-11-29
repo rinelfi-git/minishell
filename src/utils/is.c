@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/28 15:16:22 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:30:03 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_special(char *str)
 	size_t	len;
 
 	if (!str || !(*str))
-			return (0);
+		return (0);
 	len = ft_strlen(str);
 	if (len >= 2)
 	{
