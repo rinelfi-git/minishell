@@ -8,9 +8,13 @@ SRCs = src/main.c \
 		src/builtins/export.c \
 		src/builtins/pwd.c \
 		src/builtins/unset.c \
+		src/core/cmd_args.c \
+		src/core/cmd_fd.c \
 		src/core/cmd_path.c \
 		src/core/env.c \
+		src/core/cmd.c \
 		src/core/init.c \
+		src/core/list_cmd.c \
 		src/core/list_token.c \
 		src/core/prompt.c \
 		src/core/token.c \

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 10:31:28 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:52:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static char	*get_input(t_mini *mini)
 void	prompt(t_mini *mini)
 {
 	char	*in;
-	t_token	*loop;
 
 	while (1)
 	{
@@ -74,12 +73,7 @@ void	prompt(t_mini *mini)
 		if (!in)
 			break ;
 		create_token_list(&(mini->token), in);
-		loop = mini->token;
-		while (loop)
-		{
-			printf("[%s]\n", loop->str);
-			loop = loop->next;
-		}
+		create_cmd_list(mini);
 		add_history(in);
 		free(in);
 	}
