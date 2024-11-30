@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 12:17:04 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:37:22 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ struct s_token
 {
 	char	*str;
 	int		type;
-	int		expand;
 	t_token	*prev;
 	t_token	*next;
 };
@@ -69,6 +68,7 @@ void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
 void	prompt(t_mini *mini);
 char	*ft_getenv(t_mini *mini, char *var);
+char	**env_array(t_mini *mini);
 void	create_token_list(t_token **head, char *line);
 t_token	*token_append(t_token **head, char *str, int type);
 void	create_cmd_list(t_mini *mini);
@@ -78,4 +78,7 @@ char	*get_path(t_mini *mini, char *exe);
 int		get_fdin(t_token *token);
 int		get_fdout(t_token *token);
 void    built_env(t_mini *mini);
+void	mini_exec(t_mini *mini);
+void	free_lst_cmd(t_mini *mini);
+void	free_lst_token(t_mini *mini);
 #endif
