@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 16:16:20 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:21:16 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,30 @@ static void	redirect_in_out(t_cmd *cmd, int *pp)
 	close(pp[1]);
 }
 
+static void	fork_builtin(t_mini *mini, t_cmd *cmd, int *pp)
+{
+	close(pp[0]);
+	if (cmd->fd_out < 0 && cmd->next)
+		cmd->fd_out = pp[1];
+	else
+		close(pp[1]);
+	builtin(mini, cmd);
+}
+
 static void	child_process(t_mini *mini, t_cmd *cmd, int *pp)
 {
 	char	*path;
 	char	**env;
 
-	redirect_in_out(cmd, pp);
-	path = get_path(mini, cmd->args[0]);
-	env = env_array(mini);
-	execve(path, cmd->args, env);
+	if (is_builtin(cmd))
+		fork_builtin(mini, cmd, pp);
+	else
+	{
+		redirect_in_out(cmd, pp);
+		path = get_path(mini, cmd->args[0]);
+		env = env_array(mini);
+		execve(path, cmd->args, env);
+	}
 }
 
 static void	parent_process(t_cmd *cmd, int *pp)
@@ -63,9 +78,10 @@ void	mini_exec(t_mini *mini)
 	t_cmd	*cmd;
 
 	cmd = mini->cmd;
-	while (cmd)
-	{
-		if (!builtin(mini, cmd))
+	if (cmd && !cmd->next && is_builtin(cmd))
+		builtin(mini, cmd);
+	else
+		while (cmd)
 		{
 			pipe(fds);
 			pid = fork();
@@ -73,8 +89,7 @@ void	mini_exec(t_mini *mini)
 				child_process(mini, cmd, fds);
 			else if (pid > 0)
 				parent_process(cmd, fds);
+			cmd = cmd->next;
 			wait(0);
 		}
-		cmd = cmd->next;
-	}
 }

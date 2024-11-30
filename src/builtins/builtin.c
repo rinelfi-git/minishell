@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 16:26:02 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 17:18:26 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <limits.h>
 #define BUILTIN_LEN 6
 
-static int	is_builtin(t_cmd *cmd)
+int	is_builtin(t_cmd *cmd)
 {
 	char	*bins[BUILTIN_LEN];
 	int		i;
