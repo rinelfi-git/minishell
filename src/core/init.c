@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/28 16:34:18 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 07:37:00 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static void	create_env(t_env **head, char *var)
 	(*last_env)->next = 0;
 }
 
-void	minishell_init(t_mini *mini)
+void	data_init(t_mini *mini)
 {
 	mini->ret = 0;
 	mini->env = 0;
 	mini->token = 0;
 }
 
-void	minishell_env(t_mini *mini, char **env)
+void	data_env(t_mini *mini, char **env)
 {
 	int	i;
 
