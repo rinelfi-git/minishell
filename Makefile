@@ -12,6 +12,7 @@ SRCs = src/main.c \
 		src/core/cmd_fd.c \
 		src/core/cmd_path.c \
 		src/core/env.c \
+		src/core/exec.c \
 		src/core/cmd.c \
 		src/core/init.c \
 		src/core/list_cmd.c \

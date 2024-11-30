@@ -6,14 +6,30 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:39:10 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 11:52:41 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 13:58:50 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "minishell.h"
 #include "msutils.h"
 #include "libft.h"
+#include <stdlib.h>
+
+void	free_lst_token(t_mini *mini)
+{
+	t_token	*next;
+	t_token	*tmp;
+
+	tmp = mini->token;
+	while (tmp)
+	{
+		next = tmp->next;
+		free(tmp->str);
+		free(tmp);
+		tmp = next;
+	}
+	mini->token = 0;
+}
 
 static int	command_length(char *line)
 {
