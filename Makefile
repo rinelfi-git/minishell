@@ -2,6 +2,7 @@ NAME = minishell
 CC = cc
 CARG = -Werror -Wextra -Wall
 SRCs = src/main.c \
+		src/builtins/builtin.c \
 		src/builtins/cd.c \
 		src/builtins/echo.c \
 		src/builtins/env.c \
@@ -13,6 +14,7 @@ SRCs = src/main.c \
 		src/core/cmd_path.c \
 		src/core/env.c \
 		src/core/exec.c \
+		src/core/heredoc.c \
 		src/core/cmd.c \
 		src/core/init.c \
 		src/core/list_cmd.c \
