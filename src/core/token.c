@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:39:10 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/28 16:37:24 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 11:52:41 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void	add_special(t_token **head, char **line)
 void	create_token_list(t_token **head, char *line)
 {
 	*head = 0;
+	while (is_space(*line))
+		line++;
 	while (*line)
 	{
 		while (is_space(*line))
