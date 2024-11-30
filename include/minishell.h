@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 08:20:42 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:11:07 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ struct s_token
 void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
 void	prompt(t_mini *mini);
-char	*ft_getenv(char *var, t_mini *mini);
+char	*ft_getenv(t_mini *mini, char *var);
 void	token_append(t_token **head, char *str, int type);
 void	create_token_list(t_token **head, char *line);
+char	*get_path(t_mini *mini, char *exe);
 void    built_env(t_mini *mini);
 #endif

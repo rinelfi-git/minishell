@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 08:23:26 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:13:19 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*get_prompt(t_mini *mini)
 	char	*temp;
 	char	*out;
 
-	user = ft_getenv("USER", mini);
+	user = ft_getenv(mini, "USER");
 	out = ft_strjoin("\033[0;32m", user);
 	str_append(&out, "@minishell\033[0m:");
 	if (getcwd(path, PATH_LEN))

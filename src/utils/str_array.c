@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   str_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 09:39:44 by erijania         ###   ########.fr       */
+/*   Created: 2024/11/30 09:47:20 by erijania          #+#    #+#             */
+/*   Updated: 2024/11/30 09:48:55 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "libft.h"
+#include <stdlib.h>
 
-char	*ft_getenv(t_mini *mini, char *var)
+void	free_strarray(char **array)
 {
-	char	*val;
-	t_env	*loop;
-	size_t	length;
+	int	i;
 
-	loop = mini->env;
-	val = 0;
-	length = ft_strlen(var);
-	while (loop && !val)
-	{
-		if (ft_strncmp(loop->name, var, length) == 0)
-			val = loop->value;
-		loop = loop->next;
-	}
-	return (val);
+	i = 0;
+	while (array && array[i])
+		free(array[i++]);
+	free(array);
 }
