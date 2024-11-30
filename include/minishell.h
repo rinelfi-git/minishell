@@ -6,22 +6,26 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 10:11:07 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:35:48 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include <stdio.h>
-# define PATH_LEN	1024
+# define PATH_LEN		1024
 
-# define CMD		1
-# define ARG		2
-# define PIPE		3
-# define INPUT		4
-# define HEREDOC	5
-# define TRUNC		6
-# define APPEND		7
+# define TERM_PRIMARY	"\033[0m\033[1;91m"
+# define TERM_SECONDARY	"\033[0m\033[92m"
+# define TERM_DEFAULT	"\033[0m"
+
+# define CMD			1
+# define ARG			2
+# define PIPE			3
+# define INPUT			4
+# define HEREDOC		5
+# define TRUNC			6
+# define APPEND			7
 
 typedef struct s_minishell	t_mini;
 typedef struct s_env		t_env;
