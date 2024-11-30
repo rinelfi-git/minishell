@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_token.c                                       :+:      :+:    :+:   */
+/*   list_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 15:57:09 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 11:03:31 by erijania         ###   ########.fr       */
+/*   Created: 2024/11/30 10:41:38 by erijania          #+#    #+#             */
+/*   Updated: 2024/11/30 11:44:59 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdlib.h>
 
-static int	token_new(t_token **out, char *str, int type)
+static int	cmd_new(t_cmd **out)
 {
-	if (!str)
-		return (0);
-	(*out) = malloc(sizeof(t_token));
+	(*out) = malloc(sizeof(t_cmd));
 	if (!(*out))
 		return (0);
-	(*out)->str = str;
-	(*out)->type = type;
+	(*out)->args = 0;
+	(*out)->fd_in = -2;
+	(*out)->fd_out = -2;
 	(*out)->prev = 0;
 	(*out)->next = 0;
 	return (1);
 }
 
-t_token	*token_append(t_token **head, char *str, int type)
+t_cmd	*cmd_append(t_cmd **head)
 {
-	t_token	*new;
-	t_token	**last;
+	t_cmd	*new;
+	t_cmd	**last;
 
-	if (!token_new(&new, str, type))
+	if (!cmd_new(&new))
 		return (0);
 	if (!(*head))
 		*head = new;
@@ -42,7 +41,7 @@ t_token	*token_append(t_token **head, char *str, int type)
 		while ((*last))
 		{
 			new->prev = *last;
-			last = &(*last)->next;
+			last = &((*last)->next);
 		}
 		(*last) = new;
 	}
