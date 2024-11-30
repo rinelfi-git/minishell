@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 10:13:19 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:31:28 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ static char	*get_prompt(t_mini *mini)
 	char	*out;
 
 	user = ft_getenv(mini, "USER");
-	out = ft_strjoin("\033[0;32m", user);
-	str_append(&out, "@minishell\033[0m:");
+	out = ft_strjoin(TERM_PRIMARY, user);
+	str_append(&out, "@minishell"TERM_DEFAULT"["TERM_SECONDARY);
 	if (getcwd(path, PATH_LEN))
 	{
 		temp = ft_strjoin("/home/", user);
 		if (ft_strncmp(temp, path, ft_strlen(temp)) == 0)
 		{
-			str_append(&out, "\033[34m~");
+			str_append(&out, TERM_SECONDARY"~");
 			str_append(&out, path + ft_strlen(temp));
 		}
 		else
 		{
-			str_append(&out, "\033[34m");
+			str_append(&out, TERM_SECONDARY);
 			str_append(&out, path);
 		}
 		free(temp);
 	}
-	str_append(&out, "\033[0m $ ");
+	str_append(&out, TERM_DEFAULT"]$ ");
 	return (out);
 }
 
