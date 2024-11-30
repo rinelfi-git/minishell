@@ -8,6 +8,7 @@ SRCs = src/main.c \
 		src/builtins/export.c \
 		src/builtins/pwd.c \
 		src/builtins/unset.c \
+		src/core/cmd_path.c \
 		src/core/env.c \
 		src/core/init.c \
 		src/core/list_token.c \
@@ -15,6 +16,7 @@ SRCs = src/main.c \
 		src/core/token.c \
 		src/utils/is.c \
 		src/utils/quote.c \
+		src/utils/str_array.c \
 		src/utils/string.c
 OBJs = $(SRCs:.c=.o)
 INCs = -Iinclude \
