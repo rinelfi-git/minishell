@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 07:37:00 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 08:20:42 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	prompt(t_mini *mini);
 char	*ft_getenv(char *var, t_mini *mini);
 void	token_append(t_token **head, char *str, int type);
 void	create_token_list(t_token **head, char *line);
+void    built_env(t_mini *mini);
 #endif
