@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 19:13:31 by erijania         ###   ########.fr       */
+/*   Created: 2024/11/30 18:45:52 by erijania          #+#    #+#             */
+/*   Updated: 2024/11/30 19:14:34 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <sys/types.h>
 
-int	main(int ac, char **av, char **env)
+int	pid_signal_manager(pid_t pid, int mode)
 {
-	t_mini	mini;
-
-	(void)ac;
-	(void)av;
-	data_init(&mini);
-	data_env(&mini, env);
-	prompt(&mini);
-	return (mini.exit_code);
+	static pid_t	pid_storage = 0;
+	
+	if (mode == SET_MODE)
+		pid_storage = pid;
+	else if (mode == GET_MODE)
+		return (pid_storage);
+	return (-2);
 }

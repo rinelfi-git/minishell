@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 17:18:26 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:14:56 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,15 @@ int	builtin(t_mini *mini, t_cmd *cmd)
 
 	if (!is_builtin(cmd))
 		return (0);
+	tmp_out = -1;
 	if (cmd->fd_out >= 0)
 	{
 		tmp_out = dup(STDOUT_FILENO);
 		dup2(cmd->fd_out, STDOUT_FILENO);
+		close(cmd->fd_out);
 	}
 	execute_builtin(mini, cmd);
-	if (cmd->fd_out >= 0)
+	if (tmp_out >= 0)
 	{
 		dup2(tmp_out, STDOUT_FILENO);
 		close(tmp_out);

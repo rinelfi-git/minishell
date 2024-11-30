@@ -14,12 +14,14 @@ SRCs = src/main.c \
 		src/core/cmd_path.c \
 		src/core/env.c \
 		src/core/exec.c \
+		src/core/exec2.c \
 		src/core/heredoc.c \
 		src/core/cmd.c \
 		src/core/init.c \
 		src/core/list_cmd.c \
 		src/core/list_token.c \
 		src/core/prompt.c \
+		src/core/signal.c \
 		src/core/token.c \
 		src/utils/free.c \
 		src/utils/is.c \

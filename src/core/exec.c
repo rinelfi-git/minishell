@@ -6,12 +6,12 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 17:21:16 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 20:59:11 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 #include "libft.h"
+#include "minishell.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -58,6 +58,7 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pp)
 		env = env_array(mini);
 		execve(path, cmd->args, env);
 	}
+	exit(mini->exit_code);
 }
 
 static void	parent_process(t_cmd *cmd, int *pp)
@@ -81,15 +82,20 @@ void	mini_exec(t_mini *mini)
 	if (cmd && !cmd->next && is_builtin(cmd))
 		builtin(mini, cmd);
 	else
+	{
 		while (cmd)
 		{
 			pipe(fds);
 			pid = fork();
+			pid_signal_manager(pid, SET_MODE);
+			wait(0);
 			if (pid == 0)
 				child_process(mini, cmd, fds);
 			else if (pid > 0)
+			{
 				parent_process(cmd, fds);
-			cmd = cmd->next;
-			wait(0);
+				cmd = cmd->next;
+			}
 		}
+	}
 }

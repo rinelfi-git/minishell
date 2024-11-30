@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:41:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 11:44:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 18:59:32 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,17 @@ t_cmd	*cmd_append(t_cmd **head)
 		(*last) = new;
 	}
 	return (new);
+}
+
+int	cmd_length(t_cmd *head)
+{
+	int	i;
+
+	i = 0;
+	while (head)
+	{
+		head = head->next;
+		i++;
+	}
+	return (i);
 }

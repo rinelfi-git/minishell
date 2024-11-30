@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 10:41:07 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 19:13:31 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	create_env(t_env **head, char *var)
 
 void	data_init(t_mini *mini)
 {
-	mini->ret = 0;
+	mini->exit_code = 0;
 	mini->env = 0;
 	mini->token = 0;
 	mini->cmd = 0;

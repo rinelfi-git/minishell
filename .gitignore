@@ -2,3 +2,4 @@
 .vscode/
 test/
 *.[ao]
+*.fuse_*

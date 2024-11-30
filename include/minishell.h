@@ -6,12 +6,16 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 16:59:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/11/30 21:01:24 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
 # define PATH_LEN		1024
 
@@ -27,13 +31,16 @@
 # define TRUNC			6
 # define APPEND			7
 
+# define SET_MODE		1
+# define GET_MODE		2
+
 typedef struct s_minishell	t_mini;
 typedef struct s_env		t_env;
 typedef struct s_token		t_token;
 typedef struct s_cmd		t_cmd;
 struct s_minishell
 {
-	int		ret;
+	int		exit_code;
 	t_env	*env;
 	t_token	*token;
 	t_cmd	*cmd;
@@ -63,7 +70,7 @@ struct s_cmd
 	t_cmd	*prev;
 };
 
-
+int		pid_signal_manager(pid_t pid, int mode);
 void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
 void	prompt(t_mini *mini);
@@ -74,6 +81,7 @@ t_token	*token_append(t_token **head, char *str, int type);
 void	create_cmd_list(t_mini *mini);
 t_cmd	*cmd_append(t_cmd **head);
 char	**get_cmd_params(t_token *token);
+int		cmd_length(t_cmd *head);
 char	*get_path(t_mini *mini, char *exe);
 int		get_fdin(t_token *token);
 int		get_fdout(t_token *token);
