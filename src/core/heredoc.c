@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 14:01:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:28:00 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,20 @@ static void	read_process(t_doc *doc, int *pp)
 	line = 0;
 	while (1)
 	{
-		line = readline(">");
+		line = readline(" > ");
 		if (!line)
-			continue ;
+		{
+			free(line);
+			break ;
+		}
 		if (ft_strncmp(doc->delimiter, line, INT_MAX) == 0)
 			break ;
 		str_append(&line, "\n");
 		write(pp[1], line, ft_strlen(line));
 		free(line);
 	}
-	free(line);
+	if (line)
+		free(line);
 }
 
 static void	heredoc(t_doc *doc)
@@ -40,7 +44,6 @@ static void	heredoc(t_doc *doc)
 
 	pipe(fd);
 	pid = fork();
-	waitpid(pid, 0, 0);
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -48,6 +51,8 @@ static void	heredoc(t_doc *doc)
 		close(fd[1]);
 		exit(0);
 	}
+	wait(0);
+	close(fd[1]);
 	doc->fd = fd[0];
 }
 
