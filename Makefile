@@ -22,9 +22,9 @@ SRCs = src/main.c \
 		src/core/heredoc.c \
 		src/core/init.c \
 		src/core/prompt.c \
-		src/utils/free.c \
 		src/utils/is.c \
 		src/utils/quote.c \
+		src/utils/str_array.c \
 		src/utils/string.c
 OBJs = $(SRCs:.c=.o)
 INCs = -Iinclude \

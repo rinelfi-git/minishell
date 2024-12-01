@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 14:43:19 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:25:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,12 @@ int		pid_signal_manager(pid_t pid, int mode);
 void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
 void	prompt(t_mini *mini);
+
 char	*ft_getenv(t_env *mini, char *var);
 char	**env_array(t_mini *mini);
+t_env	*append_env(t_env **head);
+t_env	*env_get(t_env **head, char *name);
+
 void	create_token_list(t_token **head, char *line);
 t_token	*token_append(t_token **head, char *str, int type);
 void	create_cmd_list(t_mini *mini);

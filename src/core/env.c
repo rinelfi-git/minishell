@@ -6,14 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 08:28:33 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:28:10 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 #include "msutils.h"
-#include <stdlib.h>
 
 static int	env_length(t_env *env)
 {
@@ -67,4 +66,43 @@ char	*ft_getenv(t_env *env, char *var)
 		env = env->next;
 	}
 	return (val);
+}
+
+t_env	*append_env(t_env **head)
+{
+	t_env	*new;
+	t_env	*tmp;
+
+	if (!head)
+		return (0);
+	new = malloc(sizeof(t_env));
+	if (!new)
+		return (0);
+	new->name = 0;
+	new->value = 0;
+	new->next = 0;
+	if (!(*head))
+		*head = new;
+	else
+	{
+		tmp = *head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	return (new);
+}
+
+t_env	*env_get(t_env **head, char *name)
+{
+	t_env *env;
+
+	env = *head;
+	while (env)
+	{
+		if (ft_strncmp(name, env->name, INT_MAX) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   str_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 09:47:20 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 08:24:16 by erijania         ###   ########.fr       */
+/*   Created: 2024/12/01 15:56:51 by erijania          #+#    #+#             */
+/*   Updated: 2024/12/01 15:58:18 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,14 @@ void	free_strarray(char **array)
 	while (array && array[i])
 		free(array[i++]);
 	free(array);
+}
+
+int	len_strarray(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array && array[i])
+		i++;
+	return (i);
 }

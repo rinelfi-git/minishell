@@ -6,21 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 15:24:44 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:33:23 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	arg_len(char **array)
-{
-	int	i;
-
-	i = 0;
-	while (array && array[i])
-		i++;
-	return (i);
-}
+#include "libft.h"
+#include "msutils.h"
 
 static void	print_env(t_env *env)
 {
@@ -35,18 +27,65 @@ static void	print_env(t_env *env)
 	}
 }
 
+static int	has_value(char *str)
+{
+	while (*str)
+	{
+		if (*(str++) == '=')
+			return (1);
+	}
+	return (0);
+}
+
+static int	do_export(t_env *env, char *str)
+{
+	int		i;
+	char	*var;
+	t_env	*get;
+
+	i = 0;
+	get = 0;
+	if (!has_value(str) && !ft_getenv(env, str))
+		append_env(&env)->name = ft_strdup(str);
+	else
+	while (str[i] && !get)
+	{
+		if (str[i] == '=')
+		{
+			var = ft_substr(str, 0, i);
+			get = env_get(&env, var);
+			if (get)
+			{
+				free(get->value);
+				get->value = ft_substr(str, i + 1, ft_strlen(str + i));
+			}
+			else
+			{
+				get = append_env(&env);
+				get->name = ft_strdup(var);
+				get->value = ft_substr(str, i + 1, ft_strlen(str + i));
+			}
+			free(var);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	    built_export(t_env *env, char **args)
 {
 	int	i;
-	int	len;
 
-	len = arg_len(args);
-	if (len == 1)
+	if (len_strarray(args) == 1)
 		print_env(env);
 	else
 	{
+		i = 1;
 		while (args[i])
-			printf("ENV[%s]\n", args[i++]);	
+		{
+			if (!do_export(env, args[i++]))
+				return (0);
+		}
 	}
 	return (1);
 }
