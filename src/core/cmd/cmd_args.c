@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:27:04 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 09:16:54 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 11:38:17 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ char	**get_cmd_params(t_token *token)
 	{
 		if (is_special(token->str) && token->type != PIPE && token->next)
 			token = token->next->next;
-		if (!append_arg(&out, token->str))
+		else if (token && !append_arg(&out, token->str))
 		{
 			free_strarray(out);
 			return (0);
 		}
-		token = token->next;
+		else if (token)
+			token = token->next;
 	}
 	return (out);
 }

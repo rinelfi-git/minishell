@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:57:09 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 11:03:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 11:18:59 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_token	*token_append(t_token **head, char *str, int type)
 			last = &(*last)->next;
 		}
 		(*last) = new;
+		if (new->prev->type == PIPE)
+			new->type = CMD;
 	}
 	return (new);
 }
