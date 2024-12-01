@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 16:36:33 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 23:10:17 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,24 @@ void	data_init(t_mini *mini)
 	mini->env_array = 0;
 	mini->token = 0;
 	mini->cmd = 0;
+}
+
+void	data_free(t_mini *mini)
+{
+	t_env	*env;
+	t_env	*next;
+	
+	env = mini->env_list;
+	while (env)
+	{
+		next = env->next;
+		if (env->name)
+			free(env->name);
+		if (env->value)
+			free(env->value);
+		free(env);
+		env = next;
+	}
 }
 
 void	data_env(t_mini *mini, char **env)

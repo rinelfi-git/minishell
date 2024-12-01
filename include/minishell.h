@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 16:42:29 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 23:15:10 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ struct s_doc
 int		pid_signal_manager(pid_t pid, int mode);
 void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
+void	data_free(t_mini *mini);
 void	prompt(t_mini *mini);
+int		expand(t_mini *mini, char **str);
+int		parse(char **str);
 
 char	*ft_getenv(t_env *mini, char *var);
 char	**env_array(t_mini *mini);

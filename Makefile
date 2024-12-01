@@ -20,6 +20,7 @@ SRCs = src/main.c \
 		src/core/env.c \
 		src/core/exec.c \
 		src/core/exec2.c \
+		src/core/expand.c \
 		src/core/heredoc.c \
 		src/core/init.c \
 		src/core/prompt.c \
