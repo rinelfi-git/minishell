@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 14:17:36 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 15:26:01 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	mini_exec(t_mini *mini)
 				parent_process(cmd, fds);
 			cmd = cmd->next;
 		}
-		wait(0);
 		cmd = mini->cmd;
 		while (cmd)
 		{
+			wait(0);
 			if (cmd->fd_in >= 0)
 				close(cmd->fd_in);
 			if (cmd->fd_out >= 0)
