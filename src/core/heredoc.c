@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 14:28:00 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:35:57 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	read_process(t_doc *doc, int *pp)
 	line = 0;
 	while (1)
 	{
-		line = readline(" > ");
+		line = readline("document> ");
 		if (!line)
 		{
 			free(line);
