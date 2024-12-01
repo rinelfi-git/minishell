@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:41:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 18:59:32 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 08:12:24 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	cmd_new(t_cmd **out)
 	if (!(*out))
 		return (0);
 	(*out)->args = 0;
+	(*out)->path = 0;
 	(*out)->fd_in = -2;
 	(*out)->fd_out = -2;
 	(*out)->prev = 0;

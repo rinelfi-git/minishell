@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:50:46 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 13:58:34 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 08:45:32 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	free_lst_cmd(t_mini *mini)
 	t_cmd	*tmp;
 
 	tmp = mini->cmd;
+	mini->cmd = 0;
 	while (tmp)
 	{
 		next = tmp->next;
@@ -27,7 +28,6 @@ void	free_lst_cmd(t_mini *mini)
 		free(tmp);
 		tmp = next;
 	}
-	mini->cmd = 0;
 }
 
 static t_cmd	*create_cmd(t_cmd **last, t_token *token)
@@ -47,7 +47,7 @@ void	create_cmd_list(t_mini *mini)
 	t_cmd	*cmd;
 
 	token = mini->token;
-	cmd = create_cmd(&mini->cmd, token);
+	cmd = create_cmd(&(mini->cmd), token);
 	if (cmd)
 		token = token->next;
 	while (token)

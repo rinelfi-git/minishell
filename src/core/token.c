@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:39:10 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 13:58:50 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 08:42:50 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_lst_token(t_mini *mini)
 	t_token	*tmp;
 
 	tmp = mini->token;
+	mini->token = 0;
 	while (tmp)
 	{
 		next = tmp->next;
@@ -28,7 +29,6 @@ void	free_lst_token(t_mini *mini)
 		free(tmp);
 		tmp = next;
 	}
-	mini->token = 0;
 }
 
 static int	command_length(char *line)
@@ -59,12 +59,10 @@ static int	add_cmd(t_token **head, char **line)
 	char	*str;
 
 	length = command_length(*line);
-	str = malloc(sizeof(char) * (length + 1));
-	if (!str)
-		return (0);
 	str = ft_substr(*line, 0, length);
 	token_append(head, str, ARG);
-	(*head)->type = CMD;
+	if ((*head)->type <= ARG)
+		(*head)->type = CMD;
 	(*line) += length;
 	return (1);
 }

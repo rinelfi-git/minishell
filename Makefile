@@ -14,7 +14,6 @@ SRCs = src/main.c \
 		src/core/cmd_path.c \
 		src/core/env.c \
 		src/core/exec.c \
-		src/core/exec2.c \
 		src/core/heredoc.c \
 		src/core/cmd.c \
 		src/core/init.c \

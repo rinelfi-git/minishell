@@ -6,11 +6,11 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:47:20 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 13:29:29 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 08:24:16 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "minishell.h"
 
 void	free_strarray(char **array)
 {

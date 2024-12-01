@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 21:16:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 08:45:19 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static int	open_file(int *fd, char *path, int type)
 		*fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (type == TRUNC)
 		*fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (type == HEREDOC)
+		*fd = open_heredoc(path);
 	if (*fd == -1)
 		return (0);
 	return (1);
@@ -39,7 +41,10 @@ int	get_fdin(t_token *token)
 		if (token->type == INPUT)
 			open_file(&fd, token->next->str, INPUT);
 		if (token->type == HEREDOC)
+		{
 			open_file(&fd, token->next->str, HEREDOC);
+			token = token->next;
+		}
 		token = token->next;
 	}
 	return (fd);

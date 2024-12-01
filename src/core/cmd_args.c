@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:27:04 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 11:53:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 09:16:54 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ char	**get_cmd_params(t_token *token)
 	char	**out;
 
 	out = 0;
-	while (token && token->type < PIPE)
+	while (token && token->type != PIPE)
 	{
+		if (is_special(token->str) && token->type != PIPE && token->next)
+			token = token->next->next;
 		if (!append_arg(&out, token->str))
 		{
 			free_strarray(out);

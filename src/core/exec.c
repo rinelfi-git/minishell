@@ -6,15 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 20:59:11 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 09:17:07 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
+#include "msutils.h"
 
 static void	redirect_in_out(t_cmd *cmd, int *pp)
 {
@@ -47,16 +45,15 @@ static void	fork_builtin(t_mini *mini, t_cmd *cmd, int *pp)
 static void	child_process(t_mini *mini, t_cmd *cmd, int *pp)
 {
 	char	*path;
-	char	**env;
 
 	if (is_builtin(cmd))
 		fork_builtin(mini, cmd, pp);
-	else
+	else if (cmd->args)
 	{
 		redirect_in_out(cmd, pp);
-		path = get_path(mini, cmd->args[0]);
-		env = env_array(mini);
-		execve(path, cmd->args, env);
+		path = get_path(mini->env_list, cmd);
+		if (path)
+			execve(path, cmd->args, mini->env_array);
 	}
 	exit(mini->exit_code);
 }
@@ -87,15 +84,13 @@ void	mini_exec(t_mini *mini)
 		{
 			pipe(fds);
 			pid = fork();
+			waitpid(pid, 0, 0);
 			pid_signal_manager(pid, SET_MODE);
-			wait(0);
 			if (pid == 0)
 				child_process(mini, cmd, fds);
 			else if (pid > 0)
-			{
 				parent_process(cmd, fds);
-				cmd = cmd->next;
-			}
+			cmd = cmd->next;
 		}
 	}
 }

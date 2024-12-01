@@ -6,14 +6,10 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 13:57:41 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 09:17:01 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <unistd.h>
 #include "minishell.h"
 #include "libft.h"
 #include "msutils.h"
@@ -25,7 +21,7 @@ static char	*get_prompt(t_mini *mini)
 	char	*temp;
 	char	*out;
 
-	user = ft_getenv(mini, "USER");
+	user = ft_getenv(mini->env_list, "USER");
 	out = ft_strjoin(TERM_PRIMARY, user);
 	str_append(&out, "@minishell"TERM_DEFAULT"["TERM_SECONDARY);
 	if (getcwd(path, PATH_LEN))
@@ -76,8 +72,8 @@ void	prompt(t_mini *mini)
 		create_token_list(&(mini->token), in);
 		create_cmd_list(mini);
 		mini_exec(mini);
-		free_lst_cmd(mini);
 		free_lst_token(mini);
+		free_lst_cmd(mini);
 		free(in);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/30 13:01:24 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 08:28:33 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ char	**env_array(t_mini *mini)
 	char	**out;
 	t_env	*env;
 
-	len = env_length(mini->env);
+	len = env_length(mini->env_list);
 	out = malloc(sizeof(char *) * (len + 1));
 	if (!out)
 		return (0);
-	env = mini->env;
+	env = mini->env_list;
 	i = 0;
 	while (i < len)
 	{
@@ -49,23 +49,22 @@ char	**env_array(t_mini *mini)
 		i++;
 		env = env->next;
 	}
+	out[i] = 0;
 	return (out);
 }
 
-char	*ft_getenv(t_mini *mini, char *var)
+char	*ft_getenv(t_env *env, char *var)
 {
 	char	*val;
-	t_env	*loop;
 	size_t	length;
 
-	loop = mini->env;
 	val = 0;
 	length = ft_strlen(var);
-	while (loop && !val)
+	while (env && !val)
 	{
-		if (ft_strncmp(loop->name, var, length) == 0)
-			val = loop->value;
-		loop = loop->next;
+		if (ft_strncmp(env->name, var, length) == 0)
+			val = env->value;
+		env = env->next;
 	}
 	return (val);
 }
