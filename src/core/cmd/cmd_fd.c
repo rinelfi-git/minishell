@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 08:45:19 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:01:49 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	get_fdin(t_token *token)
 		if (token->type == INPUT)
 			open_file(&fd, token->next->str, INPUT);
 		if (token->type == HEREDOC)
-		{
 			open_file(&fd, token->next->str, HEREDOC);
-			token = token->next;
-		}
 		token = token->next;
 	}
 	return (fd);

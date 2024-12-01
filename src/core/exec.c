@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 15:26:01 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:03:59 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	parent_process(t_cmd *cmd, int *pp)
 		cmd->next->fd_in = pp[0];
 	else
 		close(pp[0]);
+	wait(0);
 }
 
 void	mini_exec(t_mini *mini)
@@ -80,6 +81,7 @@ void	mini_exec(t_mini *mini)
 		builtin(mini, cmd);
 	else
 	{
+		mini->env_array = env_array(mini);
 		while (cmd)
 		{
 			pipe(fds);
@@ -91,15 +93,7 @@ void	mini_exec(t_mini *mini)
 				parent_process(cmd, fds);
 			cmd = cmd->next;
 		}
-		cmd = mini->cmd;
-		while (cmd)
-		{
-			wait(0);
-			if (cmd->fd_in >= 0)
-				close(cmd->fd_in);
-			if (cmd->fd_out >= 0)
-				close(cmd->fd_out);
-			cmd = cmd->next;
-		}
+		wait_all(cmd);
+		free_strarray(mini->env_array);
 	}
 }

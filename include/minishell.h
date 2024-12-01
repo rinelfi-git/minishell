@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 16:25:06 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:42:29 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,5 @@ void	mini_exec(t_mini *mini);
 void	free_lst_cmd(t_mini *mini);
 void	free_lst_token(t_mini *mini);
 int		open_heredoc(char *delimiter);
+void	wait_all(t_cmd *cmd);
 #endif

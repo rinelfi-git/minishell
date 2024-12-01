@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:50:46 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 11:32:25 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:10:53 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ void	create_cmd_list(t_mini *mini)
 	t_cmd	*cmd;
 
 	token = mini->token;
-	cmd = create_cmd(&(mini->cmd), token);
+	cmd = 0;
+	if (token)
+		cmd = create_cmd(&(mini->cmd), token);
 	if (cmd)
 		token = token->next;
 	while (token)

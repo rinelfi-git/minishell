@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 08:27:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:36:33 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,4 @@ void	data_env(t_mini *mini, char **env)
 	i = 0;
 	while (env && env[i])
 		create_env(&(mini->env_list), env[i++]);
-	mini->env_array = env_array(mini);
 }
