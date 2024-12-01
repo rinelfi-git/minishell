@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 00:28:55 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:01:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	read_process(t_doc *doc, int *pp)
 			continue ;
 		if (ft_strncmp(doc->delimiter, line, INT_MAX) == 0)
 			break ;
-		write(pp[1], line, ft_strlen(line) + 1);
-		write(pp[1], "\n", 2);
+		str_append(&line, "\n");
+		write(pp[1], line, ft_strlen(line));
 		free(line);
 	}
 	free(line);
