@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 16:28:10 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:03:55 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ t_env	*append_env(t_env **head)
 
 t_env	*env_get(t_env **head, char *name)
 {
-	t_env *env;
+	t_env	*env;
 
 	env = *head;
 	while (env)

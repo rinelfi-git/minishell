@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 14:35:57 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:04:15 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	open_heredoc(char *delimiter)
 	t_doc	doc;
 	char	qt;
 	int		i;
-	
+
 	doc.escape = 1;
 	doc.fd = -2;
 	doc.delimiter = delimiter;

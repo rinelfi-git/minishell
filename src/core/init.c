@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 23:10:17 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:04:24 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	data_free(t_mini *mini)
 {
 	t_env	*env;
 	t_env	*next;
-	
+
 	env = mini->env_list;
 	while (env)
 	{
