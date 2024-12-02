@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:30 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:56:51 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "msutils.h"
 
-static void	read_process(t_doc *doc, int *pp)
+static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 {
 	char	*line;
 
@@ -30,6 +30,8 @@ static void	read_process(t_doc *doc, int *pp)
 		if (ft_strncmp(doc->delimiter, line, INT_MAX) == 0)
 			break ;
 		str_append(&line, "\n");
+		if (doc->expand)
+			expand(mini, &line);
 		write(pp[1], line, ft_strlen(line));
 		free(line);
 	}
@@ -37,7 +39,7 @@ static void	read_process(t_doc *doc, int *pp)
 		free(line);
 }
 
-static void	heredoc(t_doc *doc)
+static void	heredoc(t_mini *mini, t_doc *doc)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -47,7 +49,7 @@ static void	heredoc(t_doc *doc)
 	if (pid == 0)
 	{
 		close(fd[0]);
-		read_process(doc, fd);
+		read_process(mini, doc, fd);
 		close(fd[1]);
 		exit(0);
 	}
@@ -56,7 +58,7 @@ static void	heredoc(t_doc *doc)
 	doc->fd = fd[0];
 }
 
-int	open_heredoc(char *delimiter)
+int	open_heredoc(t_mini *mini, char *delimiter)
 {
 	t_doc	doc;
 	char	qt;
@@ -77,6 +79,6 @@ int	open_heredoc(char *delimiter)
 				doc.expand = 0;
 		}
 	}
-	heredoc(&doc);
+	heredoc(mini, &doc);
 	return (doc.fd);
 }

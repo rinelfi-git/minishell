@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:50:46 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 17:10:53 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:01:04 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	free_lst_cmd(t_mini *mini)
 	}
 }
 
-static t_cmd	*create_cmd(t_cmd **last, t_token *token)
+static t_cmd	*create_cmd(t_mini *mini, t_cmd **last, t_token *token)
 {
 	t_cmd	*cmd;
 
 	cmd = cmd_append(last);
-	cmd->fd_in = get_fdin(token);
+	cmd->fd_in = get_fdin(mini, token);
 	cmd->fd_out = get_fdout(token);
 	cmd->args = get_cmd_params(token);
 	return (cmd);
@@ -49,13 +49,13 @@ void	create_cmd_list(t_mini *mini)
 	token = mini->token;
 	cmd = 0;
 	if (token)
-		cmd = create_cmd(&(mini->cmd), token);
+		cmd = create_cmd(mini, &(mini->cmd), token);
 	if (cmd)
 		token = token->next;
 	while (token)
 	{
 		if (token->prev->type == PIPE)
-			cmd = create_cmd(&cmd, token);
+			cmd = create_cmd(mini, &cmd, token);
 		token = token->next;
 	}
 }

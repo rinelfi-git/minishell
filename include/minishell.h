@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 16:51:28 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:00:14 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_cmd	*cmd_append(t_cmd **head);
 char	**get_cmd_params(t_token *token);
 int		cmd_length(t_cmd *head);
 char	*get_path(t_env *env, t_cmd *cmd);
-int		get_fdin(t_token *token);
+int		get_fdin(t_mini *mini, t_token *token);
 int		get_fdout(t_token *token);
 
 int		is_builtin(t_cmd *cmd);
@@ -119,6 +119,6 @@ int	    built_unset(t_env *env);
 void	mini_exec(t_mini *mini);
 void	free_lst_cmd(t_mini *mini);
 void	free_lst_token(t_mini *mini);
-int		open_heredoc(char *delimiter);
+int		open_heredoc(t_mini *mini, char *delimiter);
 void	wait_all(t_cmd *cmd);
 #endif
