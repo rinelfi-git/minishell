@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 16:56:51 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:13:43 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@
 static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 {
 	char	*line;
+	char	*invite;
 
 	line = 0;
+	invite = ft_strjoin("[", doc->delimiter);
+	str_append(&invite, "]<body> ");
 	while (1)
 	{
-		line = readline("document> ");
+		line = readline(invite);
 		if (!line)
 		{
 			free(line);
@@ -35,6 +38,7 @@ static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 		write(pp[1], line, ft_strlen(line));
 		free(line);
 	}
+	free(invite);
 	if (line)
 		free(line);
 }
