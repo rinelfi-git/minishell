@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 17:03:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:35:20 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pp)
 		path = get_path(mini->env_list, cmd);
 		if (path)
 			execve(path, cmd->args, mini->env_array);
+		else
+			command_not_found(mini, cmd->args[0]);
 	}
 	exit(mini->exit_code);
 }

@@ -24,6 +24,7 @@ SRCs = src/main.c \
 		src/core/heredoc.c \
 		src/core/init.c \
 		src/core/prompt.c \
+		src/utils/error_message.c \
 		src/utils/is.c \
 		src/utils/quote.c \
 		src/utils/str_array.c \
