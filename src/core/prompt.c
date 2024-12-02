@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 22:35:43 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 08:18:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,10 @@ void	prompt(t_mini *mini)
 			break ;
 		add_history(in);
 		create_token_list(&(mini->token), in);
-		t_token *tok;
-		tok = mini->token;
-		while (tok)
-		{
-			expand(mini, &(tok->str));
-			printf("EXPANSION[%s]\n", tok->str);	
-			tok = tok->next;
-		}
-		// create_cmd_list(mini);
-		// mini_exec(mini);
-		// free_lst_token(mini);
-		// free_lst_cmd(mini);
+		create_cmd_list(mini);
+		mini_exec(mini);
+		free_lst_token(mini);
+		free_lst_cmd(mini);
 		free(in);
 	}
 }
