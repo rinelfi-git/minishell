@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 18:39:36 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 18:42:41 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	command_not_found(t_mini *mini, char *str)
 	{
 		write(STDERR_FILENO, "minishell: ", 11);
 		write(STDERR_FILENO, str, ft_strlen(str));
-		write(STDERR_FILENO, ": No such file or directory\n", 28);	
+		write(STDERR_FILENO, ": No such file or directory\n", 28);
 	}
 	else
 	{
