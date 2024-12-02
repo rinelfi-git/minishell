@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 23:15:10 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:51:28 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ struct s_cmd
 struct s_doc
 {
 	char	*delimiter;
-	int		escape;
+	int		expand;
 	int		fd;
 };
 

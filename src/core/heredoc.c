@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 16:04:15 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:51:30 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int	open_heredoc(char *delimiter)
 	char	qt;
 	int		i;
 
-	doc.escape = 1;
+	doc.expand = 1;
 	doc.fd = -2;
 	doc.delimiter = delimiter;
 	i = -1;
-	while (doc.escape && delimiter[++i])
+	while (doc.expand && delimiter[++i])
 	{
 		if (is_quote(delimiter[i]))
 		{
@@ -74,7 +74,7 @@ int	open_heredoc(char *delimiter)
 			while (delimiter[++i] != qt)
 				;
 			if (delimiter[i])
-				doc.escape = 0;
+				doc.expand = 0;
 		}
 	}
 	heredoc(&doc);
