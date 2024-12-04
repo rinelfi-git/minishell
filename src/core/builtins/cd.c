@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 11:32:42 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:37:52 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	update_vars(t_env *env ,char *old)
 int	built_cd(t_env *env, char **args)
 {
 	char	*old;
+	int		len;
 
 	if (len_strarray(args) > 2)
 	{
@@ -39,10 +40,11 @@ int	built_cd(t_env *env, char **args)
 		return (0);
 	}
 	old = getcwd(0, 0);
-	if (len_strarray(args) == 2)
-		chdir(args[1]);
-	else
+	len = len_strarray(args);
+	if (len == 1 || (len == 2 && args[1][0] == '~'))
 		chdir(ft_getenv(env, "HOME"));
+	else if (len == 2)
+		chdir(args[1]);
 	update_vars(env, old);
 	free(old);
 	return (1);
