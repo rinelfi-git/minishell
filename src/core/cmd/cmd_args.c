@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:27:04 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 11:38:17 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:57:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,15 @@ static int	append_arg(char ***args, char *str)
 	*args = tmp;
 	return (1);
 }
-
+/**
+ * @brief Si c'est un caractère spécial, sûrement un indicateur input ou output
+ * et toujours, le caractère qui suit est le délimiteur ou le nom du fichier source/destination
+ * donc on passe au deuxième caractère.
+ * Si c'est un simple caractère, on le considère comme un vrai argument
+ * 
+ * @param token 
+ * @return char** 
+ */
 char	**get_cmd_params(t_token *token)
 {
 	char	**out;

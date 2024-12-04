@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/11/29 13:30:03 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:38:17 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ int	is_space(char c)
 	return (c && (c == ' ' || c == '\n' || c == '\r' || c == '\f'
 			|| c == '\t' || c == '\v'));
 }
-
+/**
+ * @brief Permet de récupérer le type de caractère spécial et de retourner sa valeur dans
+ * la liste des inputs dans le header minishell.h
+ * 
+ * @param str 
+ * @return int 
+ */
 int	is_special(char *str)
 {
 	size_t	len;

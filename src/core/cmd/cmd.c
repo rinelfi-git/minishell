@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:50:46 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 17:01:04 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 09:52:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,18 @@ void	free_lst_cmd(t_mini *mini)
 		tmp = next;
 	}
 }
-
+/**
+ * @brief On ajoute d'abord l'instance de la nouvelle commande à notre liste de commande de la structure principale mini->cmd
+ * Un groupe de commande est composé d'un argument, d'un input et d'un output
+ * L'output peut varier: soit un fichier soit la sortie standard
+ * L'input peut varier: soit un fichier soit l'entré standard
+ * Les argumetns sont tous ce qui ne sont pas output/input
+ * 
+ * @param mini 
+ * @param last 
+ * @param token 
+ * @return t_cmd* 
+ */
 static t_cmd	*create_cmd(t_mini *mini, t_cmd **last, t_token *token)
 {
 	t_cmd	*cmd;
@@ -40,7 +51,12 @@ static t_cmd	*create_cmd(t_mini *mini, t_cmd **last, t_token *token)
 	cmd->args = get_cmd_params(token);
 	return (cmd);
 }
-
+/**
+ * @brief Pour créer une liste de commande avec les arguments et les fichier in et out.
+ * à chaque fois qu'on rencontre un PIPE, on crée un groupe de commande
+ * 
+ * @param mini 
+ */
 void	create_cmd_list(t_mini *mini)
 {
 	t_token	*token;
