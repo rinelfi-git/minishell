@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 18:35:20 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:20:50 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	mini_exec(t_mini *mini)
 		{
 			pipe(fds);
 			pid = fork();
-			pid_signal_manager(pid, SET_MODE);
 			if (pid == 0)
 				child_process(mini, cmd, fds);
 			else if (pid > 0)

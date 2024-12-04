@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 13:02:25 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:21:27 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
+# include <sys/signal.h>
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -84,7 +85,7 @@ struct s_doc
 };
 
 
-int		pid_signal_manager(pid_t pid, int mode);
+int		signal_manager(int signal, int mode);
 void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
 void	data_free(t_mini *mini);
@@ -121,4 +122,6 @@ void	free_lst_cmd(t_mini *mini);
 void	free_lst_token(t_mini *mini);
 int		open_heredoc(t_mini *mini, char *delimiter);
 void	wait_all(t_cmd *cmd);
+
+void	main_signal(void);
 #endif

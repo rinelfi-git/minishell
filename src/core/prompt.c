@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 11:29:29 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:22:09 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static char	*get_input(t_mini *mini)
 
 	prompt = get_prompt(mini);
 	in = readline(prompt);
-	if (!in)
+	if (!in || ft_strncmp(in, "exit", 4) == 0)
 	{
 		free(in);
 		in = 0;
@@ -96,11 +96,17 @@ void	prompt(t_mini *mini)
 {
 	char	*in;
 
+	main_signal();
 	while (1)
 	{
 		in = get_input(mini);
+		if (signal_manager(0, GET_MODE) == SIGINT)
+			mini->exit_code = 130;
 		if (!in)
+		{
+			write(STDOUT_FILENO, "exit\n", 5);
 			break ;
+		}
 		add_history(in);
 		create_token_list(&(mini->token), in);
 		create_cmd_list(mini);
