@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 12:45:32 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:02:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int		builtin(t_mini *mini, t_cmd *cmd);
 int	    built_env(t_env *env);
 int		built_cd(t_env *env, char **args);
 int	    built_export(t_env *env, char **args);
-int	    built_echo(t_env *env);
-int	    built_pwd(t_env *env);
+int	    built_echo(char **args);
+int	    built_pwd(t_mini *mini, char **args);
 int	    built_unset(t_env *env);
 
 void	mini_exec(t_mini *mini);
