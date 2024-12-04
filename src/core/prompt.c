@@ -6,13 +6,37 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 09:33:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:29:29 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 #include "msutils.h"
+
+static void	prompt_path(char **out, char *user)
+{
+	char	*cwd;
+	char	*tmp;
+
+	cwd = getcwd(0, 0);
+	if (cwd)
+	{
+		tmp = ft_strjoin("/home/", user);
+		if (ft_strncmp(tmp, cwd, ft_strlen(tmp)) == 0)
+		{
+			str_append(out, TERM_SECONDARY"~");
+			str_append(out, cwd + ft_strlen(tmp));
+		}
+		else
+		{
+			str_append(out, TERM_SECONDARY);
+			str_append(out, cwd);
+		}
+		free(tmp);
+	}
+	free(cwd);
+}
 
 /**
  * @brief Récupère les infoirmations à afficher dans le prompt
@@ -25,28 +49,12 @@
 static char	*get_prompt(t_mini *mini)
 {
 	char	*user;
-	char	path[PATH_LEN];
-	char	*temp;
 	char	*out;
 
 	user = ft_getenv(mini->env_list, "USER");
 	out = ft_strjoin(TERM_PRIMARY, user);
 	str_append(&out, "@minishell"TERM_DEFAULT"["TERM_SECONDARY);
-	if (getcwd(path, PATH_LEN))
-	{
-		temp = ft_strjoin("/home/", user);
-		if (ft_strncmp(temp, path, ft_strlen(temp)) == 0)
-		{
-			str_append(&out, TERM_SECONDARY"~");
-			str_append(&out, path + ft_strlen(temp));
-		}
-		else
-		{
-			str_append(&out, TERM_SECONDARY);
-			str_append(&out, path);
-		}
-		free(temp);
-	}
+	prompt_path(&out, user);
 	str_append(&out, TERM_DEFAULT"]$ ");
 	return (out);
 }

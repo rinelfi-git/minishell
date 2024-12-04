@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 17:00:14 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/04 11:04:43 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	prompt(t_mini *mini);
 int		expand(t_mini *mini, char **str);
 int		parse(char **str);
 
-char	*ft_getenv(t_env *mini, char *var);
+char	*ft_getenv(t_env *env, char *var);
 char	**env_array(t_mini *mini);
 t_env	*append_env(t_env **head);
 t_env	*env_get(t_env **head, char *name);
@@ -110,7 +110,7 @@ int		get_fdout(t_token *token);
 int		is_builtin(t_cmd *cmd);
 int		builtin(t_mini *mini, t_cmd *cmd);
 int	    built_env(t_env *env);
-int	    built_cd(t_env *env);
+int		built_cd(t_env *env, char **args);
 int	    built_export(t_env *env, char **args);
 int	    built_echo(t_env *env);
 int	    built_pwd(t_env *env);
