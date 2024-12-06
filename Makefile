@@ -23,6 +23,7 @@ SRCs = src/main.c \
 		src/core/expand.c \
 		src/core/heredoc.c \
 		src/core/init.c \
+		src/core/parse.c \
 		src/core/prompt.c \
 		src/utils/error_message.c \
 		src/utils/is.c \

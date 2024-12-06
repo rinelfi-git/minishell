@@ -6,19 +6,89 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 12:50:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:56:31 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "msutils.h"
+#include "libft.h"
+
+static int	sequence_count(char *str)
+{
+	int		i;
+	int		sequence;
+	char	quote;
+
+	sequence = 0;
+	quote = 0;
+	i = -1;
+	while (str[++i])
+	{
+		if (!is_quote(str[i]))
+			sequence++;
+		while (str[i] && !is_quote(str[i]))
+			i++;
+		if (is_quote(str[i]))
+		{
+			sequence++;
+			quote = str[i++];
+			while (str[i] && str[i] != quote)
+				i++;
+		}
+	}
+	return (sequence);
+}
+
+static char	*parse_split(t_mini *mini, char *str, int *i)
+{
+	int		j;
+	char	quote;
+	char	*substr;
+	
+	j = 0;
+	substr = 0;
+	if (is_quote(str[j]))
+	{
+		quote = str[j++];
+		while (str[j] && str[j] != quote)
+			j++;
+		substr = ft_substr(str, 1, j - 1);
+		j++;
+		if (quote == '"')
+			expand(mini, &substr);
+	}
+	else
+	{
+		while (str[j] && !is_quote(str[j]))
+			j++;
+		substr = ft_substr(str, 0, j);
+		expand(mini, &substr);
+	}
+	(*i) += j;
+	return (substr);
+}
 
 int	parse(t_mini *mini, char **str)
 {
-	// existence double/simple quote
-	// si simple quote ne pas expander les variables qui se trouvent dans la chaine
-	// ex: une chaine qui contient 'une $HOME' => une chaine qui contient une $HOME
-	// si double quote expander les variables qui se trouvent dans la chaine
-	// ex: une chaine qui contient "une $HOME" et exit "$?" => une chaine qui contient une /home/user et exit 0
-	// l'expansion utilise la fonction expand(t_mini, char **)
+	char	**split;
+	int		jump;
+	int		i;
+
+	(void)mini;
+	split = malloc(sizeof(char *) * (sequence_count(*str) + 1));
+	if (!split)
+		return (0);
+	i = 0;
+	jump = 0;
+	while ((*str)[jump])
+		split[i++] = parse_split(mini, (*str) + jump, &jump);
+	split[i] = 0;
+	free(*str);
+	*str = ft_strdup("");
+	i = 0;
+	while (split[i])
+		str_append(str, split[i++]);
+	free_strarray(split);
 	return (1);
 }

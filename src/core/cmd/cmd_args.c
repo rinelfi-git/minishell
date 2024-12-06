@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:27:04 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 09:57:06 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:02:53 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	arg_len(char **args)
 	return (len);
 }
 
-static int	append_arg(char ***args, char *str)
+static int	append_arg(t_mini *mini, char ***args, char *str)
 {
 	char	**tmp;
 	int		i;
@@ -39,8 +39,12 @@ static int	append_arg(char ***args, char *str)
 		return (0);
 	i = -1;
 	while (++i < len)
+	{
 		tmp[i] = ft_strdup((*args)[i]);
-	tmp[i++] = ft_strdup(str);
+		parse(mini, tmp + i);
+	}
+	tmp[i] = ft_strdup(str);
+	parse(mini, tmp + (i++));
 	tmp[i] = 0;
 	free_strarray(*args);
 	*args = tmp;
@@ -55,7 +59,7 @@ static int	append_arg(char ***args, char *str)
  * @param token 
  * @return char** 
  */
-char	**get_cmd_params(t_token *token)
+char	**get_cmd_params(t_mini *mini, t_token *token)
 {
 	char	**out;
 
@@ -64,7 +68,7 @@ char	**get_cmd_params(t_token *token)
 	{
 		if (is_special(token->str) && token->type != PIPE && token->next)
 			token = token->next->next;
-		else if (token && !append_arg(&out, token->str))
+		else if (token && !append_arg(mini, &out, token->str))
 		{
 			free_strarray(out);
 			return (0);

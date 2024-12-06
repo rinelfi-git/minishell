@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 19:21:27 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/06 23:04:10 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	data_env(t_mini *mini, char **env);
 void	data_free(t_mini *mini);
 void	prompt(t_mini *mini);
 int		expand(t_mini *mini, char **str);
-int		parse(char **str);
+int		parse(t_mini *mini, char **str);
 
 char	*ft_getenv(t_env *env, char *var);
 char	**env_array(t_mini *mini);
@@ -102,7 +102,7 @@ void	create_token_list(t_token **head, char *line);
 t_token	*token_append(t_token **head, char *str, int type);
 void	create_cmd_list(t_mini *mini);
 t_cmd	*cmd_append(t_cmd **head);
-char	**get_cmd_params(t_token *token);
+char	**get_cmd_params(t_mini *mini, t_token *token);
 int		cmd_length(t_cmd *head);
 char	*get_path(t_env *env, t_cmd *cmd);
 int		get_fdin(t_mini *mini, t_token *token);
