@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 16:58:44 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:08:48 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 static int	open_file(t_mini *mini, int *fd, char *path, int type)
 {
+	if (type != HEREDOC)
+		parse(mini, &path);
 	if (*fd >= 0)
 		close(*fd);
 	if (type == INPUT)
