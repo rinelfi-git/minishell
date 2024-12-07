@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 13:08:54 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:17:58 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	if (ft_strncmp(cmd->args[0], "export", INT_MAX) == 0)
 		return (built_export(mini->env_list, cmd->args));
 	if (ft_strncmp(cmd->args[0], "cd", INT_MAX) == 0)
-		return (built_cd(mini->env_list, cmd->args));
+		return (built_cd(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "pwd", INT_MAX) == 0)
 		return (built_pwd(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "echo", INT_MAX) == 0)

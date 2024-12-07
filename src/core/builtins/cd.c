@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 11:37:52 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:28:56 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,52 @@ static void	update_vars(t_env *env ,char *old)
 	free(cwd);
 }
 
-int	built_cd(t_env *env, char **args)
+static int	access_test(t_mini *mini, char *path)
+{
+	struct stat	stats;
+
+	stat(path, &stats);
+	if (access(path, F_OK) != 0)
+	{
+		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+		mini->exit_code = 1;
+		return (0);
+	}
+	if (!S_ISDIR(stats.st_mode))
+	{
+		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putendl_fd(": Not a directory", STDERR_FILENO);
+		mini->exit_code = 1;
+		return (0);
+	}
+	return (1);
+}
+
+int	built_cd(t_mini *mini, char **args)
 {
 	char	*old;
 	int		len;
 
 	if (len_strarray(args) > 2)
 	{
-		write(STDERR_FILENO, "minishell: cd: too many arguments\n", 34);
+		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
+		mini->exit_code = 1;
 		return (0);
 	}
 	old = getcwd(0, 0);
 	len = len_strarray(args);
 	if (len == 1 || (len == 2 && args[1][0] == '~'))
-		chdir(ft_getenv(env, "HOME"));
-	else if (len == 2)
+		chdir(ft_getenv(mini->env_list, "HOME"));
+	else if (len == 2 && access_test(mini, args[1]))
 		chdir(args[1]);
-	update_vars(env, old);
-	free(old);
-	return (1);
+	if (mini->exit_code == 0)
+	{
+		update_vars(mini->env_list, old);
+		free(old);
+		return (1);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 15:08:22 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 20:23:24 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/signal.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -112,7 +113,7 @@ int		get_fdout(t_mini *mini, t_token *token);
 int		is_builtin(t_cmd *cmd);
 int		builtin(t_mini *mini, t_cmd *cmd);
 int	    built_env(t_env *env);
-int		built_cd(t_env *env, char **args);
+int		built_cd(t_mini *mini, char **args);
 int	    built_export(t_env *env, char **args);
 int	    built_echo(char **args);
 int	    built_pwd(t_mini *mini, char **args);
