@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:39:10 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 09:46:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:05:13 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	add_cmd(t_token **head, char **line)
 	length = command_length(*line);
 	str = ft_substr(*line, 0, length);
 	token_append(head, str, ARG);
-	if ((*head)->type <= ARG)
+	if ((*head)->type == ARG)
 		(*head)->type = CMD;
 	(*line) += length;
 	return (1);

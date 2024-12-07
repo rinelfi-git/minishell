@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 10:08:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:51:40 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,29 @@ static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 {
 	char	*line;
 	char	*invite;
+	int		line_count;
 
 	line = 0;
-	invite = ft_strjoin("[", doc->delimiter);
-	str_append(&invite, "]<body> ");
+	invite = ft_strjoin("<", doc->delimiter);
+	str_append(&invite, "> ");
 	while (1)
 	{
 		line = readline(invite);
 		if (!line)
 		{
+			heredoc_eof(doc->delimiter, line_count);
 			free(line);
 			break ;
 		}
 		if (ft_strncmp(doc->delimiter, line, INT_MAX) == 0)
 			break ;
-		str_append(&line, "\n");
+		line_count++;
 		if (doc->expand)
 			expand(mini, &line);
-		write(pp[1], line, ft_strlen(line));
+		ft_putendl_fd(line, pp[1]);
 		free(line);
 	}
 	free(invite);
-	if (line)
-		free(line);
 }
 
 static void	heredoc(t_mini *mini, t_doc *doc)
@@ -65,7 +65,7 @@ static void	heredoc(t_mini *mini, t_doc *doc)
 int	open_heredoc(t_mini *mini, char *delimiter)
 {
 	t_doc	doc;
-	char	qt;
+	char	quote;
 	int		i;
 
 	doc.expand = 1;
@@ -76,8 +76,8 @@ int	open_heredoc(t_mini *mini, char *delimiter)
 	{
 		if (is_quote(delimiter[i]))
 		{
-			qt = delimiter[i];
-			while (delimiter[++i] != qt)
+			quote = delimiter[i];
+			while (delimiter[++i] != quote)
 				;
 			if (delimiter[i])
 				doc.expand = 0;

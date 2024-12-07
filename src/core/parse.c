@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/06 23:56:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:18:14 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static int	sequence_count(char *str)
 
 	sequence = 0;
 	quote = 0;
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
 	{
-		if (!is_quote(str[i]))
+		if (str[i] && !is_quote(str[i]))
 			sequence++;
 		while (str[i] && !is_quote(str[i]))
 			i++;
-		if (is_quote(str[i]))
+		if (str[i] && is_quote(str[i]))
 		{
 			sequence++;
 			quote = str[i++];
@@ -75,7 +75,8 @@ int	parse(t_mini *mini, char **str)
 	int		jump;
 	int		i;
 
-	(void)mini;
+	if (!(*str))
+		return (1);
 	split = malloc(sizeof(char *) * (sequence_count(*str) + 1));
 	if (!split)
 		return (0);

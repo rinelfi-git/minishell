@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/06 23:04:10 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:08:22 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define HEREDOC		5
 # define TRUNC			6
 # define APPEND			7
+# define FILE			8
 
 # define SET_MODE		1
 # define GET_MODE		2
@@ -106,7 +107,7 @@ char	**get_cmd_params(t_mini *mini, t_token *token);
 int		cmd_length(t_cmd *head);
 char	*get_path(t_env *env, t_cmd *cmd);
 int		get_fdin(t_mini *mini, t_token *token);
-int		get_fdout(t_token *token);
+int		get_fdout(t_mini *mini, t_token *token);
 
 int		is_builtin(t_cmd *cmd);
 int		builtin(t_mini *mini, t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 11:00:42 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 14:33:15 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,23 @@ void	command_not_found(t_mini *mini, char *str)
 {
 	if (ft_strchr(str, '/'))
 	{
-		write(STDERR_FILENO, "minishell: ", 11);
-		write(STDERR_FILENO, str, ft_strlen(str));
-		write(STDERR_FILENO, ": No such file or directory\n", 28);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 	}
 	else
 	{
-		write(STDERR_FILENO, str, ft_strlen(str));
-		write(STDERR_FILENO, ": command not found\n", 20);
+		ft_putstr_fd(str, STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
 	}
 	mini->exit_code = 127;
+}
+
+void	heredoc_eof(char *delimiter, int line)
+{
+	ft_putstr_fd("minishell: warning: here-document at line ", STDERR_FILENO);
+	ft_putnbr_fd(line, STDERR_FILENO);
+	ft_putstr_fd(" delimited by end-of-file (wanted `", STDERR_FILENO);
+	ft_putstr_fd(delimiter, STDERR_FILENO);
+	ft_putendl_fd("')", STDERR_FILENO);
 }
