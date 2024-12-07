@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 14:51:40 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 19:42:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	open_heredoc(t_mini *mini, char *delimiter)
 
 	doc.expand = 1;
 	doc.fd = -2;
-	doc.delimiter = delimiter;
+	doc.delimiter = ft_strdup(delimiter);
 	i = -1;
 	while (doc.expand && delimiter[++i])
 	{
@@ -85,5 +85,6 @@ int	open_heredoc(t_mini *mini, char *delimiter)
 	}
 	parse(mini, &(doc.delimiter));
 	heredoc(mini, &doc);
+	free(doc.delimiter);
 	return (doc.fd);
 }

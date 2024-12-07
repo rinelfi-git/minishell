@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 15:18:14 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/07 15:24:34 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	parse(t_mini *mini, char **str)
 		split[i++] = parse_split(mini, (*str) + jump, &jump);
 	split[i] = 0;
 	free(*str);
-	*str = ft_strdup("");
+	*str = 0;
 	i = 0;
 	while (split[i])
 		str_append(str, split[i++]);
