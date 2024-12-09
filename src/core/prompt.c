@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 19:22:09 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:31:26 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	prompt(t_mini *mini)
 			mini->exit_code = 130;
 		if (!in)
 		{
-			write(STDOUT_FILENO, "exit\n", 5);
+			ft_putendl_fd("exit", STDOUT_FILENO);
 			break ;
 		}
 		add_history(in);
@@ -113,6 +113,7 @@ void	prompt(t_mini *mini)
 		mini_exec(mini);
 		free_lst_token(mini);
 		free_lst_cmd(mini);
+		signal_manager(0, SET_MODE);
 		free(in);
 	}
 }
