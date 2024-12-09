@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 19:41:06 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 20:47:26 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	open_file(t_mini *mini, int *fd, char *path, int type)
 {
 	if (*fd >= 0)
 		close(*fd);
+	*fd = -2;
 	if (type == INPUT)
 		*fd = open(path, O_RDONLY);
 	else if (type == APPEND)
@@ -38,6 +39,8 @@ int	get_fdin(t_mini *mini, t_token *token)
 	fd = -2;
 	while (token && token->type != PIPE)
 	{
+		if (signal_manager(0, GET_MODE) == SIGINT)
+			return (-1);
 		if (token->type == INPUT)
 		{
 			parse(mini, &token->next->str);
@@ -57,6 +60,8 @@ int	get_fdout(t_mini *mini, t_token *token)
 	fd = -2;
 	while (token && token->type != PIPE)
 	{
+		if (signal_manager(0, GET_MODE) == SIGINT)
+			return (-1);
 		if (token->type == TRUNC)
 		{
 			parse(mini, &(token->next->str));

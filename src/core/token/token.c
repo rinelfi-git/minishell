@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:39:10 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 19:43:37 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 20:38:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "msutils.h"
 #include "libft.h"
 
-void	free_lst_token(t_mini *mini)
+int	free_lst_token(t_mini *mini)
 {
 	t_token	*next;
 	t_token	*tmp;
@@ -29,6 +29,7 @@ void	free_lst_token(t_mini *mini)
 		free(tmp);
 		tmp = next;
 	}
+	return (0);
 }
 /**
  * @brief Tant qu'on n'a pas trouvé une espace ou un caractère spécial,

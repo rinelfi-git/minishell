@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 14:27:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 20:42:44 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_env	*env_get(t_env **head, char *name);
 
 void	create_token_list(t_token **head, char *line);
 t_token	*token_append(t_token **head, char *str, int type);
-void	create_cmd_list(t_mini *mini);
+int		create_cmd_list(t_mini *mini);
 t_cmd	*cmd_append(t_cmd **head);
 char	**get_cmd_params(t_mini *mini, t_token *token);
 int		cmd_length(t_cmd *head);
@@ -121,12 +121,11 @@ int	    built_pwd(t_mini *mini, char **args);
 int	    built_unset(t_env *env);
 
 void	mini_exec(t_mini *mini);
-void	free_lst_cmd(t_mini *mini);
-void	free_lst_token(t_mini *mini);
+int		free_lst_cmd(t_mini *mini);
+int		free_lst_token(t_mini *mini);
 int		open_heredoc(t_mini *mini, char *delimiter);
 void	wait_all(t_cmd *cmd);
 
 void	main_signal(void);
 void	heredoc_signal(void);
-void	prevent_signal(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 14:32:29 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 20:35:15 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	prompt(t_mini *mini)
 	char	*in;
 
 	main_signal();
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		in = get_input(mini);
@@ -109,11 +110,11 @@ void	prompt(t_mini *mini)
 			ft_putendl_fd("exit", STDOUT_FILENO);
 			break ;
 		}
-		printf("INPUT\n");
 		add_history(in);
 		create_token_list(&(mini->token), in);
 		create_cmd_list(mini);
-		mini_exec(mini);
+		if (mini->cmd)
+			mini_exec(mini);
 		free_lst_token(mini);
 		free_lst_cmd(mini);
 		free(in);

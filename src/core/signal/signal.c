@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:45:52 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 14:35:39 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 20:25:05 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,13 @@ int	signal_manager(int signal, int mode)
 static void	sigint(int signal)
 {
 	signal_manager(signal, SET_MODE);
-	ioctl(STDIN_FILENO, TIOCSTI, "\0");
-}
-
-static void	prevent_sigint(int signal)
-{
-	(void)signal;
+    rl_on_new_line();
+    rl_replace_line("", 0);
+	ft_putstr_fd("\n", STDIN_FILENO);
+    rl_redisplay();
 }
 
 void	main_signal(void)
 {
 	signal(SIGINT, sigint);
-}
-void	prevent_signal(void)
-{
-	signal(SIGINT, prevent_sigint);
 }

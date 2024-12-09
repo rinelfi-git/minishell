@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 13:45:41 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:29:00 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 	while (1)
 	{
 		line = readline(invite);
-		printf("INPUT [%s]\n", line);
 		if (!line)
 		{
 			heredoc_eof(doc->delimiter, line_count);
@@ -53,6 +52,7 @@ static void	heredoc(t_mini *mini, t_doc *doc)
 
 	pipe(fd);
 	pid = fork();
+	close(fd[1]);
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -62,17 +62,13 @@ static void	heredoc(t_mini *mini, t_doc *doc)
 		exit(0);
 	}
 	else
-		prevent_signal();
+		signal(SIGINT, SIG_IGN);
 	wait(&wstatus);
-	close(fd[1]);
 	main_signal();
 	if (WIFEXITED(wstatus))
-	{
-		printf("EXIT %d\n", WEXITSTATUS(wstatus));
-		signal_manager(SIGINT, SET_MODE);
-	}
-	if (signal_manager(0, GET_MODE) == SIGINT)
-		doc->fd = -2;
+		mini->exit_code = WEXITSTATUS(wstatus);
+	if (mini->exit_code == 130 && signal_manager(SIGINT, SET_MODE) == SIGINT)
+		close(fd[0]);
 	else
 		doc->fd = fd[0];
 }

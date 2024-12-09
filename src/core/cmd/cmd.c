@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:50:46 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 15:08:31 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 20:46:17 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "msutils.h"
 #include <stdlib.h>
 
-void	free_lst_cmd(t_mini *mini)
+int	free_lst_cmd(t_mini *mini)
 {
 	t_cmd	*next;
 	t_cmd	*tmp;
@@ -28,6 +28,7 @@ void	free_lst_cmd(t_mini *mini)
 		free(tmp);
 		tmp = next;
 	}
+	return (0);
 }
 /**
  * @brief On ajoute d'abord l'instance de la nouvelle commande à notre liste de commande de la structure principale mini->cmd
@@ -49,6 +50,8 @@ static t_cmd	*create_cmd(t_mini *mini, t_cmd **last, t_token *token)
 	cmd->fd_in = get_fdin(mini, token);
 	cmd->fd_out = get_fdout(mini, token);
 	cmd->args = get_cmd_params(mini, token);
+	if (cmd->fd_in == -1 || cmd->fd_out == -1)
+		return (0);
 	return (cmd);
 }
 /**
@@ -57,7 +60,7 @@ static t_cmd	*create_cmd(t_mini *mini, t_cmd **last, t_token *token)
  * 
  * @param mini 
  */
-void	create_cmd_list(t_mini *mini)
+int	create_cmd_list(t_mini *mini)
 {
 	t_token	*token;
 	t_cmd	*cmd;
@@ -66,12 +69,18 @@ void	create_cmd_list(t_mini *mini)
 	cmd = 0;
 	if (token)
 		cmd = create_cmd(mini, &(mini->cmd), token);
-	if (cmd)
-		token = token->next;
+	if (!cmd || signal_manager(0, GET_MODE) == SIGINT)
+		return (free_lst_cmd(mini));
+	token = token->next;
 	while (token)
 	{
 		if (token->prev->type == PIPE)
+		{
 			cmd = create_cmd(mini, &cmd, token);
+			if (!cmd || signal_manager(0, GET_MODE) == SIGINT)
+				return (free_lst_cmd(mini));
+		}
 		token = token->next;
 	}
+	return (1);
 }
