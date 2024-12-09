@@ -14,6 +14,7 @@ SRCs = src/main.c \
 		src/core/cmd/cmd_path.c \
 		src/core/cmd/cmd.c \
 		src/core/cmd/list_cmd.c \
+		src/core/signal/heredoc.c \
 		src/core/signal/signal.c \
 		src/core/token/list_token.c \
 		src/core/token/token.c \

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 20:10:15 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:20:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	mini_exec(t_mini *mini)
 	t_cmd	*cmd;
 
 	cmd = mini->cmd;
-	mini->exit_code = 0;
 	if (cmd && !cmd->next && is_builtin(cmd))
 		builtin(mini, cmd);
 	else

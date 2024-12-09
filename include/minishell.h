@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 20:23:24 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:27:31 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/signal.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <sys/ioctl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
@@ -126,4 +127,6 @@ int		open_heredoc(t_mini *mini, char *delimiter);
 void	wait_all(t_cmd *cmd);
 
 void	main_signal(void);
+void	heredoc_signal(void);
+void	prevent_signal(void);
 #endif
