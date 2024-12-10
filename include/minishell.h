@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttelolah <ttelolah@student.42antananavo    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 20:20:38 by ttelolah         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:01:53 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ char	*ft_getenv(t_env *env, char *var);
 char	**env_array(t_mini *mini);
 t_env	*append_env(t_env **head);
 t_env	*env_get(t_env **head, char *name);
+int		delete_env(t_env **head, t_env *env);
 
 void	create_token_list(t_token **head, char *line);
 t_token	*token_append(t_token **head, char *str, int type);

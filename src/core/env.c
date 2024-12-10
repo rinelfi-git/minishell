@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 16:03:55 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:54:29 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "msutils.h"
 
-static int	env_length(t_env *env)
+static int	env_list_length(t_env *env)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ char	**env_array(t_mini *mini)
 	char	**out;
 	t_env	*env;
 
-	len = env_length(mini->env_list);
+	len = env_list_length(mini->env_list);
 	out = malloc(sizeof(char *) * (len + 1));
 	if (!out)
 		return (0);

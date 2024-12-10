@@ -19,6 +19,7 @@ SRCs = src/main.c \
 		src/core/token/list_token.c \
 		src/core/token/token.c \
 		src/core/env.c \
+		src/core/env2.c \
 		src/core/exec.c \
 		src/core/exec2.c \
 		src/core/expand.c \

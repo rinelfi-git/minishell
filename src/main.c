@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:28:30 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 09:27:52 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:05:04 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	main(int ac, char **av, char **env)
 	data_init(&mini);
 	data_env(&mini, env);
 	prompt(&mini);
+	data_free(&mini);
 	return (mini.exit_code);
 }
