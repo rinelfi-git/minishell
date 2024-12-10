@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 20:54:34 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 21:01:06 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:07:54 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	delete_env(t_env **head, t_env *env)
 	if (env == tmp)
 	{
 		*head = env->next;
+		free(tmp->name);
+		free(tmp->value);
 		free(tmp);
 		return (1);
 	}
