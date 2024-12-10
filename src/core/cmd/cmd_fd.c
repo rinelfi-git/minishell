@@ -6,13 +6,12 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 20:47:26 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 08:40:43 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <fcntl.h>
-#include <unistd.h>
+#include "msutils.h"
 
 static int	open_file(t_mini *mini, int *fd, char *path, int type)
 {
@@ -27,8 +26,12 @@ static int	open_file(t_mini *mini, int *fd, char *path, int type)
 		*fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == HEREDOC)
 		*fd = open_heredoc(mini, path);
-	if (*fd == -1)
+	if (*fd == -1 && errno)
+	{
+		if (errno)
+			fd_error(path);
 		return (0);
+	}
 	return (1);
 }
 

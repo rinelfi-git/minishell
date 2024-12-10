@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 14:33:15 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 08:39:59 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,13 @@ void	heredoc_eof(char *delimiter, int line)
 	ft_putstr_fd(" delimited by end-of-file (wanted `", STDERR_FILENO);
 	ft_putstr_fd(delimiter, STDERR_FILENO);
 	ft_putendl_fd("')", STDERR_FILENO);
+}
+
+void	fd_error(char *path)
+{
+	char	*msg;
+
+	msg = ft_strjoin("minishell: ", path);
+	perror(msg);
+	free(msg);
 }

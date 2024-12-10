@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 20:42:44 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 08:36:19 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 # include <sys/signal.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-# include <sys/ioctl.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include <stdio.h>
+# include <errno.h>
 # define PATH_LEN		1024
 
 # define TERM_PRIMARY	"\033[0m\033[1;91m"
