@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: ttelolah <ttelolah@student.42antananavo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 20:17:58 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:19:56 by ttelolah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	execute_builtin(t_mini *mini, t_cmd *cmd)
 		return (built_pwd(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "echo", INT_MAX) == 0)
 		return (built_echo(cmd->args));
+	if (ft_strncmp(cmd->args[0], "unset", INT_MAX) == 0)
+		return (built_unset(mini, cmd->args));
 	return (0);
 }
 

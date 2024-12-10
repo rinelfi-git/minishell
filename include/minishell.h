@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: ttelolah <ttelolah@student.42antananavo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 08:36:19 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:20:38 by ttelolah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ int		built_cd(t_mini *mini, char **args);
 int	    built_export(t_env *env, char **args);
 int	    built_echo(char **args);
 int	    built_pwd(t_mini *mini, char **args);
-int	    built_unset(t_env *env);
+int		built_unset(t_mini *mini, char **args);
+
 
 void	mini_exec(t_mini *mini);
 int		free_lst_cmd(t_mini *mini);
