@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 08:39:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:40:44 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,13 @@ void	fd_error(char *path)
 	msg = ft_strjoin("minishell: ", path);
 	perror(msg);
 	free(msg);
+}
+int	export_invalid_identifier(t_mini *mini, char *id)
+{
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(id, STDERR_FILENO);
+	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+	free(id);
+	mini->exit_code = 1;
+	return (0);
 }

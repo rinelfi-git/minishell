@@ -6,14 +6,14 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 10:19:19 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 11:19:46 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "msutils.h"
 #include "libft.h"
-static void	update_vars(t_env *env ,char *old)
+static void	update_vars(t_mini *mini ,char *old)
 {
 	char	*export[4];
 	char	*cwd;
@@ -23,7 +23,7 @@ static void	update_vars(t_env *env ,char *old)
 	export[1] = ft_strjoin("OLDPWD=", old);
 	export[2] = ft_strjoin("PWD=", cwd);
 	export[3] = 0;
-	built_export(env, export);
+	built_export(mini, export);
 	free(export[1]);
 	free(export[2]);
 	free(cwd);
@@ -72,7 +72,7 @@ int	built_cd(t_mini *mini, char **args)
 		chdir(args[1]);
 	if (mini->exit_code == 0)
 	{
-		update_vars(mini->env_list, old);
+		update_vars(mini, old);
 		free(old);
 		return (1);
 	}

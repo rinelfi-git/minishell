@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:52:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 10:45:32 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:30:40 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ int		strarraylen(char **array);
 void	command_not_found(t_mini *mini, char *str);
 void	heredoc_eof(char *delimiter, int line);
 void	fd_error(char *path);
+int		export_invalid_identifier(t_mini *mini, char *id);
 #endif

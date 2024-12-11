@@ -8,6 +8,7 @@ SRCs = src/main.c \
 		src/core/builtins/env.c \
 		src/core/builtins/exit.c \
 		src/core/builtins/export.c \
+		src/core/builtins/export_operation.c \
 		src/core/builtins/pwd.c \
 		src/core/builtins/unset.c \
 		src/core/cmd/cmd_args.c \
