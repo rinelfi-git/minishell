@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:26:00 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:19:32 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void	mini_exec(t_mini *mini)
 		}
 		post_exec(mini);
 		free_strarray(mini->env_array);
+		mini->env_array = 0;
 	}
 }
