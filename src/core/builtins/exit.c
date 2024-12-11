@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:12:34 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 10:51:41 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 12:54:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	built_exit(t_mini *mini, char **args)
 	}
 	else if(len == 1)
 	{
-		ft_putendl_fd("exit", STDOUT_FILENO);
 		data_free(mini);
 		exit(0);
 	}
