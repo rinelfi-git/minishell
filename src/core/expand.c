@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:06:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/07 19:40:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:21:13 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	expand(t_mini *mini, char **str)
 		{
 			if ((*str)[i + 1] == '?')
 				return (expand_exitcode(str, i, mini));
-			else
+			else if (isalpha((*str)[i + 1]))
 				return (expand_var(str, i, mini));
 		}
 	}
