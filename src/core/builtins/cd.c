@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 11:19:46 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:50:27 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	built_cd(t_mini *mini, char **args)
 	char	*old;
 	int		len;
 
+	mini->exit_code = 0;
 	if (strarraylen(args) > 2)
 	{
 		ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);

@@ -6,12 +6,12 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:41:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 08:12:24 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:10:57 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdlib.h>
+#include "msutils.h"
 
 static int	cmd_new(t_cmd **out)
 {
@@ -60,4 +60,26 @@ int	cmd_length(t_cmd *head)
 		i++;
 	}
 	return (i);
+}
+
+int	free_lst_cmd(t_mini *mini)
+{
+	t_cmd	*next;
+	t_cmd	*tmp;
+
+	tmp = mini->cmd;
+	mini->cmd = 0;
+	while (tmp)
+	{
+		next = tmp->next;
+		if (tmp->args)
+			free_strarray(tmp->args);
+		if (tmp->fd_in >= 0)
+			close(tmp->fd_in);
+		if (tmp->fd_out >= 0)
+			close(tmp->fd_out);
+		free(tmp);
+		tmp = next;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 12:38:55 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:49:18 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int	do_export(t_mini *mini, char *str)
 		i = ft_strlen(identifier);
 		export_assign(str, i, &(mini->env_list));
 		free(identifier);
-		return (1);
 	}
+	mini->exit_code = 0;
 	return (1);
 }
 
@@ -81,5 +81,6 @@ int	built_export(t_mini *mini, char **args)
 				return (0);
 		}
 	}
+	mini->exit_code = 0;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 12:42:46 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:26:00 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ static void	parent_process(t_mini *mini, t_cmd *cmd, int *pp)
 	wait(&wstatus);
 	if (WIFEXITED(wstatus))
 		mini->exit_code = WEXITSTATUS(wstatus);
+	else if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGINT)
+		mini->exit_code = 130;
 }
 
 void	mini_exec(t_mini *mini)

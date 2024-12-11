@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 11:19:05 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:47:51 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_builtin(t_cmd *cmd)
 static int	execute_builtin(t_mini *mini, t_cmd *cmd)
 {
 	if (ft_strncmp(cmd->args[0], "env", INT_MAX) == 0)
-		return (built_env(mini->env_list));
+		return (built_env(mini));
 	if (ft_strncmp(cmd->args[0], "export", INT_MAX) == 0)
 		return (built_export(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "cd", INT_MAX) == 0)
@@ -52,7 +52,7 @@ static int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	if (ft_strncmp(cmd->args[0], "pwd", INT_MAX) == 0)
 		return (built_pwd(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "echo", INT_MAX) == 0)
-		return (built_echo(cmd->args));
+		return (built_echo(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "unset", INT_MAX) == 0)
 		return (built_unset(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "exit", INT_MAX) == 0)

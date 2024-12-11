@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:18 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 10:19:19 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:48:24 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "msutils.h"
 #include "libft.h"
 
-int	built_echo(char **args)
+int	built_echo(t_mini *mini, char **args)
 {
 	char	end;
 	int		i;
@@ -36,5 +36,6 @@ int	built_echo(char **args)
 		}
 		write(STDOUT_FILENO, &end, 1);
 	}
+	mini->exit_code = 0;
 	return (1);
 }

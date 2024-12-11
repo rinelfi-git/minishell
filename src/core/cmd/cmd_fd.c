@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 08:40:43 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:03:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ static int	open_file(t_mini *mini, int *fd, char *path, int type)
 	if (*fd == -1 && errno)
 	{
 		if (errno)
+		{
 			fd_error(path);
+			mini->exit_code = 1;
+		}
 		return (0);
 	}
 	return (1);
@@ -47,7 +50,8 @@ int	get_fdin(t_mini *mini, t_token *token)
 		if (token->type == INPUT)
 		{
 			parse(mini, &token->next->str);
-			open_file(0, &fd, token->next->str, INPUT);
+			if (!open_file(mini, &fd, token->next->str, INPUT))
+				return (-1);
 		}
 		if (token->type == HEREDOC)
 			open_file(mini, &fd, token->next->str, HEREDOC);
@@ -68,12 +72,14 @@ int	get_fdout(t_mini *mini, t_token *token)
 		if (token->type == TRUNC)
 		{
 			parse(mini, &(token->next->str));
-			open_file(0, &fd, token->next->str, TRUNC);
+			if (!open_file(mini, &fd, token->next->str, TRUNC))
+				return (-1);
 		}
 		if (token->type == APPEND)
 		{
 			parse(mini, &(token->next->str));
-			open_file(0, &fd, token->next->str, APPEND);
+			if (!open_file(mini, &fd, token->next->str, APPEND))
+				return (-1);
 		}
 		token = token->next;
 	}

@@ -6,30 +6,11 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:50:46 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 20:46:17 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:09:58 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "msutils.h"
-#include <stdlib.h>
-
-int	free_lst_cmd(t_mini *mini)
-{
-	t_cmd	*next;
-	t_cmd	*tmp;
-
-	tmp = mini->cmd;
-	mini->cmd = 0;
-	while (tmp)
-	{
-		next = tmp->next;
-		free_strarray(tmp->args);
-		free(tmp);
-		tmp = next;
-	}
-	return (0);
-}
 /**
  * @brief On ajoute d'abord l'instance de la nouvelle commande à notre liste de commande de la structure principale mini->cmd
  * Un groupe de commande est composé d'un argument, d'un input et d'un output

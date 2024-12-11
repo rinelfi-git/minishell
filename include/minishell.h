@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 12:38:05 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:48:07 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ struct s_doc
 int		signal_manager(int signal, int mode);
 void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
-void	data_free(t_mini *mini);
+int		data_free(t_mini *mini);
 void	prompt(t_mini *mini);
 int		expand(t_mini *mini, char **str);
 int		parse(t_mini *mini, char **str);
@@ -118,10 +118,10 @@ int		get_fdout(t_mini *mini, t_token *token);
 
 int		is_builtin(t_cmd *cmd);
 int		builtin(t_mini *mini, t_cmd *cmd);
-int	    built_env(t_env *env);
+int	    built_env(t_mini *mini);
 int		built_cd(t_mini *mini, char **args);
 int	    built_export(t_mini *mini, char **args);
-int	    built_echo(char **args);
+int	    built_echo(t_mini *mini, char **args);
 int	    built_pwd(t_mini *mini, char **args);
 int		built_unset(t_mini *mini, char **args);
 int		built_exit(t_mini *mini, char **args);

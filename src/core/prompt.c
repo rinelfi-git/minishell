@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 12:42:42 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 14:04:52 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	prompt(t_mini *mini)
 		add_history(in);
 		create_token_list(&(mini->token), in);
 		create_cmd_list(mini);
-		mini->exit_code = 0;
 		if (mini->cmd)
 			mini_exec(mini);
 		free_lst_token(mini);

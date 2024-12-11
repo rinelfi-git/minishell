@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttelolah <ttelolah@student.42antananavo    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:37 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 21:09:02 by ttelolah         ###   ########.fr       */
+/*   Updated: 2024/12/11 13:51:07 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int	built_unset(t_mini *mini, char **args)
 		remove_env_variable(&mini->env_list, args[i]);
 		i++;
 	}
+	mini->exit_code = 0;
 	return (0);
 }
