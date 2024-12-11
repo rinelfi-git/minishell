@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:45:52 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 20:25:05 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:41:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	signal_manager(int signal, int mode)
 static void	sigint(int signal)
 {
 	signal_manager(signal, SET_MODE);
+	ft_putstr_fd("\n", STDIN_FILENO);
     rl_on_new_line();
     rl_replace_line("", 0);
-	ft_putstr_fd("\n", STDIN_FILENO);
     rl_redisplay();
 }
 

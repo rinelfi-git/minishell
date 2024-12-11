@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 14:19:32 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 15:44:13 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,16 @@ static void	parent_process(t_mini *mini, t_cmd *cmd, int *pp)
 		cmd->next->fd_in = pp[0];
 	else
 		close(pp[0]);
+	signal(SIGINT, SIG_IGN);
 	wait(&wstatus);
+	main_signal();
 	if (WIFEXITED(wstatus))
 		mini->exit_code = WEXITSTATUS(wstatus);
 	else if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGINT)
+	{
 		mini->exit_code = 130;
+		write(1, "\n", 1);
+	}
 }
 
 void	mini_exec(t_mini *mini)
