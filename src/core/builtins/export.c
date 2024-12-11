@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/02 16:26:40 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:19:19 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	built_export(t_env *env, char **args)
 {
 	int	i;
 
-	if (len_strarray(args) == 1)
+	if (strarraylen(args) == 1)
 		export_print(env);
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttelolah <ttelolah@student.42antananavo    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 20:19:56 by ttelolah         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:30:00 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <unistd.h>
 #include <limits.h>
-#define BUILTIN_LEN 6
+#define BUILTIN_LEN 7
 
 int	is_builtin(t_cmd *cmd)
 {
@@ -30,6 +30,7 @@ int	is_builtin(t_cmd *cmd)
 	bins[3] = "export";
 	bins[4] = "pwd";
 	bins[5] = "unset";
+	bins[6] = "exit";
 	if (!cmd)
 		return (0);
 	while (i < BUILTIN_LEN)
@@ -54,7 +55,9 @@ static int	execute_builtin(t_mini *mini, t_cmd *cmd)
 		return (built_echo(cmd->args));
 	if (ft_strncmp(cmd->args[0], "unset", INT_MAX) == 0)
 		return (built_unset(mini, cmd->args));
-	return (0);
+	if (ft_strncmp(cmd->args[0], "exit", INT_MAX) == 0)
+		return (built_exit(mini, cmd->args));
+	return (1);
 }
 
 int	builtin(t_mini *mini, t_cmd *cmd)

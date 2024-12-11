@@ -6,15 +6,15 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 21:05:24 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:02:57 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "msutils.h"
 #include "libft.h"
-#include <stdlib.h>
 
-static void	create_env(t_env **head, char *var)
+static int	create_env(t_env **head, char *var)
 {
 	int		limits[2];
 	char	*name;
@@ -32,12 +32,13 @@ static void	create_env(t_env **head, char *var)
 	last_env = head;
 	while (*last_env)
 		last_env = &((*last_env)->next);
-	*last_env = malloc(sizeof(t_env));
+	*last_env = ft_calloc(sizeof(t_env), 1);
 	if (!(*last_env))
-		exit(1);
+		return (MALLOC_ERROR);
 	(*last_env)->name = name;
 	(*last_env)->value = value;
 	(*last_env)->next = 0;
+	return (0);
 }
 
 void	data_init(t_mini *mini)
@@ -51,21 +52,11 @@ void	data_init(t_mini *mini)
 
 void	data_free(t_mini *mini)
 {
-	t_env	*env;
-	t_env	*next;
-
-	env = mini->env_list;
-	mini->env_list = 0;
-	while (env)
-	{
-		next = env->next;
-		if (env->name)
-			free(env->name);
-		if (env->value)
-			free(env->value);
-		free(env);
-		env = next;
-	}
+	free_lst_token(mini);
+	free_lst_cmd(mini);
+	free_lst_env(mini);
+	if (mini->env_array)
+		free_strarray(mini->env_array);
 }
 
 void	data_env(t_mini *mini, char **env)
@@ -74,5 +65,11 @@ void	data_env(t_mini *mini, char **env)
 
 	i = 0;
 	while (env && env[i])
-		create_env(&(mini->env_list), env[i++]);
+	{
+		if (create_env(&(mini->env_list), env[i++]) < 0)
+		{
+			data_free(mini);
+			exit(EXIT_FAILURE);
+		}
+	}
 }

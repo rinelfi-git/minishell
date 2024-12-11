@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:06:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 21:21:13 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:51:44 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ static char	*get_varname(char *str)
 
 static int	expand_exitcode(char **str, int i, t_mini *mini)
 {
-	char	*split[3];
+	char	**split;
 
+	split = ft_calloc(sizeof(char *), 4);
+	if (!split)
+		return (MALLOC_ERROR);
 	split[0] = ft_substr(*str, 0, i++);
 	split[1] = ft_itoa(mini->exit_code);
 	split[2] = ft_substr(*str, i + 1, ft_strlen(*str) - (i + 1));
@@ -39,9 +42,7 @@ static int	expand_exitcode(char **str, int i, t_mini *mini)
 	free(*str);
 	*str = ft_strjoin(split[0], split[1]);
 	str_append(str, split[2]);
-	free(split[0]);
-	free(split[1]);
-	free(split[2]);
+	free_strarray(split);
 	return (1);
 }
 
@@ -49,8 +50,11 @@ static int	expand_var(char **str, int i, t_mini *mini)
 {
 	char	*var;
 	int		jump;
-	char	*split[3];
+	char	**split;
 
+	split = ft_calloc(sizeof(char *), 4);
+	if (!split)
+		return (MALLOC_ERROR);
 	split[0] = ft_substr(*str, 0, i++);
 	var = get_varname((*str) + i);
 	jump = ft_strlen(var);
@@ -64,9 +68,7 @@ static int	expand_var(char **str, int i, t_mini *mini)
 	free(*str);
 	*str = ft_strjoin(split[0], split[1]);
 	str_append(str, split[2]);
-	free(split[0]);
-	free(split[1]);
-	free(split[2]);
+	free_strarray(split);
 	return (1);
 }
 

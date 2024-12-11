@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/10 21:01:53 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:14:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 
 # define SET_MODE		1
 # define GET_MODE		2
+
+# define MALLOC_ERROR	-1
 
 typedef struct s_minishell	t_mini;
 typedef struct s_env		t_env;
@@ -102,6 +104,7 @@ char	**env_array(t_mini *mini);
 t_env	*append_env(t_env **head);
 t_env	*env_get(t_env **head, char *name);
 int		delete_env(t_env **head, t_env *env);
+int		free_lst_env(t_mini *mini);
 
 void	create_token_list(t_token **head, char *line);
 t_token	*token_append(t_token **head, char *str, int type);
@@ -121,13 +124,14 @@ int	    built_export(t_env *env, char **args);
 int	    built_echo(char **args);
 int	    built_pwd(t_mini *mini, char **args);
 int		built_unset(t_mini *mini, char **args);
+int		built_exit(t_mini *mini, char **args);
 
 
 void	mini_exec(t_mini *mini);
 int		free_lst_cmd(t_mini *mini);
 int		free_lst_token(t_mini *mini);
 int		open_heredoc(t_mini *mini, char *delimiter);
-void	wait_all(t_cmd *cmd);
+void	post_exec(t_mini *mini);
 
 void	main_signal(void);
 void	heredoc_signal(void);

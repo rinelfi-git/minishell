@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:18 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 13:08:33 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:19:19 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	built_echo(char **args)
 
 	end = '\n';
 	i = 1;
-	if (len_strarray(args) > 1)
+	if (strarraylen(args) > 1)
 	{
 		if (ft_strncmp(args[1], "-n", 2) == 0)
 		{

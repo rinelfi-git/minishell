@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 09:38:17 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:45:14 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,19 @@ int	is_special(char *str)
 			return (PIPE);
 	}
 	return (0);
+}
+
+int	isnumber(char *str)
+{
+	while (is_space(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return (0);
+		str++;
+	}
+	return (1);
 }

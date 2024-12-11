@@ -6,6 +6,7 @@ SRCs = src/main.c \
 		src/core/builtins/cd.c \
 		src/core/builtins/echo.c \
 		src/core/builtins/env.c \
+		src/core/builtins/exit.c \
 		src/core/builtins/export.c \
 		src/core/builtins/pwd.c \
 		src/core/builtins/unset.c \

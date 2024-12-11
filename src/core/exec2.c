@@ -6,14 +6,17 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:40:11 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 16:50:12 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 09:38:55 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	wait_all(t_cmd *cmd)
+void	post_exec(t_mini *mini)
 {
+	t_cmd	*cmd;
+
+	cmd = mini->cmd;
 	while (cmd)
 	{
 		if (cmd->fd_in >= 0)

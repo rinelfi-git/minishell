@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 20:35:15 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:20:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,8 @@ static char	*get_input(t_mini *mini)
 
 	prompt = get_prompt(mini);
 	in = readline(prompt);
-	if (!in || ft_strncmp(in, "exit", 4) == 0)
-	{
-		free(in);
-		in = 0;
-	}
+	if (!in)
+		in = ft_strdup("exit 0");
 	free(prompt);
 	return (in);
 }
@@ -105,11 +102,6 @@ void	prompt(t_mini *mini)
 		if (signal_manager(0, GET_MODE) == SIGINT)
 			mini->exit_code = 130;
 		signal_manager(0, SET_MODE);
-		if (!in)
-		{
-			ft_putendl_fd("exit", STDOUT_FILENO);
-			break ;
-		}
 		add_history(in);
 		create_token_list(&(mini->token), in);
 		create_cmd_list(mini);

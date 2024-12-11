@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:56:51 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 15:58:18 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:19:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void	free_strarray(char **array)
 	while (array && array[i])
 		free(array[i++]);
 	free(array);
+	array = 0;
 }
 
-int	len_strarray(char **array)
+int	strarraylen(char **array)
 {
 	int	i;
 

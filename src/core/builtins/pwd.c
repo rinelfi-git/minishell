@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:07 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/04 12:57:47 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/11 10:19:19 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	    built_pwd(t_mini *mini, char **args)
 {
 	char	*cwd;
 	
-	if (len_strarray(args) > 1)
+	if (strarraylen(args) > 1)
 	{
 		write(STDERR_FILENO, "pwd: too many arguments\n", 24);
 		mini->exit_code = 1;
