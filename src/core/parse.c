@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 14:57:14 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:26:59 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,49 @@ static int	sequence_count(char *str)
 	return (1 + sequence_count(str));
 }
 
-static char	*parse_split(t_mini *mini, char *str, int *i)
+static char	*split_quoted(t_mini *mini, char *str, int *i)
 {
 	int		j;
 	char	quote;
-	char	*substr;
-	
-	j = 0;
-	substr = 0;
-	if (is_quote(str[j]))
-	{
-		quote = str[j++];
-		while (str[j] && str[j] != quote)
-			j++;
-		substr = ft_substr(str, 1, j - 1);
+	char	*split;
+
+	if (!str || !is_quote(*str))
+		return (0);
+	quote = *str;
+	j = 1;
+	split = 0;
+	while (str[j] && str[j] != quote)
 		j++;
-		if (quote == '"')
-			expand(mini, &substr);
-	}
-	else
-	{
-		while (str[j] && !is_quote(str[j]))
-			j++;
-		substr = ft_substr(str, 0, j);
-		expand(mini, &substr);
-	}
+	split = ft_substr(str, 1, j - 1);
+		j++;
+	if (quote == '"')
+		expand(mini, &split);
 	(*i) += j;
-	return (substr);
+	return (split);
+}
+
+static char	*split_literral(t_mini *mini, char *str, int *i)
+{
+	int		j;
+	char	*split;
+
+	if (!str)
+		return (0);
+	j = 0;
+	split = 0;
+	while (str[j] && !is_quote(str[j]))
+		j++;
+	split = ft_substr(str, 0, j);
+	expand(mini, &split);
+	(*i) += j;
+	return (split);
+}
+
+static char	*parse_split(t_mini *mini, char *str, int *i)
+{
+	if (is_quote(*str))
+		return (split_quoted(mini, str, i));
+	return (split_literral(mini, str, i));
 }
 
 int	parse(t_mini *mini, char **str)
