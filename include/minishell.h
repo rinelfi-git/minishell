@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 15:37:20 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:21:48 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define HEREDOC		5
 # define TRUNC			6
 # define APPEND			7
-# define FILE			8
 
 # define SET_MODE		1
 # define GET_MODE		2
@@ -98,6 +97,7 @@ int		data_free(t_mini *mini);
 void	prompt(t_mini *mini);
 int		expand(t_mini *mini, char **str);
 int		parse(t_mini *mini, char **str);
+int		syntax_ok(char *str);
 
 char	*ft_getenv(t_env *env, char *var);
 char	**env_array(t_mini *mini);
@@ -132,11 +132,10 @@ void	export_print(t_env *env);
 
 void	mini_exec(t_mini *mini);
 int		free_lst_cmd(t_mini *mini);
-int		free_lst_token(t_mini *mini);
+int		free_lst_token(t_token **head);
 int		open_heredoc(t_mini *mini, char *delimiter);
 void	post_exec(t_mini *mini);
 
 void	main_signal(void);
-void	child_signal(void);
 void	heredoc_signal(void);
 #endif

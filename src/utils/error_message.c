@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 12:40:44 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:05:50 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,11 @@ int	export_invalid_identifier(t_mini *mini, char *id)
 	ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 	free(id);
 	mini->exit_code = 1;
+	return (0);
+}
+
+int	unclosed_quote(void)
+{
+	ft_putendl_fd("minishell: syntax error: unexpected EOF", STDERR_FILENO);
 	return (0);
 }

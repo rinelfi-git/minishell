@@ -6,12 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:52:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 12:30:40 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:39:20 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MSUTILS_H
 # define MSUTILS_H
+# include "minishell.h"
 
 void	str_append(char **dest, char *src);
 int		is_space(char c);
@@ -26,4 +27,5 @@ void	command_not_found(t_mini *mini, char *str);
 void	heredoc_eof(char *delimiter, int line);
 void	fd_error(char *path);
 int		export_invalid_identifier(t_mini *mini, char *id);
+int		unclosed_quote(void);
 #endif

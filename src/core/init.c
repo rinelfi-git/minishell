@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:29:54 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 20:59:07 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	data_init(t_mini *mini)
 
 int	data_free(t_mini *mini)
 {
-	free_lst_token(mini);
+	free_lst_token(&(mini->token));
 	free_lst_cmd(mini);
 	free_lst_env(mini);
 	if (mini->env_array)

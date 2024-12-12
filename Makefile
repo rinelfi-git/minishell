@@ -29,6 +29,7 @@ SRCs = src/main.c \
 		src/core/init.c \
 		src/core/parse.c \
 		src/core/prompt.c \
+		src/core/syntax_check.c \
 		src/utils/error_message.c \
 		src/utils/is.c \
 		src/utils/quote.c \
