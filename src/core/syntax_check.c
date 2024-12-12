@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:26:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:46:56 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ static int	closed_quote(char *str)
 	return (1);
 }
 
-static int	unexpected_token(char *token)
+static int	unexpected_token(int *code, char *token)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
 	ft_putstr_fd(token, 2);
 	ft_putendl_fd("'", 2);
+	*code = 2;
 	return (0);
 }
 
-int	syntax_ok(char *str)
+int	syntax_ok(char *str, int *code)
 {
 	t_token	*token;
 	t_token	*tmp;
@@ -56,13 +57,13 @@ int	syntax_ok(char *str)
 	while (tmp)
 	{
 		if (!closed_quote(tmp->str))
-			return (unclosed_quote());
+			return (unclosed_quote(code));
 		if (tmp->type == PIPE && (!tmp->next || tmp->next->type != CMD))
-			return (unexpected_token("|"));
+			return (unexpected_token(code, "|"));
 		special = INPUT;
 		while (special <= APPEND)
 			if (tmp->type == special++ && (!tmp->next || tmp->next->type != ARG))
-				return (unexpected_token(tmp->str));
+				return (unexpected_token(code, tmp->str));
 		tmp = tmp->next;
 	}
 	free_lst_token(&token);

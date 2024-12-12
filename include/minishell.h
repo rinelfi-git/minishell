@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:21:48 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:50:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int		data_free(t_mini *mini);
 void	prompt(t_mini *mini);
 int		expand(t_mini *mini, char **str);
 int		parse(t_mini *mini, char **str);
-int		syntax_ok(char *str);
+int		syntax_ok(char *str, int *code);
 
 char	*ft_getenv(t_env *env, char *var);
 char	**env_array(t_mini *mini);

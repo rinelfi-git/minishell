@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:16:54 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 21:48:18 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	prompt(t_mini *mini)
 		if (signal_manager(0, GET_MODE) == SIGINT)
 			mini->exit_code = 130;
 		signal_manager(0, SET_MODE);
-		if (!syntax_ok(in))
+		if (!syntax_ok(in, &(mini->exit_code)))
 			continue ;
 		create_token_list(&(mini->token), in);
 		create_cmd_list(mini);
