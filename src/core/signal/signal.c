@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:45:52 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 15:41:06 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:46:23 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ static void	sigint(int signal)
 
 void	main_signal(void)
 {
+	signal(SIGINT, SIG_IGN);
 	signal(SIGINT, sigint);
 }

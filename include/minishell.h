@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:48:07 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:37:20 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,6 @@ int		open_heredoc(t_mini *mini, char *delimiter);
 void	post_exec(t_mini *mini);
 
 void	main_signal(void);
+void	child_signal(void);
 void	heredoc_signal(void);
 #endif

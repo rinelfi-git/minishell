@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 15:44:13 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:47:38 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pp)
 	exit(mini->exit_code);
 }
 
-static void	parent_process(t_mini *mini, t_cmd *cmd, int *pp)
+static void	parent_process(t_cmd *cmd, int *pp)
 {
-	int	wstatus;
-
+	signal(SIGINT, SIG_IGN);
 	close(pp[1]);
 	if (cmd->fd_out == -2)
 		cmd->fd_out = pp[0];
@@ -71,16 +70,6 @@ static void	parent_process(t_mini *mini, t_cmd *cmd, int *pp)
 		cmd->next->fd_in = pp[0];
 	else
 		close(pp[0]);
-	signal(SIGINT, SIG_IGN);
-	wait(&wstatus);
-	main_signal();
-	if (WIFEXITED(wstatus))
-		mini->exit_code = WEXITSTATUS(wstatus);
-	else if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGINT)
-	{
-		mini->exit_code = 130;
-		write(1, "\n", 1);
-	}
 }
 
 void	mini_exec(t_mini *mini)
@@ -102,7 +91,7 @@ void	mini_exec(t_mini *mini)
 			if (pid == 0)
 				child_process(mini, cmd, fds);
 			else if (pid > 0)
-				parent_process(mini, cmd, fds);
+				parent_process(cmd, fds);
 			cmd = cmd->next;
 		}
 		post_exec(mini);
