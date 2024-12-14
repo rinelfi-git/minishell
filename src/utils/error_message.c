@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:47:12 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:22:39 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	command_not_found(t_mini *mini, char *str)
 	}
 	else
 	{
+		ft_putstr_fd("minishell: '", 2);
 		ft_putstr_fd(str, 2);
-		ft_putendl_fd(": command not found", 2);
+		ft_putendl_fd("': command not found", 2);
 	}
 	mini->exit_code = 127;
 }

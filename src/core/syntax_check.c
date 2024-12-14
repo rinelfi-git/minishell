@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 14:44:29 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:10:48 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,24 @@ int	syntax_ok(char *str, int *code)
 	t_token	*token;
 	t_token	*tmp;
 	int		special;
+	int		ok;
 
 	create_token_list(&token, str);
+	ok = 1;
 	tmp = token;
 	if (tmp)
 		add_history(str);
-	while (tmp)
+	while (ok && tmp)
 	{
+		if (*(tmp->str))
 		if (!closed_quote(tmp->str))
-			return (unclosed_quote(code));
-		if (tmp->type == PIPE && (!tmp->next || tmp->next->type != CMD))
-			return (unexpected_token(code, "|"));
+			ok = unclosed_quote(code);
+		if (ok && tmp->type == PIPE && (!tmp->next || tmp->next->type != CMD))
+			ok = unexpected_token(code, "|");
 		special = INPUT;
-		while (special <= APPEND)
+		while (ok && special <= APPEND)
 			if (tmp->type == special++ && (!tmp->next || tmp->next->type != ARG))
-				return (unexpected_token(code, "newline"));
+				ok = unexpected_token(code, "newline");
 		tmp = tmp->next;
 	}
 	free_lst_token(&token);
