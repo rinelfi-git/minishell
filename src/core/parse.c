@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 17:26:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:33:13 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*split_quoted(t_mini *mini, char *str, int *i)
 	while (str[j] && str[j] != quote)
 		j++;
 	split = ft_substr(str, 1, j - 1);
-		j++;
+	j++;
 	if (quote == '"')
 		expand(mini, &split);
 	(*i) += j;
