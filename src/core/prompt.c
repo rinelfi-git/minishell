@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:48:18 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:45:58 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ static void	prompt_path(char **out, char *user)
 	free(cwd);
 }
 
-/**
- * @brief Récupère les infoirmations à afficher dans le prompt
- * notament, le nom d'utilisateur de la session,
- * le dossier où le shell est lancé
- * 
- * @param mini 
- * @return char* 
- */
 static char	*get_prompt(t_mini *mini)
 {
 	char	*user;
@@ -58,12 +50,7 @@ static char	*get_prompt(t_mini *mini)
 	str_append(&out, TERM_DEFAULT"]$ ");
 	return (out);
 }
-/**
- * @brief Permet de formater le prompt récupérer l'input utilisateur depuis l'entré standard
- * 
- * @param mini 
- * @return char* 
- */
+
 static char	*get_input(t_mini *mini)
 {
 	char	*in;
@@ -77,18 +64,6 @@ static char	*get_input(t_mini *mini)
 	return (in);
 }
 
-/**
- * @brief À chaque boucle, on récupère la valeur de l'entré standard avec readline.
- * ensuite, on ajoute la saisie à l'historique de commande.
- * On crée une liste de token quon sauvegardera dans la structure principale du programme
- * qui est mini->token
- * Une fois la tokenisation terminée on les transforme en une ligne de commande
- * qu'on pourra exécuter dans la boucle d'exécution
- * On exécute la liste de commande puis on libère les tokens et commandes précédement
- * créés pour faire place à le nouvelle ligne de commande saisie
- * 
- * @param mini 
- */
 void	prompt(t_mini *mini)
 {
 	char	*in;

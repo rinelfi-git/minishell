@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:46:56 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:44:29 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	syntax_ok(char *str, int *code)
 		special = INPUT;
 		while (special <= APPEND)
 			if (tmp->type == special++ && (!tmp->next || tmp->next->type != ARG))
-				return (unexpected_token(code, tmp->str));
+				return (unexpected_token(code, "newline"));
 		tmp = tmp->next;
 	}
 	free_lst_token(&token);
