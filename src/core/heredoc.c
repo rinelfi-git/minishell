@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:30:56 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:34:09 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 	char	*invite;
 	int		line_count;
 
-	line = 0;
 	line_count = 0;
 	invite = ft_strjoin("<", doc->delimiter);
 	str_append(&invite, "> ");
