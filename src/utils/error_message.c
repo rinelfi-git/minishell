@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 15:22:39 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:40:09 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	fd_error(char *path)
 	perror(msg);
 	free(msg);
 }
+
 int	export_invalid_identifier(t_mini *mini, char *id)
 {
 	ft_putstr_fd("minishell: export: `", 2);
