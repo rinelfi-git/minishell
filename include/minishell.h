@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 13:57:03 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:42:30 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ struct s_doc
 	int		fd;
 };
 
-
 int		signal_manager(int signal, int mode);
 void	data_init(t_mini *mini);
 void	data_env(t_mini *mini, char **env);
@@ -117,17 +116,16 @@ int		get_fdout(t_mini *mini, t_token *token);
 
 int		is_builtin(t_cmd *cmd);
 int		builtin(t_mini *mini, t_cmd *cmd);
-int	    built_env(t_mini *mini);
+int		built_env(t_mini *mini);
 int		built_cd(t_mini *mini, char **args);
-int	    built_export(t_mini *mini, char **args);
-int	    built_echo(t_mini *mini, char **args);
-int	    built_pwd(t_mini *mini, char **args);
+int		built_export(t_mini *mini, char **args);
+int		built_echo(t_mini *mini, char **args);
+int		built_pwd(t_mini *mini, char **args);
 int		built_unset(t_mini *mini, char **args);
 int		built_exit(t_mini *mini, char **args);
 int		export_append(char *str, int i, t_env **env);
 int		export_assign(char *str, int i, t_env **env);
 void	export_print(t_env *env);
-
 
 void	mini_exec(t_mini *mini);
 int		free_lst_cmd(t_mini *mini);
