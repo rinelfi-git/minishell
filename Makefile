@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CARG = -Werror -Wextra -Wall -g
+CARG = -Werror -Wextra -Wall
 SRCs = src/main.c \
 		src/core/builtins/builtin.c \
 		src/core/builtins/cd.c \
