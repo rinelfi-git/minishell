@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:50:25 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 13:57:03 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <limits.h>
 # include <stdio.h>
 # include <errno.h>
-# define PATH_LEN		1024
 
 # define TERM_PRIMARY	"\033[0m\033[1;91m"
 # define TERM_SECONDARY	"\033[0m\033[92m"
