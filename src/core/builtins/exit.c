@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:12:34 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:09:16 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:38:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	built_exit(t_mini *mini, char **args)
 		else
 			exit_numeric(mini, ft_atoi(args[1]));
 	}
-	else if(len == 1)
+	else if (len == 1)
 		exit_numeric(mini, 0);
 	else
 		exit_many_argument(mini);
