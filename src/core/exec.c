@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 15:47:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:59:29 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pp)
 {
 	char	*path;
 
+	signal(SIGQUIT, SIG_DFL);
 	if (is_builtin(cmd))
 		fork_builtin(mini, cmd, pp);
 	else if (cmd->args)

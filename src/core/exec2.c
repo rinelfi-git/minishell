@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:40:11 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 15:48:57 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:04:03 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	post_exec(t_mini *mini)
 		waitpid(-1, &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			mini->exit_code = WEXITSTATUS(wstatus);
-		else if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGINT)
+		else if (WIFSIGNALED(wstatus))
 		{
-			mini->exit_code = 130;
-			ft_putchar_fd('\n', STDIN_FILENO);
+			mini->exit_code = 128 + WTERMSIG(wstatus);
+			if (mini->exit_code == 131)
+				ft_putstr_fd("Quit", 1);
+			ft_putchar_fd('\n', 1);
 		}
 		if (cmd->fd_in >= 0)
 			close(cmd->fd_in);

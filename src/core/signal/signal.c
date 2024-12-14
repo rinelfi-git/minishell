@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:45:52 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 15:46:23 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 14:57:58 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	signal_manager(int signal, int mode)
 {
-	static pid_t	signal_storage = 0;
+	static int	signal_storage = 0;
 	
 	if (mode == SET_MODE)
 		signal_storage = signal;
