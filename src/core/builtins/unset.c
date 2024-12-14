@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:37 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:51:07 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/14 15:36:33 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+
 static void	remove_env_variable(t_env **env_list, char *var_name)
 {
 	t_env	*prev;
@@ -48,6 +49,7 @@ static void	remove_env_variable(t_env **env_list, char *var_name)
 		current = current->next;
 	}
 }
+
 int	built_unset(t_mini *mini, char **args)
 {
 	int	i;
