@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 15:31:09 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:03:57 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ int	syntax_ok(char *str, int *code)
 		tmp = tmp->next;
 	}
 	free_lst_token(&token);
-	return (1);
+	return (ok);
 }
