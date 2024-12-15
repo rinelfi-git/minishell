@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 17:59:44 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:08:44 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	parent_process(t_cmd *cmd, int *pp)
 {
 	signal(SIGINT, SIG_IGN);
 	close(pp[1]);
-	if (cmd->fd_in)
+	if (cmd->fd_in >= 0)
 		close(cmd->fd_in);
 	if (cmd->next && cmd->next->fd_in == -2)
 		cmd->next->fd_in = pp[0];
