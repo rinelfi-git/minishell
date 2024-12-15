@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:40:11 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 15:05:41 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:38:02 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	code_from_signal(int status, int *code)
 		}
 		else if (WTERMSIG(status) == SIGQUIT)
 		{
-			*code = 130;
+			*code = 131;
 			ft_putendl_fd("Quit", 1);
 		}
 	}
@@ -40,8 +40,9 @@ void	post_exec(t_mini *mini)
 	cmd = mini->cmd;
 	while (cmd)
 	{
-		waitpid(-1, &wstatus, 0);
-		code_from_signal(wstatus, &(mini->exit_code));
+		waitpid(cmd->pid, &wstatus, 0);
+		if (!cmd->next)
+			code_from_signal(wstatus, &(mini->exit_code));
 		if (cmd->fd_in >= 0)
 			close(cmd->fd_in);
 		if (cmd->fd_out >= 0)
