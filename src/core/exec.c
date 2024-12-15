@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 17:56:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 17:59:44 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ static void	parent_process(t_cmd *cmd, int *pp)
 	close(pp[1]);
 	if (cmd->fd_in)
 		close(cmd->fd_in);
-	if (cmd->fd_in == -2)
-		cmd->fd_in = pp[0];
 	if (cmd->next && cmd->next->fd_in == -2)
 		cmd->next->fd_in = pp[0];
 	else
