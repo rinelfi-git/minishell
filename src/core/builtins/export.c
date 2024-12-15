@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:49:18 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:13:50 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 
 static int	is_valid_identifier(char *str)
 {
-	if (!ft_isalpha(*(str++)))
+	if (!ft_isalpha(*str) && *str != '_')
 		return (0);
-	while (*str && ft_isalnum(*str))
+	str++;
+	while (*str && (ft_isalnum(*str) || *str != '_'))
 		str++;
 	if (!(*str))
 		return (1);
@@ -53,7 +54,7 @@ static int	do_export(t_mini *mini, char *str)
 
 	identifier = get_identifier(str);
 	if (!is_valid_identifier(identifier))
-		return (export_invalid_identifier(mini, identifier));
+		return (export_invalid_identifier(mini, str));
 	if (!has_operation(str) && !ft_getenv(mini->env_list, str))
 		append_env(&(mini->env_list))->name = identifier;
 	else
