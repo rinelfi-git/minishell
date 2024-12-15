@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 15:34:09 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:49:48 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@
 static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 {
 	char	*line;
-	char	*invite;
 	int		line_count;
 
 	line_count = 0;
-	invite = ft_strjoin("<", doc->delimiter);
-	str_append(&invite, "> ");
 	while (1)
 	{
-		line = readline(invite);
+		line = readline("> ");
 		if (!line)
 		{
 			heredoc_eof(doc->delimiter, line_count);
@@ -40,36 +37,37 @@ static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 		line_count++;
 		free(line);
 	}
-	free(invite);
+	close(pp[1]);
+	exit(0);
 }
 
 static void	heredoc(t_mini *mini, t_doc *doc)
 {
-	int		fd[2];
+	int		fds[2];
 	pid_t	pid;
 	int		wstatus;
 
-	pipe(fd);
+	pipe(fds);
 	pid = fork();
-	close(fd[1]);
 	if (pid == 0)
 	{
-		close(fd[0]);
 		heredoc_signal();
-		read_process(mini, doc, fd);
-		close(fd[1]);
-		exit(0);
+		close(fds[0]);
+		read_process(mini, doc, fds);
 	}
 	else
+	{
+		close(fds[1]);
 		signal(SIGINT, SIG_IGN);
+	}
 	wait(&wstatus);
 	main_signal();
 	if (WIFEXITED(wstatus))
 		mini->exit_code = WEXITSTATUS(wstatus);
 	if (mini->exit_code == 130 && signal_manager(SIGINT, SET_MODE) == SIGINT)
-		close(fd[0]);
+		close(fds[0]);
 	else
-		doc->fd = fd[0];
+		doc->fd = fds[0];
 }
 
 int	open_heredoc(t_mini *mini, char *delimiter)
@@ -93,7 +91,7 @@ int	open_heredoc(t_mini *mini, char *delimiter)
 				doc.expand = 0;
 		}
 	}
-	parse(mini, &(doc.delimiter));
+	parse(mini, &(doc.delimiter), 0);
 	heredoc(mini, &doc);
 	free(doc.delimiter);
 	return (doc.fd);

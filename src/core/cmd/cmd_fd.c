@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 14:03:21 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:33:20 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	get_fdin(t_mini *mini, t_token *token)
 			return (-1);
 		if (token->type == INPUT)
 		{
-			parse(mini, &token->next->str);
+			parse(mini, &token->next->str, 1);
 			if (!open_file(mini, &fd, token->next->str, INPUT))
 				return (-1);
 		}
@@ -71,13 +71,13 @@ int	get_fdout(t_mini *mini, t_token *token)
 			return (-1);
 		if (token->type == TRUNC)
 		{
-			parse(mini, &(token->next->str));
+			parse(mini, &(token->next->str), 1);
 			if (!open_file(mini, &fd, token->next->str, TRUNC))
 				return (-1);
 		}
 		if (token->type == APPEND)
 		{
-			parse(mini, &(token->next->str));
+			parse(mini, &(token->next->str), 1);
 			if (!open_file(mini, &fd, token->next->str, APPEND))
 				return (-1);
 		}

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:27:04 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 14:45:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:32:53 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static int	append_arg(t_mini *mini, char ***args, char *str)
 	while (++i < len)
 	{
 		tmp[i] = ft_strdup((*args)[i]);
-		parse(mini, tmp + i);
+		parse(mini, tmp + i, 1);
 	}
 	tmp[i] = ft_strdup(str);
-	parse(mini, tmp + (i++));
+	parse(mini, tmp + (i++), 1);
 	tmp[i] = 0;
 	free_strarray(*args);
 	*args = tmp;

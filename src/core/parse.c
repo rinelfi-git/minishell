@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 15:33:13 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:32:19 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	sequence_count(char *str)
 	return (1 + sequence_count(str));
 }
 
-static char	*split_quoted(t_mini *mini, char *str, int *i)
+static char	*split_quoted(t_mini *mini, char *str, int *i, int use_expand)
 {
 	int		j;
 	char	quote;
@@ -50,13 +50,13 @@ static char	*split_quoted(t_mini *mini, char *str, int *i)
 		j++;
 	split = ft_substr(str, 1, j - 1);
 	j++;
-	if (quote == '"')
+	if (quote == '"' && use_expand)
 		expand(mini, &split);
 	(*i) += j;
 	return (split);
 }
 
-static char	*split_literral(t_mini *mini, char *str, int *i)
+static char	*split_literral(t_mini *mini, char *str, int *i, int use_expand)
 {
 	int		j;
 	char	*split;
@@ -68,19 +68,20 @@ static char	*split_literral(t_mini *mini, char *str, int *i)
 	while (str[j] && !is_quote(str[j]))
 		j++;
 	split = ft_substr(str, 0, j);
-	expand(mini, &split);
+	if (use_expand)
+		expand(mini, &split);
 	(*i) += j;
 	return (split);
 }
 
-static char	*parse_split(t_mini *mini, char *str, int *i)
+static char	*parse_split(t_mini *mini, char *str, int *i, int use_expand)
 {
 	if (is_quote(*str))
-		return (split_quoted(mini, str, i));
-	return (split_literral(mini, str, i));
+		return (split_quoted(mini, str, i, use_expand));
+	return (split_literral(mini, str, i, use_expand));
 }
 
-int	parse(t_mini *mini, char **str)
+int	parse(t_mini *mini, char **str, int use_expand)
 {
 	char	**split;
 	int		jump;
@@ -94,7 +95,7 @@ int	parse(t_mini *mini, char **str)
 	i = 0;
 	jump = 0;
 	while ((*str)[jump])
-		split[i++] = parse_split(mini, (*str) + jump, &jump);
+		split[i++] = parse_split(mini, (*str) + jump, &jump, use_expand);
 	split[i] = 0;
 	free(*str);
 	*str = 0;

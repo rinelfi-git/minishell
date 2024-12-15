@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 12:25:51 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 12:28:04 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_input()
 {
 	char	*in;
 
-	in = readline("minishell> ");
+	in = readline("minishell:~$ ");
 	if (!in)
 		in = ft_strdup("exit 0");
 	return (in);
