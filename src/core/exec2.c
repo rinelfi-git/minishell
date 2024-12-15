@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:40:11 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 18:38:02 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:09:14 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	post_exec(t_mini *mini)
 	cmd = mini->cmd;
 	while (cmd)
 	{
-		waitpid(cmd->pid, &wstatus, 0);
+		waitpid(-1, &wstatus, 0);
 		if (!cmd->next)
 			code_from_signal(wstatus, &(mini->exit_code));
 		if (cmd->fd_in >= 0)
