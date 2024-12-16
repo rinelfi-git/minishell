@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:31:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 12:39:26 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:31:55 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	export_print(t_env *env)
 {
 	while (env)
 	{
-		printf("declare -x %s", env->name);
+		printf("export %s", env->name);
 		if (env->value)
 			printf("=%s\n", env->value);
 		else
