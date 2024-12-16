@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 15:10:23 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:21:10 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	fork_builtin(t_mini *mini, t_cmd *cmd, int *pipes)
 static void	child_process(t_mini *mini, t_cmd *cmd, int *pipes)
 {
 	char	*path;
+	int		code;
 
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
@@ -64,7 +65,9 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pipes)
 		close(pipes[0]);
 	if (pipes[1] >= 0)
 		close(pipes[1]);
-	exit(mini->exit_code);
+	code = mini->exit_code;
+	data_free(mini);
+	exit(code);
 }
 
 static void	parent_process(t_cmd *cmd, int *pipes)
