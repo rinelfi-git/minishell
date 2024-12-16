@@ -6,25 +6,26 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:40:11 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 19:09:14 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 03:17:45 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "msutils.h"
 
-static void	code_from_signal(int status, int *code)
+static void	code_from_signal(int *status, int *code)
 {
-	if (WIFEXITED(status))
-		*code = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
+	if (WIFEXITED(*status))
+		*code = WEXITSTATUS(*status);
+	else if (WIFSIGNALED(*status))
 	{
-		if (WTERMSIG(status) == SIGINT)
+		if (WTERMSIG(*status) == SIGINT)
 		{
 			*code = 130;
 			ft_putchar_fd('\n', 1);
 		}
-		else if (WTERMSIG(status) == SIGQUIT)
+		else if (WTERMSIG(*status) == SIGQUIT)
 		{
 			*code = 131;
 			ft_putendl_fd("Quit", 1);
@@ -32,17 +33,18 @@ static void	code_from_signal(int status, int *code)
 	}
 }
 
-void	post_exec(t_mini *mini)
+void	post_exec(t_mini *mini, pid_t *pids)
 {
 	t_cmd	*cmd;
 	int		wstatus;
+	int		i;
 
 	cmd = mini->cmd;
+	i = 0;
 	while (cmd)
 	{
-		waitpid(-1, &wstatus, 0);
-		if (!cmd->next)
-			code_from_signal(wstatus, &(mini->exit_code));
+		waitpid(pids[i++], &wstatus, 0);
+		code_from_signal(&wstatus, &(mini->exit_code));
 		if (cmd->fd_in >= 0)
 			close(cmd->fd_in);
 		if (cmd->fd_out >= 0)
@@ -50,4 +52,7 @@ void	post_exec(t_mini *mini)
 		cmd = cmd->next;
 	}
 	main_signal();
+	free_strarray(mini->env_array);
+	mini->env_array = 0;
+	free(pids);
 }
