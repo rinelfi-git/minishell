@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 18:03:57 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 03:50:26 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,11 @@ int	syntax_ok(char *str, int *code)
 	{
 		if (!closed_quote(tmp->str))
 			ok = unclosed_quote(code);
-		if (ok && tmp->type == PIPE && (!tmp->next || tmp->next->type != CMD))
+		if (ok && tmp->type == PIPE && !tmp->next)
 			ok = unexpected_token(code, "|");
 		special = INPUT;
 		while (ok && special <= APPEND)
-			if (tmp->type == special++
-				&& (!tmp->next || tmp->next->type != ARG))
+			if (tmp->type == special++ && !tmp->next)
 				ok = unexpected_token(code, "newline");
 		tmp = tmp->next;
 	}

@@ -6,12 +6,12 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:57:09 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/01 11:18:59 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 03:48:59 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdlib.h>
+#include "msutils.h"
 
 static int	token_new(t_token **out, char *str, int type)
 {
@@ -45,7 +45,7 @@ t_token	*token_append(t_token **head, char *str, int type)
 			last = &(*last)->next;
 		}
 		(*last) = new;
-		if (new->prev->type == PIPE)
+		if (new->prev->type == PIPE && !is_special(new->str))
 			new->type = CMD;
 	}
 	return (new);

@@ -1,5 +1,5 @@
 NAME = minishell
-CC = cc
+CC = gcc
 CARG = -Werror -Wextra -Wall
 SRCs = src/main.c \
 		src/core/builtins/builtin.c \
