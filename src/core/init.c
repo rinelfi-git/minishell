@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 20:59:07 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:03:13 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,11 @@ static int	create_env(t_env **head, char *var)
 void	data_init(t_mini *mini)
 {
 	mini->exit_code = 0;
-	mini->env_list = 0;
-	mini->env_array = 0;
-	mini->token = 0;
-	mini->cmd = 0;
+	mini->env_list = NULL;
+	mini->env_array = NULL;
+	mini->token = NULL;
+	mini->cmd = NULL;
+	mini->pids = NULL;
 }
 
 int	data_free(t_mini *mini)
@@ -57,6 +58,9 @@ int	data_free(t_mini *mini)
 	free_lst_env(mini);
 	if (mini->env_array)
 		free_strarray(mini->env_array);
+	if (mini->pids)
+		free(mini->pids);
+	data_init(mini);
 	return (mini->exit_code);
 }
 

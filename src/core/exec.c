@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 15:21:10 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:03:40 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static void	parent_process(t_cmd *cmd, int *pipes)
 void	mini_exec(t_mini *mini)
 {
 	int		fds[2];
-	pid_t	*pids;
 	t_cmd	*cmd;
 	int		i;
 
@@ -97,18 +96,18 @@ void	mini_exec(t_mini *mini)
 	else
 	{
 		mini->env_array = env_array(mini);
-		pids = malloc(sizeof(pid_t) * cmd_length(cmd));
+		mini->pids = malloc(sizeof(pid_t) * cmd_length(cmd));
 		i = 0;
 		while (cmd)
 		{
 			pipe(fds);
-			pids[i] = fork();
-			if (pids[i] == 0)
+			mini->pids[i] = fork();
+			if (mini->pids[i] == 0)
 				child_process(mini, cmd, fds);
-			else if (pids[i++] > 0)
+			else if (mini->pids[i++] > 0)
 				parent_process(cmd, fds);
 			cmd = cmd->next;
 		}
-		post_exec(mini, pids);
+		post_exec(mini);
 	}
 }
