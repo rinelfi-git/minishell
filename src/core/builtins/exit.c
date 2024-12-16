@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:12:34 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 15:38:21 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:27:45 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 static void	exit_not_numeric(t_mini *mini)
 {
 	ft_putendl_fd("minishell: exit: numeric argument required", STDERR_FILENO);
-	mini->exit_code = 2;
+	data_free(mini);
+	exit(2);
 }
 
 static void	exit_numeric(t_mini *mini, int exit_code)
