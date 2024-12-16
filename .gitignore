@@ -3,3 +3,4 @@
 test/
 *.[ao]
 *.fuse_*
+readline.supp
