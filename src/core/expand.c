@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:06:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 09:51:44 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:54:39 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*get_varname(char *str)
 	i = 0;
 	if (str[i] == '_' || isalpha(str[i]))
 		i++;
-	while (str[i] && isalnum(str[i]))
+	while (str[i] && (isalnum(str[i]) || str[i] == '_'))
 		i++;
 	return (ft_substr(str, 0, i));
 }
@@ -54,11 +54,13 @@ static int	expand_var(char **str, int i, t_mini *mini)
 
 	split = ft_calloc(sizeof(char *), 4);
 	if (!split)
-		return (MALLOC_ERROR);
+		return (0);
 	split[0] = ft_substr(*str, 0, i++);
 	var = get_varname((*str) + i);
 	jump = ft_strlen(var);
-	if (ft_getenv(mini->env_list, var))
+	if (ft_strlen(var) == 0)
+		split[1] = ft_strdup("$");
+	else if (ft_getenv(mini->env_list, var))
 		split[1] = ft_strdup(ft_getenv(mini->env_list, var));
 	else
 		split[1] = ft_strdup("");
@@ -87,7 +89,7 @@ int	expand(t_mini *mini, char **str)
 		{
 			if ((*str)[i + 1] == '?')
 				return (expand_exitcode(str, i, mini));
-			else if (isalpha((*str)[i + 1]))
+			else
 				return (expand_var(str, i, mini));
 		}
 	}

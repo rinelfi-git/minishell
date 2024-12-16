@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 12:32:19 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:51:03 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ static char	*split_literral(t_mini *mini, char *str, int *i, int use_expand)
 	split = 0;
 	while (str[j] && !is_quote(str[j]))
 		j++;
-	split = ft_substr(str, 0, j);
+	if (j > 0 && is_quote(str[j]) && str[j - 1] == '$')
+		split = ft_substr(str, 0, j - 1);
+	else
+		split = ft_substr(str, 0, j);
 	if (use_expand)
 		expand(mini, &split);
 	(*i) += j;

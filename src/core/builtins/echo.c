@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:18 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 12:30:28 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 12:38:03 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ int	built_echo(t_mini *mini, char **args)
 		}
 		while (args[i])
 		{
-			write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
+			ft_putstr_fd(args[i], 1);
 			if (args[++i])
-				write(STDOUT_FILENO, " ", 1);
+				ft_putchar_fd(' ', 1);
 		}
-		write(STDOUT_FILENO, &end, 1);
+		ft_putchar_fd(end, 1);
 	}
 	mini->exit_code = 0;
 	return (1);
