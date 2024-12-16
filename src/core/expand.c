@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:06:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 13:24:34 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:19:29 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static int	expand_var(char **str, int i, t_mini *mini)
 	free(var);
 	split[2] = ft_substr(*str, i + jump, ft_strlen(*str) - (i + jump));
 	expand(mini, split + 2);
-	printf("BEFORE FREE [%s]\n", *str);
 	free(*str);
 	*str = ft_strjoin(split[0], split[1]);
 	str_append(str, split[2]);
