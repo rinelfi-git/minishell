@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:33:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 22:12:43 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:16:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ char	*get_path(char **path, t_env *env, t_cmd *cmd)
 		}
 	}
 	free_strarray(paths);
+	*path = cmd->path;
 	return (*path);
 }

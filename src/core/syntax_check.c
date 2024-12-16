@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 03:50:26 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:11:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int	syntax_ok(char *str, int *code)
 	create_token_list(&token, str);
 	ok = 1;
 	tmp = token;
-	if (tmp)
-		add_history(str);
 	while (ok && tmp)
 	{
 		if (!closed_quote(tmp->str))

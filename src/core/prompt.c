@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 03:41:50 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 13:13:20 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,43 @@ static char	*get_input()
 	return (in);
 }
 
+static int	preexpand(t_mini *mini, char **line)
+{
+	while (**line && is_space(**line))
+		(*line)++;
+	if (**line == '$')
+		expand(mini, line);
+	return (1);
+}
+
+static int	save_history(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && is_space(line[i]))
+		i++;
+	if (line[i])
+		add_history(line);
+	return (1);
+}
+
 void	prompt(t_mini *mini)
 {
 	char	*in;
+	char	*input;
 
 	main_signal();
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		in = get_input();
+		input = in;
 		if (signal_manager(0, GET_MODE) == SIGINT)
 			mini->exit_code = 130;
 		signal_manager(0, SET_MODE);
+		save_history(in);
+		preexpand(mini, &in);
 		if (!syntax_ok(in, &(mini->exit_code)))
 			continue ;
 		create_token_list(&(mini->token), in);
@@ -44,6 +69,6 @@ void	prompt(t_mini *mini)
 			mini_exec(mini);
 		free_lst_token(&(mini->token));
 		free_lst_cmd(mini);
-		free(in);
+		free(input);
 	}
 }
