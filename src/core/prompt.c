@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 15:18:53 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/16 20:18:54 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	prompt(t_mini *mini)
 		if (!syntax_ok(in, &(mini->exit_code)))
 			continue ;
 		create_token_list(&(mini->token), in);
+		free(in);
 		create_cmd_list(mini);
 		if (mini->cmd)
 			mini_exec(mini);
 		free_lst_token(&(mini->token));
 		free_lst_cmd(mini);
-		free(in);
 	}
 }
