@@ -54,11 +54,12 @@ typedef struct s_doc		t_doc;
 typedef struct s_cmd		t_cmd;
 struct						s_minishell
 {
-	int						exit_code;
-	t_env					*env_list;
-	char					**env_array;
-	t_token					*token;
-	t_cmd					*cmd;
+	int		exit_code;
+	t_env	*env_list;
+	char	**env_array;
+	t_token	*token;
+	t_cmd	*cmd;
+	pid_t	*pids;
 };
 
 struct						s_env

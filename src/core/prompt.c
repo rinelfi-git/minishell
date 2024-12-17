@@ -86,26 +86,25 @@ static void load_history(void)
 void    prompt(t_mini *mini)
 {
     char    *in;
-
-    main_signal();
-    signal(SIGQUIT, SIG_IGN);
-    load_history();
-    while (1)
-    {
-        in = get_input();
-        if (signal_manager(0, GET_MODE) == SIGINT)
-            mini->exit_code = 130;
-        signal_manager(0, SET_MODE);
-        save_history(in);
-        preexpand(mini, &in);
-        if (!syntax_ok(in, &(mini->exit_code)))
-            continue ;
-        create_token_list(&(mini->token), in);
-        create_cmd_list(mini);
-        if (mini->cmd)
-            mini_exec(mini);
-        free_lst_token(&(mini->token));
-        free_lst_cmd(mini);
-        free(in);
-    }
+  
+	main_signal();
+	signal(SIGQUIT, SIG_IGN);
+	while (1)
+	{
+		in = get_input();
+		if (signal_manager(0, GET_MODE) == SIGINT)
+			mini->exit_code = 130;
+		signal_manager(0, SET_MODE);
+		save_history(in);
+		preexpand(mini, &in);
+		if (!syntax_ok(in, &(mini->exit_code)))
+			continue ;
+		create_token_list(&(mini->token), in);
+		free(in);
+		create_cmd_list(mini);
+		if (mini->cmd)
+			mini_exec(mini);
+		free_lst_token(&(mini->token));
+		free_lst_cmd(mini);
+	}
 }
