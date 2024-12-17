@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 09:31:50 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:14:10 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,10 +141,4 @@ void						post_exec(t_mini *mini);
 
 void						main_signal(void);
 void						heredoc_signal(void);
-
-char						*get_next_line(int fd);
-char						*gnl_strjoin(char *s1, char *s2);
-char						*gnl_strchr(const char *s, int c);
-size_t						gnl_strlen(const char *s);
-void						*gnl_memcpy(void *dst, const void *src, size_t n);
 #endif

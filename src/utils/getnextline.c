@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   getnextline.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/17 16:06:24 by erijania          #+#    #+#             */
+/*   Updated: 2024/12/17 16:12:06 by erijania         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+#include "libft.h"
 
 static int	get_line_length(char *stash)
 {
@@ -15,22 +28,22 @@ static int	get_line_length(char *stash)
 static char	*extract_line(char **stash)
 {
 	char	*line;
-	char	*temp;
-	int		i;
+	char	*tmp;
+	int		length;
 
 	if (!*stash)
 		return (NULL);
-	i = get_line_length(*stash);
-	line = (char *)malloc(sizeof(char) * (i + 1));
+	length = get_line_length(*stash);
+	line = (char *)malloc(sizeof(char) * (length + 1));
 	if (!line)
 		return (NULL);
-	gnl_memcpy(line, *stash, i);
-	line[i] = '\0';
-	if ((*stash)[i])
+	ft_memcpy(line, *stash, length);
+	line[length] = '\0';
+	if ((*stash)[length])
 	{
-		temp = gnl_strjoin((*stash) + i, "");
+		tmp = ft_strdup((*stash) + length);
 		free(*stash);
-		*stash = temp;
+		*stash = tmp;
 	}
 	else
 	{
@@ -42,28 +55,21 @@ static char	*extract_line(char **stash)
 
 static char	*read_file(int fd, char **stash)
 {
-	char	*buffer;
+	char	buffer[BUFFER_SIZE + 1];
 	char	*temp;
 	ssize_t	bytes_read;
 
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
 	bytes_read = 1;
-	while (bytes_read > 0 && !gnl_strchr(*stash, '\n'))
+	while (bytes_read > 0 && !ft_strchr(*stash, '\n'))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-		{
-			free(buffer);
 			return (NULL);
-		}
 		buffer[bytes_read] = '\0';
-		temp = gnl_strjoin(*stash, buffer);
+		temp = ft_strjoin(*stash, buffer);
 		free(*stash);
 		*stash = temp;
 	}
-	free(buffer);
 	return (*stash);
 }
 
@@ -74,7 +80,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!stash)
-		stash = gnl_strjoin("", "");
+		stash = ft_strdup("");
 	if (!read_file(fd, &stash))
 	{
 		free(stash);

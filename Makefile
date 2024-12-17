@@ -31,12 +31,11 @@ SRCs = src/main.c \
 		src/core/prompt.c \
 		src/core/syntax_check.c \
 		src/utils/error_message.c \
+		src/utils/getnextline.c \
 		src/utils/is.c \
 		src/utils/quote.c \
 		src/utils/str_array.c \
-		src/utils/string.c \
-		src/utils/getnextline.c\
-		src/utils/getnextline_utils.c
+		src/utils/string.c
 OBJs = $(SRCs:.c=.o)
 INCs = -Iinclude \
 		-Ilibs/libft

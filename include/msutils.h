@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:52:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/12 21:47:43 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:14:16 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ void	heredoc_eof(char *delimiter, int line);
 void	fd_error(char *path);
 int		export_invalid_identifier(t_mini *mini, char *id);
 int		unclosed_quote(int *code);
+char	*get_next_line(int fd);
 #endif
