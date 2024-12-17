@@ -6,13 +6,17 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:52:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 16:14:16 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:32:50 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MSUTILS_H
 # define MSUTILS_H
 # include "minishell.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 2
+# endif
 
 void	str_append(char **dest, char *src);
 int		is_space(char c);

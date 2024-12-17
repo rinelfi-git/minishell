@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 16:14:10 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:32:40 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@
 # define TERM_SECONDARY "\033[0m\033[92m"
 # define TERM_DEFAULT "\033[0m"
 # define HISTORY_FILE "/tmp/.history"
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
 
 # define CMD 1
 # define ARG 2

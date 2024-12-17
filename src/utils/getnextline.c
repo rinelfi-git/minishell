@@ -6,12 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 16:06:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 16:12:06 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:32:00 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "msutils.h"
 
 static int	get_line_length(char *stash)
 {
@@ -56,19 +57,16 @@ static char	*extract_line(char **stash)
 static char	*read_file(int fd, char **stash)
 {
 	char	buffer[BUFFER_SIZE + 1];
-	char	*temp;
-	ssize_t	bytes_read;
+	int		bytes_read;
 
 	bytes_read = 1;
 	while (bytes_read > 0 && !ft_strchr(*stash, '\n'))
 	{
+		ft_bzero(buffer, BUFFER_SIZE + 1);
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (NULL);
-		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(*stash, buffer);
-		free(*stash);
-		*stash = temp;
+		str_append(stash, buffer);
 	}
 	return (*stash);
 }
@@ -81,13 +79,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!stash)
 		stash = ft_strdup("");
-	if (!read_file(fd, &stash))
-	{
-		free(stash);
-		stash = NULL;
-		return (NULL);
-	}
-	if (!*stash)
+	if (!read_file(fd, &stash) || !(*stash))
 	{
 		free(stash);
 		stash = NULL;
