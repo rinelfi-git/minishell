@@ -34,7 +34,9 @@ SRCs = src/main.c \
 		src/utils/is.c \
 		src/utils/quote.c \
 		src/utils/str_array.c \
-		src/utils/string.c
+		src/utils/string.c \
+		src/utils/getnextline.c\
+		src/utils/getnextline_utils.c
 OBJs = $(SRCs:.c=.o)
 INCs = -Iinclude \
 		-Ilibs/libft
