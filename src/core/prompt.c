@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttelolah <ttelolah@student.42antananavo    +#+  +:+       +#+        */
+/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 09:08:07 by ttelolah         ###   ########.fr       */
+/*   Updated: 2024/12/17 09:37:40 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 #include "libft.h"
 #include "msutils.h"
 
-static char	*get_input()
+static char	*get_input(t_mini *mini)
 {
 	char	*in;
 
 	in = readline("~$ ");
 	if (!in)
-		in = ft_strdup("exit 0");
+	{
+		data_free(mini);
+		ft_putendl_fd("exit", 1);
+		exit(0);
+	}
 	return (in);
 }
 
@@ -89,9 +93,10 @@ void    prompt(t_mini *mini)
   
 	main_signal();
 	signal(SIGQUIT, SIG_IGN);
+	load_history();
 	while (1)
 	{
-		in = get_input();
+		in = get_input(mini);
 		if (signal_manager(0, GET_MODE) == SIGINT)
 			mini->exit_code = 130;
 		signal_manager(0, SET_MODE);
