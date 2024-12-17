@@ -18,18 +18,20 @@ SRCs = src/main.c \
 		src/core/cmd/list_cmd.c \
 		src/core/signal/heredoc.c \
 		src/core/signal/signal.c \
+		src/core/syntax/expand_first.c \
+		src/core/syntax/expand.c \
+		src/core/syntax/identifier.c \
+		src/core/syntax/parse.c \
+		src/core/syntax/check.c \
 		src/core/token/list_token.c \
 		src/core/token/token.c \
 		src/core/env.c \
 		src/core/env2.c \
 		src/core/exec.c \
 		src/core/exec2.c \
-		src/core/expand.c \
 		src/core/heredoc.c \
 		src/core/init.c \
-		src/core/parse.c \
 		src/core/prompt.c \
-		src/core/syntax_check.c \
 		src/utils/error_message.c \
 		src/utils/getnextline.c \
 		src/utils/is.c \

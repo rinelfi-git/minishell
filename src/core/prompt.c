@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 18:40:54 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 20:35:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	preexpand(t_mini *mini, char **in)
 	while (ref[i] && is_space(ref[i]))
 		i++;
 	if (ref[i] == '$')
-		expand(mini, in);
+		expand_first(mini, in, i);
 	return (1);
 }
 

@@ -6,25 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 18:13:50 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 20:33:26 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
 #include "msutils.h"
-
-static int	is_valid_identifier(char *str)
-{
-	if (!ft_isalpha(*str) && *str != '_')
-		return (0);
-	str++;
-	while (*str && (ft_isalnum(*str) || *str != '_'))
-		str++;
-	if (!(*str))
-		return (1);
-	return (0);
-}
 
 static int	has_operation(char *str)
 {
@@ -35,16 +23,6 @@ static int	has_operation(char *str)
 		if (str[i] == '=')
 			return (1);
 	return (0);
-}
-
-static char	*get_identifier(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '=')
-		i++;
-	return (ft_substr(str, 0, i));
 }
 
 static int	do_export(t_mini *mini, char *str)

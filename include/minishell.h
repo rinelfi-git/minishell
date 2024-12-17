@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 18:32:40 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 20:36:12 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,6 @@ void						data_init(t_mini *mini);
 void						data_env(t_mini *mini, char **env);
 int							data_free(t_mini *mini);
 void						prompt(t_mini *mini);
-int							expand(t_mini *mini, char **str);
-int							parse(t_mini *mini, char **str, int use_expand);
-int							syntax_ok(char *str, int *code);
 
 char						*ft_getenv(t_env *env, char *var);
 char						**env_array(t_mini *mini);
@@ -105,6 +102,13 @@ t_env						*append_env(t_env **head);
 t_env						*env_get(t_env **head, char *name);
 int							delete_env(t_env **head, t_env *env);
 int							free_lst_env(t_mini *mini);
+
+char						*get_identifier(char *str);
+int							is_valid_identifier(char *str);
+int							syntax_ok(char *str, int *code);
+int							expand_first(t_mini *mini, char **in, int start);
+int							expand(t_mini *mini, char **str);
+int							parse(t_mini *mini, char **str, int use_expand);
 
 void						create_token_list(t_token **head, char *line);
 t_token						*token_append(t_token **head, char *str, int type);

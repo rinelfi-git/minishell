@@ -6,27 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:06:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 15:19:29 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:02:49 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 #include "msutils.h"
-
-static char	*get_varname(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	if (str[i] == '_' || isalpha(str[i]))
-		i++;
-	while (str[i] && (isalnum(str[i]) || str[i] == '_'))
-		i++;
-	return (ft_substr(str, 0, i));
-}
 
 static int	expand_exitcode(char **str, int i, t_mini *mini)
 {
@@ -56,7 +42,7 @@ static int	expand_var(char **str, int i, t_mini *mini)
 	if (!split)
 		return (0);
 	split[0] = ft_substr(*str, 0, i++);
-	var = get_varname((*str) + i);
+	var = get_identifier((*str) + i);
 	jump = ft_strlen(var);
 	if (jump == 0)
 		split[1] = ft_strdup("$");
