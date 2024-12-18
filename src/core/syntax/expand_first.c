@@ -6,13 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:49:17 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 20:45:56 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:01:41 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 #include "msutils.h"
-#include "libft.h"
 
 static int	escape_quote(char **str, int start);
 
@@ -33,7 +33,7 @@ static int	escape_quote(char **str, int start)
 {
 	int		i;
 	char	q[4];
-	
+
 	i = start;
 	ft_bzero(q, 4);
 	while ((*str)[i])

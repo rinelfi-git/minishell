@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 20:36:12 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:00:49 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int							create_cmd_list(t_mini *mini);
 t_cmd						*cmd_append(t_cmd **head);
 char						**get_cmd_params(t_mini *mini, t_token *token);
 int							cmd_length(t_cmd *head);
-char						*get_path(char **path, t_env *env, t_cmd *cmd);
+char						*get_path(t_env *env, t_cmd *cmd);
 int							get_fdin(t_mini *mini, t_token *token);
 int							get_fdout(t_mini *mini, t_token *token);
 

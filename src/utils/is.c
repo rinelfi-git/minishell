@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 14:45:56 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 21:39:07 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	is_special(char *str)
 	len = ft_strlen(str);
 	if (len >= 2)
 	{
-		if (ft_strncmp(str, "<<", 2) == 0)
+		if (ft_strncmp(str, "<<", 3) == 0)
 			return (HEREDOC);
-		if (ft_strncmp(str, ">>", 2) == 0)
+		if (ft_strncmp(str, ">>", 3) == 0)
 			return (APPEND);
 	}
 	if (len >= 1)

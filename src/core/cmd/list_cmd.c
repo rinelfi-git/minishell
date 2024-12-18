@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:41:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 14:10:57 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 22:00:28 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	free_lst_cmd(t_mini *mini)
 	while (tmp)
 	{
 		next = tmp->next;
+		if (tmp->path)
+			free(tmp->path);
 		if (tmp->args)
 			free_strarray(tmp->args);
 		if (tmp->fd_in >= 0)
