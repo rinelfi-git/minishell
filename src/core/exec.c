@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/18 19:05:22 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:17:45 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "minishell.h"
 #include "msutils.h"
 
-static void	redirect_in_out(t_cmd *cmd, int *pipes)
+static void	redirect_in_out(t_mini *mini, t_cmd *cmd, int *pipes)
 {
 	close(pipes[0]);
 	if (cmd->fd_in >= 0)
@@ -30,6 +30,11 @@ static void	redirect_in_out(t_cmd *cmd, int *pipes)
 	else if (cmd->next)
 		dup2(pipes[1], 1);
 	close(pipes[1]);
+	if (cmd->fd_in == -1 || cmd->fd_out == -1)
+	{
+		data_free(mini);
+		exit(1);
+	}
 }
 
 static void	fork_builtin(t_mini *mini, t_cmd *cmd, int *pipes)
@@ -55,9 +60,8 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pipes)
 	{
 		if (get_path(&path, mini->env_list, cmd))
 		{
-			redirect_in_out(cmd, pipes);
-			if (cmd->fd_in != -1 && cmd->fd_out != -1)
-				execve(path, cmd->args, mini->env_array);
+			redirect_in_out(mini, cmd, pipes);
+			execve(path, cmd->args, mini->env_array);
 		}
 		else
 			command_not_found(mini, cmd->args[0]);
