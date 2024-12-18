@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:50:46 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 03:51:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:38:23 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static t_cmd	*create_cmd(t_mini *mini, t_cmd **last, t_token *token)
 	cmd = cmd_append(last);
 	cmd->fd_in = get_fdin(mini, token);
 	cmd->fd_out = get_fdout(mini, token);
-	if (cmd->fd_in == -1 || cmd->fd_out == -1)
-		return (0);
 	cmd->args = get_cmd_params(mini, token);
 	return (cmd);
 }

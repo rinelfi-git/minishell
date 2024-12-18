@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 21:06:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 19:02:49 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:10:10 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "msutils.h"
 
-static int	expand_exitcode(char **str, int i, t_mini *mini)
+static int	expand_exitcode(t_mini *mini, char **str, int i)
 {
 	char	**split;
 
@@ -32,7 +32,7 @@ static int	expand_exitcode(char **str, int i, t_mini *mini)
 	return (1);
 }
 
-static int	expand_var(char **str, int i, t_mini *mini)
+static int	expand_var(t_mini *mini, char **str, int i)
 {
 	char	*var;
 	int		jump;
@@ -74,9 +74,9 @@ int	expand(t_mini *mini, char **str)
 		if ((*str)[i] == '$' && (*str)[i + 1])
 		{
 			if ((*str)[i + 1] == '?')
-				return (expand_exitcode(str, i, mini));
+				return (expand_exitcode(mini, str, i));
 			else
-				return (expand_var(str, i, mini));
+				return (expand_var(mini, str, i));
 		}
 	}
 	return (1);

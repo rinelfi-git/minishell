@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:55:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 20:33:33 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 18:11:09 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ char	*get_identifier(char *str)
 	int	i;
 
 	if (!str)
-		return (NULL);
+		return (ft_strdup(""));
 	i = 0;
 	if (ft_isalpha(str[i]) || str[i] == '_')
 		i++;
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	if (!i)
-		return (NULL);
+		return (ft_strdup(""));
 	return (ft_substr(str, 0, i));
 }

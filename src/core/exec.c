@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 20:03:40 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:05:22 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pipes)
 		if (get_path(&path, mini->env_list, cmd))
 		{
 			redirect_in_out(cmd, pipes);
-			execve(path, cmd->args, mini->env_array);
+			if (cmd->fd_in != -1 && cmd->fd_out != -1)
+				execve(path, cmd->args, mini->env_array);
 		}
 		else
 			command_not_found(mini, cmd->args[0]);
@@ -76,8 +77,6 @@ static void	parent_process(t_cmd *cmd, int *pipes)
 	close(pipes[1]);
 	if (cmd->fd_in >= 0)
 		close(cmd->fd_in);
-	if (cmd->fd_in == -2)
-		cmd->fd_in = pipes[0];
 	if (cmd->next && cmd->next->fd_in == -2)
 		cmd->next->fd_in = pipes[0];
 	else
