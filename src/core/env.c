@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 12:44:49 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:31:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_getenv(t_env *env, char *var)
 		return (0);
 	while (env && !val)
 	{
-		if (ft_strncmp(env->name, var, length) == 0)
+		if (ft_strncmp(env->name, var, length + 1) == 0)
 			val = env->value;
 		env = env->next;
 	}
