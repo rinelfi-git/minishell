@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:16:26 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:25:22 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	update_vars(t_mini *mini, char *old)
 	built_export(mini, export);
 	free(export[1]);
 	free(export[2]);
-	free(cwd);
 	return (1);
 }
 

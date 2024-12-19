@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:18:32 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:37:33 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 int	is_space(char c)
 {
-	return (c && (c == ' ' || c == '\n' || c == '\r' || c == '\f'
-			|| c == '\t' || c == '\v'));
+	return (c && (c == ' ' || c == '\n' || c == '\r' || c == '\f' || c == '\t'
+			|| c == '\v'));
 }
 
 int	is_special(char *str)
@@ -56,4 +56,12 @@ int	isnumber(char *str)
 	while (is_space(*str))
 		str++;
 	return (!*str);
+}
+
+int	is_dir(char *path)
+{
+	struct stat	stats;
+
+	stat(path, &stats);
+	return (S_ISDIR(stats.st_mode));
 }

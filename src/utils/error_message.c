@@ -6,28 +6,35 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:25:55 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:36:36 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
+#include "msutils.h"
 
 void	command_not_found(t_mini *mini, char *str)
 {
-	if (ft_strchr(str, '/'))
+	ft_putstr_fd("minishell: ", 2);
+	if (is_dir(str))
 	{
-		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(": Is a directory", 2);
+		mini->exit_code = 126;
+	}
+	else if (ft_strchr(str, '/'))
+	{
 		ft_putstr_fd(str, 2);
 		ft_putendl_fd(": No such file or directory", 2);
+		mini->exit_code = 127;
 	}
 	else
 	{
-		ft_putstr_fd("minishell: '", 2);
 		ft_putstr_fd(str, 2);
 		ft_putendl_fd("': command not found", 2);
+		mini->exit_code = 127;
 	}
-	mini->exit_code = 127;
 }
 
 void	heredoc_eof(char *delimiter, int line)
