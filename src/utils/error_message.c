@@ -32,7 +32,7 @@ void	command_not_found(t_mini *mini, char *str)
 	else
 	{
 		ft_putstr_fd(str, 2);
-		ft_putendl_fd("': command not found", 2);
+		ft_putendl_fd(": command not found", 2);
 		mini->exit_code = 127;
 	}
 }
