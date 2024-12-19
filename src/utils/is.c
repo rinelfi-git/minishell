@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/18 21:39:07 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 07:54:07 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,9 @@ int	isnumber(char *str)
 		str++;
 	if (*str == '-' || *str == '+')
 		str++;
-	while (*str)
-	{
-		if (*str < '0' || *str > '9')
-			return (0);
+	while (*str && ft_isdigit(*str))
 		str++;
-	}
-	return (1);
+	while (is_space(*str))
+		str++;
+	return (!*str);
 }
