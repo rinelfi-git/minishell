@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 22:56:09 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:44:25 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	command_not_found(t_mini *mini, char *str)
 {
 	ft_putstr_fd("minishell: ", 2);
-	if (is_dir(str))
+	if (isdir(str))
 	{
 		ft_putstr_fd(str, 2);
 		ft_putendl_fd(": Is a directory", 2);

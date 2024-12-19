@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 19:28:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:49:18 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ int	isnumber(char *str)
 	return (!*str);
 }
 
-int	is_dir(char *path)
+int	isdir(char *path)
 {
 	struct stat	stats;
 
-	stat(path, &stats);
+	if (stat(path, &stats) == -1)
+		return (0);
 	return (S_ISDIR(stats.st_mode));
 }
