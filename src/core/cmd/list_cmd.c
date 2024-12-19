@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:41:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/18 22:00:28 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:04:21 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static int	cmd_new(t_cmd **out)
 	(*out) = malloc(sizeof(t_cmd));
 	if (!(*out))
 		return (0);
-	(*out)->args = 0;
-	(*out)->path = 0;
+	(*out)->args = NULL;
+	(*out)->path = NULL;
 	(*out)->fd_in = -2;
 	(*out)->fd_out = -2;
-	(*out)->prev = 0;
-	(*out)->next = 0;
+	(*out)->prev = NULL;
+	(*out)->next = NULL;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:15:56 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:43:48 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ t_env						*append_env(t_env **head);
 t_env						*env_get(t_env **head, char *name);
 int							delete_env(t_env **head, t_env *env);
 int							free_lst_env(t_mini *mini);
+int							env_list_length(t_env *env);
 
 char						*get_identifier(char *str);
 int							is_valid_identifier(char *str);

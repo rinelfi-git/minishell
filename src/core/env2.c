@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 20:54:34 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 10:04:13 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:43:20 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,17 @@ int	free_lst_env(t_mini *mini)
 	while (mini->env_list)
 		delete_env(&(mini->env_list), mini->env_list);
 	return (0);
+}
+
+int	env_list_length(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	while (env)
+	{
+		env = env->next;
+		i++;
+	}
+	return (i);
 }

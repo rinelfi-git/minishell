@@ -6,26 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:50:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/18 19:31:21 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 17:06:43 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 #include "msutils.h"
-
-static int	env_list_length(t_env *env)
-{
-	int	i;
-
-	i = 0;
-	while (env)
-	{
-		env = env->next;
-		i++;
-	}
-	return (i);
-}
 
 char	**env_array(t_mini *mini)
 {
@@ -35,7 +22,7 @@ char	**env_array(t_mini *mini)
 	t_env	*env;
 
 	len = env_list_length(mini->env_list);
-	out = malloc(sizeof(char *) * (len + 1));
+	out = ft_calloc(sizeof(char *), len + 1);
 	if (!out)
 		return (0);
 	env = mini->env_list;
@@ -44,11 +31,9 @@ char	**env_array(t_mini *mini)
 	{
 		out[i] = ft_strdup(env->name);
 		str_append(out + i, "=");
-		str_append(out + i, env->value);
-		i++;
+		str_append(out + (i++), env->value);
 		env = env->next;
 	}
-	out[i] = 0;
 	return (out);
 }
 
