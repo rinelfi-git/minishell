@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/11 13:47:51 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:41:27 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	builtin(t_mini *mini, t_cmd *cmd)
 {
 	int	tmp_out;
 
-	if (!is_builtin(cmd))
+	if (!is_builtin(cmd) || cmd->fd_in == -1 || cmd->fd_out == -1)
 		return (0);
 	tmp_out = -1;
 	if (cmd->fd_out >= 0)
