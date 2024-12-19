@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/15 22:36:43 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:25:55 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	heredoc_eof(char *delimiter, int line)
 	ft_putendl_fd("')", 2);
 }
 
-void	fd_error(char *path)
+void	ms_perror(char *path)
 {
 	char	*msg;
 

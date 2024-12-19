@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 15:39:40 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:25:57 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include "msutils.h"
 #include "libft.h"
 
-static void	update_vars(t_mini *mini, char *old)
+static int	update_vars(t_mini *mini, char *old)
 {
 	char	*export[4];
 	char	*cwd;
 
+	if (mini->exit_code != 0)
+		return (0);
 	cwd = getcwd(0, 0);
 	export[0] = "export";
 	export[1] = ft_strjoin("OLDPWD=", old);
@@ -28,6 +30,7 @@ static void	update_vars(t_mini *mini, char *old)
 	free(export[1]);
 	free(export[2]);
 	free(cwd);
+	return (1);
 }
 
 static int	access_test(t_mini *mini, char *path)
@@ -71,12 +74,12 @@ int	built_cd(t_mini *mini, char **args)
 	if (len == 1 || (len == 2 && args[1][0] == '~'))
 		chdir(ft_getenv(mini->env_list, "HOME"));
 	else if (len == 2 && access_test(mini, args[1]))
-		chdir(args[1]);
-	if (mini->exit_code == 0)
 	{
-		update_vars(mini, old);
-		free(old);
-		return (1);
+		if (chdir(args[1]) == -1 && errno)
+		{
+			ms_perror(ft_strjoin("cd: ", args[1]));
+			mini->exit_code = 1;
+		}
 	}
-	return (0);
+	return (update_vars(mini, old));
 }
