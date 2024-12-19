@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 19:56:39 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 23:09:58 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 #include "libft.h"
 #include "msutils.h"
 
-static void	read_process(t_mini *mini, t_doc *doc, int *pp)
+static int	heredoc_quit(t_mini *mini, t_doc *heredoc, int fd_in, int code)
+{
+	if (fd_in >= 0)
+		close (fd_in);
+	free(heredoc->delimiter);
+	data_free(mini);
+	return (code);
+}
+
+static void	read_process(t_mini *mini, t_doc *doc, int fd_in)
 {
 	char	*line;
 	int		line_count;
@@ -25,22 +34,20 @@ static void	read_process(t_mini *mini, t_doc *doc, int *pp)
 		line = readline("> ");
 		if (!line)
 		{
-			heredoc_eof(doc->delimiter, line_count);
-			free(line);
+			if (signal_manager(0, GET_MODE) == SIGINT)
+				exit(heredoc_quit(mini, doc, fd_in, 130));
+			heredoc_eof(doc, line_count);
 			break ;
 		}
 		if (ft_strncmp(doc->delimiter, line, INT_MAX) == 0)
 			break ;
 		if (doc->expand)
 			expand(mini, &line);
-		ft_putendl_fd(line, pp[1]);
-		line_count++;
+		ft_putendl_fd(line, fd_in);
 		free(line);
+		line_count++;
 	}
-	close(pp[1]);
-	data_free(mini);
-	free(doc->delimiter);
-	exit(0);
+	exit(heredoc_quit(mini, doc, fd_in, 0));
 }
 
 static void	heredoc(t_mini *mini, t_doc *doc)
@@ -55,7 +62,7 @@ static void	heredoc(t_mini *mini, t_doc *doc)
 	{
 		heredoc_signal();
 		close(fds[0]);
-		read_process(mini, doc, fds);
+		read_process(mini, doc, fds[1]);
 	}
 	else
 	{

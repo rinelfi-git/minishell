@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:52:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:34:14 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:57:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		isnumber(char *str);
 void	free_strarray(char **array);
 int		strarraylen(char **array);
 void	command_not_found(t_mini *mini, char *str);
-void	heredoc_eof(char *delimiter, int line);
+void	heredoc_eof(t_doc *heredoc, int line);
 void	ms_perror(char *path);
 int		export_invalid_identifier(t_mini *mini, char *id);
 int		unclosed_quote(int *code);

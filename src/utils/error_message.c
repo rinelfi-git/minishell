@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:36:36 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:56:09 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	command_not_found(t_mini *mini, char *str)
 	}
 }
 
-void	heredoc_eof(char *delimiter, int line)
+void	heredoc_eof(t_doc *heredoc, int line)
 {
 	ft_putstr_fd("minishell: warning: here-document at line ", 2);
 	ft_putnbr_fd(line, 2);
 	ft_putstr_fd(" delimited by end-of-file (wanted `", 2);
-	ft_putstr_fd(delimiter, 2);
+	ft_putstr_fd(heredoc->delimiter, 2);
 	ft_putendl_fd("')", 2);
 }
 

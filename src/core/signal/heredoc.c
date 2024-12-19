@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:03:19 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/09 17:27:52 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 22:48:54 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	sigint(int signal)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	ft_putstr_fd("\n", STDIN_FILENO);
-	exit(130);
+	close(0);
 }
 
 void	heredoc_signal(void)
