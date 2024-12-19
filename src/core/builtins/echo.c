@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:18 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 12:38:03 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:16:48 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 static int	n_argument(char *arg)
 {
 	if (*(arg++) != '-')
+		return (0);
+	if (!(*arg) || is_space(*arg))
 		return (0);
 	while (*arg)
 	{
@@ -46,8 +48,8 @@ int	built_echo(t_mini *mini, char **args)
 			if (args[++i])
 				ft_putchar_fd(' ', 1);
 		}
-		ft_putchar_fd(end, 1);
 	}
+	ft_putchar_fd(end, 1);
 	mini->exit_code = 0;
 	return (1);
 }
