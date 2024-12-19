@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 14:41:43 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:37:33 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:28:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	is_special(char *str)
 
 int	isnumber(char *str)
 {
+	if (!ft_strlen(str))
+		return (0);
 	while (is_space(*str))
 		str++;
 	if (*str == '-' || *str == '+')

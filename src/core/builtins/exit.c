@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 10:12:34 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/16 15:27:45 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:25:36 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ int	built_exit(t_mini *mini, char **args)
 
 	len = strarraylen(args);
 	ft_putendl_fd("exit", STDOUT_FILENO);
-	if (len == 2)
+	if (len >= 2)
 	{
 		if (!isnumber(args[1]))
 			exit_not_numeric(mini);
+		if (len > 2)
+			exit_many_argument(mini);
 		else
 			exit_numeric(mini, ft_atoi(args[1]));
 	}
-	else if (len == 1)
-		exit_numeric(mini, 0);
 	else
-		exit_many_argument(mini);
+		exit_numeric(mini, 0);
 	return (1);
 }
