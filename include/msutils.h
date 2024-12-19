@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:52:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:25:55 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:15:33 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "minishell.h"
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2
+#  define BUFFER_SIZE 256
 # endif
 
 void	str_append(char **dest, char *src);

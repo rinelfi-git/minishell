@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:41:27 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:54:38 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	execute_builtin(t_mini *mini, t_cmd *cmd)
 	if (ft_strncmp(cmd->args[0], "cd", INT_MAX) == 0)
 		return (built_cd(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "pwd", INT_MAX) == 0)
-		return (built_pwd(mini, cmd->args));
+		return (built_pwd(mini));
 	if (ft_strncmp(cmd->args[0], "echo", INT_MAX) == 0)
 		return (built_echo(mini, cmd->args));
 	if (ft_strncmp(cmd->args[0], "unset", INT_MAX) == 0)

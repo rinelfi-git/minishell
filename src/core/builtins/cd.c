@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:25:57 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:16:26 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 static int	update_vars(t_mini *mini, char *old)
 {
 	char	*export[4];
-	char	*cwd;
+	char	cwd[PATH_LEN];
 
 	if (mini->exit_code != 0)
 		return (0);
-	cwd = getcwd(0, 0);
+	getcwd(cwd, PATH_LEN);
 	export[0] = "export";
 	export[1] = ft_strjoin("OLDPWD=", old);
 	export[2] = ft_strjoin("PWD=", cwd);
@@ -59,7 +59,7 @@ static int	access_test(t_mini *mini, char *path)
 
 int	built_cd(t_mini *mini, char **args)
 {
-	char	*old;
+	char	old[PATH_LEN];
 	int		len;
 
 	mini->exit_code = 0;
@@ -69,7 +69,7 @@ int	built_cd(t_mini *mini, char **args)
 		mini->exit_code = 1;
 		return (0);
 	}
-	old = getcwd(0, 0);
+	getcwd(old, PATH_LEN);
 	len = strarraylen(args);
 	if (len == 1 || (len == 2 && args[1][0] == '~'))
 		chdir(ft_getenv(mini->env_list, "HOME"));

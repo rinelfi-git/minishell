@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/18 22:00:49 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:15:56 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
+
+# define PATH_LEN 1024
 
 # define TERM_PRIMARY "\033[0m\033[1;91m"
 # define TERM_SECONDARY "\033[0m\033[92m"
@@ -126,7 +128,7 @@ int							built_env(t_mini *mini);
 int							built_cd(t_mini *mini, char **args);
 int							built_export(t_mini *mini, char **args);
 int							built_echo(t_mini *mini, char **args);
-int							built_pwd(t_mini *mini, char **args);
+int							built_pwd(t_mini *mini);
 int							built_unset(t_mini *mini, char **args);
 int							built_exit(t_mini *mini, char **args);
 int							export_append(char *str, int i, t_env **env);
