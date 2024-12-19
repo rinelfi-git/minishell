@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 20:30:54 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:32:44 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	syntax_ok(char *str, int *code)
 	create_token_list(&token, str);
 	ok = 1;
 	tmp = token;
+	if (token && token->type == PIPE)
+		ok = unexpected_token(code, "|");
 	while (ok && tmp)
 	{
 		if (!closed_quote(tmp->str))
