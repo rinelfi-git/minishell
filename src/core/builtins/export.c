@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/17 20:33:26 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:08:39 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,22 @@ static int	has_operation(char *str)
 	return (0);
 }
 
+static char	*get_export_identifier(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != '=')
+		i++;
+	return (ft_substr(str, 0, i));
+}
+
 static int	do_export(t_mini *mini, char *str)
 {
 	int		i;
 	char	*identifier;
 
-	identifier = get_identifier(str);
+	identifier = get_export_identifier(str);
 	if (!is_valid_identifier(identifier))
 		return (export_invalid_identifier(mini, str));
 	if (!has_operation(str) && !ft_getenv(mini->env_list, str))
