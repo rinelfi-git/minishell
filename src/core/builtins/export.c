@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 15:32:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:51:52 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static int	do_export(t_mini *mini, char *str)
 		free(id);
 		return (export_invalid_identifier(mini, str));
 	}
-	if (!has_operation(str) && !ft_getenv(mini->env_list, str))
+	if (!has_operation(str) && !ft_getenv(mini->env_list, id))
 		append_env(&(mini->env_list))->name = ft_strdup(id);
-	else
+	else if (has_operation(str))
 	{
 		i = ft_strlen(id);
 		export_assign(str, i, &(mini->env_list));

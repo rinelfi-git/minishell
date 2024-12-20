@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 15:20:37 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 17:50:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int							built_echo(t_mini *mini, char **args);
 int							built_pwd(t_mini *mini);
 int							built_unset(t_mini *mini, char **args);
 int							built_exit(t_mini *mini, char **args);
-int							export_append(char *str, int i, t_env **env);
 int							export_assign(char *str, int i, t_env **env);
 void						export_print(t_env *env);
 
