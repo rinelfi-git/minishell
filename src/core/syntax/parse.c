@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 20:53:38 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 19:09:16 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:27:46 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ static char	*split_literral(t_mini *mini, char *str, int *i, int use_expand)
 	if (use_expand)
 		expand(mini, &split);
 	(*i) += j;
-	return (split);
+	if (split && *split)
+		return (split);
+	free(split);
+	return (NULL);
 }
 
 static char	*parse_split(t_mini *mini, char *str, int *i, int use_expand)
@@ -89,10 +92,12 @@ int	parse(t_mini *mini, char **str, int use_expand)
 	char	**split;
 	int		jump;
 	int		i;
+	int		split_length;
 
 	if (!(*str))
 		return (1);
-	split = ft_calloc(sizeof(char *), sequence_count(*str) + 1);
+	split_length = sequence_count(*str);
+	split = ft_calloc(sizeof(char *), split_length + 1);
 	if (!split)
 		return (0);
 	i = 0;
@@ -100,10 +105,13 @@ int	parse(t_mini *mini, char **str, int use_expand)
 	while ((*str)[jump])
 		split[i++] = parse_split(mini, (*str) + jump, &jump, use_expand);
 	free(*str);
-	*str = 0;
-	i = 0;
-	while (split[i])
-		str_append(str, split[i++]);
+	*str = NULL;
+	i = -1;
+	while (++i < split_length)
+	{
+		if (split[i])
+			str_append(str, split[i]);
+	}
 	free_strarray(split);
 	return (1);
 }
