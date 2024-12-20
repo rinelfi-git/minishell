@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:33:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 18:49:01 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 19:58:02 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static char	*get_absolute(char *env_path, char *exe, char **error)
 	}
 	if (!path)
 		*error = ft_strdup(CMD_NOT_FOUND);
+	free_strarray(path_split);
 	return (path);
 }
 
