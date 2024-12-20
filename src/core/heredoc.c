@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 22:15:24 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 23:09:58 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:18:09 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	read_process(t_mini *mini, t_doc *doc, int fd_in)
 	line_count = 0;
 	while (1)
 	{
-		line = readline("> ");
+		line = readline(HD_PROMPT);
 		if (!line)
 		{
 			if (signal_manager(0, GET_MODE) == SIGINT)

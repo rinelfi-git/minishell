@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 14:43:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:45:04 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static int	closed_quote(char *str)
 	char	quote;
 
 	quote = 0;
-	printf("Check %s\n", str);
 	while (*str)
 	{
 		if (is_quote(*str))

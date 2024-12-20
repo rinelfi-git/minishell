@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:45:52 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/14 15:35:41 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:57:32 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static void	sigint(int signal)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	rl_redisplay();
 }
 
 void	main_signal(void)
 {
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, sigint);
 }

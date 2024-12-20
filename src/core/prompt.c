@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 14:33:15 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:11:01 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_input(t_mini *mini)
 {
 	char	*in;
 
-	in = readline("~$ ");
+	in = readline(MAIN_PROMPT);
 	if (!in)
 	{
 		data_free(mini);
@@ -94,7 +94,6 @@ void	prompt(t_mini *mini)
 	char	*in;
 
 	main_signal();
-	signal(SIGQUIT, SIG_IGN);
 	load_history();
 	while (1)
 	{
