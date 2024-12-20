@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 17:50:08 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:46:52 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@
 # define GET_MODE 2
 
 # define MALLOC_ERROR -1
+# define CMD_ERR_DIR ": Is a directory"
+# define CMD_NOT_FILE ": No such file or directory"
+# define CMD_NOT_FOUND ": command not found"
+# define CMD_ERR_PERMISSION ": Permission denied"
 
 typedef struct s_minishell	t_mini;
 typedef struct s_env		t_env;
@@ -118,7 +122,7 @@ int							create_cmd_list(t_mini *mini);
 t_cmd						*cmd_append(t_cmd **head);
 char						**get_cmd_params(t_mini *mini, t_token *token);
 int							cmd_length(t_cmd *head);
-char						*get_path(t_env *env, t_cmd *cmd);
+char						*get_path(t_env *env, t_cmd *cmd, char **error);
 int							get_fdin(t_mini *mini, t_token *token);
 int							get_fdout(t_mini *mini, t_token *token);
 

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 23:44:25 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:44:32 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,18 @@
 #include "minishell.h"
 #include "msutils.h"
 
-void	command_not_found(t_mini *mini, char *str)
+void	command_error(t_mini *mini, char *str, char *error)
 {
 	ft_putstr_fd("minishell: ", 2);
-	if (isdir(str))
-	{
-		ft_putstr_fd(str, 2);
-		ft_putendl_fd(": Is a directory", 2);
+	ft_putstr_fd(str, 2);
+	ft_putendl_fd(error, 2);
+	if (ft_strncmp(error, CMD_ERR_DIR, INT_MAX) == 0 ||
+		ft_strncmp(error, CMD_ERR_PERMISSION, INT_MAX) == 0)
 		mini->exit_code = 126;
-	}
-	else if (ft_strchr(str, '/'))
-	{
-		ft_putstr_fd(str, 2);
-		ft_putendl_fd(": No such file or directory", 2);
+	else if (ft_strncmp(error, CMD_NOT_FILE, INT_MAX) == 0 ||
+		ft_strncmp(error, CMD_NOT_FOUND, INT_MAX) == 0)
 		mini->exit_code = 127;
-	}
-	else
-	{
-		ft_putstr_fd(str, 2);
-		ft_putendl_fd(": command not found", 2);
-		mini->exit_code = 127;
-	}
+	free(error);
 }
 
 void	heredoc_eof(t_doc *heredoc, int line)

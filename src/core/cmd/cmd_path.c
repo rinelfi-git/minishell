@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:33:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 16:11:04 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 18:49:01 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,36 @@ static int	null_args(t_cmd *cmd)
 	return (!cmd || !cmd->args || !cmd->args[0] || !*(cmd->args[0]));
 }
 
-static char	*get_absolute(char **paths, char *exe)
+static char	*get_relative(char *exe, char **error)
+{
+	if (isdir(exe))
+		*error = ft_strdup(CMD_ERR_DIR);
+	else if (access(exe, F_OK) == 0)
+	{
+		if (access(exe, X_OK) == 0)
+			return (ft_strdup(exe));
+		else
+			*error = ft_strdup(CMD_ERR_PERMISSION);
+	}
+	else
+		*error = ft_strdup(CMD_NOT_FILE);
+	return (NULL);
+}
+
+static char	*get_absolute(char *env_path, char *exe, char **error)
 {
 	int		i;
 	char	*path;
+	char	**path_split;
 
 	i = 0;
 	path = NULL;
-	while (!path && paths && paths[i])
+	path_split = ft_split(env_path, ':');
+	if (!path_split)
+		return (NULL);
+	while (!path && path_split[i])
 	{
-		path = ft_strjoin(paths[i++], "/");
+		path = ft_strjoin(path_split[i++], "/");
 		str_append(&path, exe);
 		if (access(path, F_OK) != 0 && access(path, X_OK) != 0)
 		{
@@ -36,26 +56,27 @@ static char	*get_absolute(char **paths, char *exe)
 			path = NULL;
 		}
 	}
+	if (!path)
+		*error = ft_strdup(CMD_NOT_FOUND);
 	return (path);
 }
 
-char	*get_path(t_env *env, t_cmd *cmd)
+char	*get_path(t_env *env, t_cmd *cmd, char **error)
 {
-	char	**paths;
 	char	*exe;
 
+	*error = NULL;
 	cmd->path = NULL;
-	if (null_args(cmd) || isdir(cmd->args[0]))
-		return (cmd->path);
+	if (null_args(cmd))
+		*error = ft_strdup(CMD_NOT_FOUND);
+	if (*error)
+		return (NULL);
 	exe = cmd->args[0];
-	if (access(exe, F_OK) == 0 && access(exe, X_OK) == 0)
-		cmd->path = ft_strdup(exe);
-	if (cmd->path || (env && !ft_getenv(env, "PATH")))
-		return (cmd->path);
-	paths = ft_split(ft_getenv(env, "PATH"), ':');
-	if (!paths)
-		return (0);
-	cmd->path = get_absolute(paths, exe);
-	free_strarray(paths);
+	if (ft_strchr(exe, '/'))
+		cmd->path = get_relative(exe, error);
+	else if (env && ft_getenv(env, "PATH"))
+		cmd->path = get_absolute(ft_getenv(env, "PATH"), exe, error);
+	else
+		*error = ft_strdup(CMD_NOT_FILE);
 	return (cmd->path);
 }
