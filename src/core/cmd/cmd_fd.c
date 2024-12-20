@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:25:55 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:00:11 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,27 @@
 
 static int	open_file(t_mini *mini, int *fd, char *path, int type)
 {
-	if (*fd >= 0)
+	int	temp_fd;
+
+	if (fd && *fd >= 0)
 		close(*fd);
-	*fd = -2;
+	temp_fd = -2;
 	if (type == INPUT)
-		*fd = open(path, O_RDONLY);
+		temp_fd = open(path, O_RDONLY);
 	else if (type == APPEND)
-		*fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		temp_fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (type == TRUNC)
-		*fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		temp_fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (type == HEREDOC)
-		*fd = open_heredoc(mini, path);
-	if (*fd == -1 && errno)
+		temp_fd = open_heredoc(mini, path);
+	if (fd)
+		*fd = temp_fd;
+	else if (temp_fd >= 0)
+		close(temp_fd);
+	if (temp_fd == -1 && errno)
 	{
-		if (errno)
-		{
-			ms_perror(path);
-			mini->exit_code = 1;
-		}
+		ms_perror(path);
+		mini->exit_code = 1;
 		return (0);
 	}
 	return (1);
@@ -47,6 +50,12 @@ int	get_fdin(t_mini *mini, t_token *token)
 	{
 		if (signal_manager(0, GET_MODE) == SIGINT)
 			return (-1);
+		if (token->type == TRUNC || token->type == APPEND)
+		{
+			parse(mini, &token->next->str, 1);
+			if (!open_file(mini, 0, token->next->str, token->type))
+				return (-1);
+		}
 		if (token->type == INPUT)
 		{
 			parse(mini, &token->next->str, 1);
@@ -69,16 +78,16 @@ int	get_fdout(t_mini *mini, t_token *token)
 	{
 		if (signal_manager(0, GET_MODE) == SIGINT)
 			return (-1);
-		if (token->type == TRUNC)
+		if (token->type == INPUT)
 		{
-			parse(mini, &(token->next->str), 1);
-			if (!open_file(mini, &fd, token->next->str, TRUNC))
+			parse(mini, &token->next->str, 1);
+			if (!open_file(mini, 0, token->next->str, INPUT))
 				return (-1);
 		}
-		if (token->type == APPEND)
+		if (token->type == APPEND || token->type == TRUNC)
 		{
 			parse(mini, &(token->next->str), 1);
-			if (!open_file(mini, &fd, token->next->str, APPEND))
+			if (!open_file(mini, &fd, token->next->str, token->type))
 				return (-1);
 		}
 		token = token->next;
