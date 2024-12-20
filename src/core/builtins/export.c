@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:08:39 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:32:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,22 @@ static char	*get_export_identifier(char *str)
 static int	do_export(t_mini *mini, char *str)
 {
 	int		i;
-	char	*identifier;
+	char	*id;
 
-	identifier = get_export_identifier(str);
-	if (!is_valid_identifier(identifier))
+	id = get_export_identifier(str);
+	if (!is_valid_identifier(id))
+	{
+		free(id);
 		return (export_invalid_identifier(mini, str));
+	}
 	if (!has_operation(str) && !ft_getenv(mini->env_list, str))
-		append_env(&(mini->env_list))->name = identifier;
+		append_env(&(mini->env_list))->name = ft_strdup(id);
 	else
 	{
-		i = ft_strlen(identifier);
+		i = ft_strlen(id);
 		export_assign(str, i, &(mini->env_list));
-		free(identifier);
 	}
+	free(id);
 	mini->exit_code = 0;
 	return (1);
 }
