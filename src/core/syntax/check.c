@@ -6,12 +6,12 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 20:10:24 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:48:30 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "msutils.h"
 #include "libft.h"
+#include "msutils.h"
 
 static int	closed_quote(char *str)
 {
@@ -53,11 +53,27 @@ static void	post_check(int valid, char *in)
 		free(in);
 }
 
+static int	check_specials(t_token *token, int *code)
+{
+	int	special;
+
+	special = INPUT;
+	while (special <= APPEND)
+		if (token->type == special++)
+		{
+			if (!token->next && !unexpected_token(code, "newline"))
+				return (0);
+			else if (token->next && token->next->type != ARG &&
+				!unexpected_token(code, token->next->str))
+				return (0);
+		}
+	return (1);
+}
+
 int	syntax_ok(char *str, int *code)
 {
 	t_token	*token;
 	t_token	*tmp;
-	int		special;
 	int		ok;
 
 	create_token_list(&token, str);
@@ -71,10 +87,8 @@ int	syntax_ok(char *str, int *code)
 			ok = unclosed_quote(code);
 		if (ok && tmp->type == PIPE && !tmp->next)
 			ok = unexpected_token(code, "|");
-		special = INPUT;
-		while (ok && special <= APPEND)
-			if (tmp->type == special++ && !tmp->next)
-				ok = unexpected_token(code, "newline");
+		if (ok)
+			ok = check_specials(tmp, code);
 		tmp = tmp->next;
 	}
 	free_lst_token(&token);
