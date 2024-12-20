@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:26 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 17:51:52 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 19:05:01 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	do_export(t_mini *mini, char *str)
 		export_assign(str, i, &(mini->env_list));
 	}
 	free(id);
-	mini->exit_code = 0;
 	return (1);
 }
 
@@ -62,17 +61,14 @@ int	built_export(t_mini *mini, char **args)
 {
 	int	i;
 
+	mini->exit_code = 0;
 	if (strarraylen(args) == 1)
 		export_print(mini->env_list);
 	else
 	{
 		i = 1;
 		while (args[i])
-		{
-			if (!do_export(mini, args[i++]))
-				return (0);
-		}
+			do_export(mini, args[i++]);
 	}
-	mini->exit_code = 0;
 	return (1);
 }
