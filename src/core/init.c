@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 09:33:01 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 17:04:05 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:23:12 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	data_free(t_mini *mini)
 	if (mini->pids)
 		free(mini->pids);
 	data_init(mini);
+	rl_clear_history();
 	return (mini->exit_code);
 }
 

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:32:44 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:43:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int	closed_quote(char *str)
 	char	quote;
 
 	quote = 0;
+	printf("Check %s\n", str);
 	while (*str)
 	{
 		if (is_quote(*str))
@@ -27,8 +28,11 @@ static int	closed_quote(char *str)
 				str++;
 			if (*str == quote)
 				quote = 0;
+			if (*str)
+				str++;
 		}
-		str++;
+		else
+			str++;
 	}
 	if (quote)
 		return (0);
@@ -44,6 +48,12 @@ static int	unexpected_token(int *code, char *token)
 	return (0);
 }
 
+static void	post_check(int valid, char *in)
+{
+	if (!valid)
+		free(in);
+}
+
 int	syntax_ok(char *str, int *code)
 {
 	t_token	*token;
@@ -54,7 +64,7 @@ int	syntax_ok(char *str, int *code)
 	create_token_list(&token, str);
 	ok = 1;
 	tmp = token;
-	if (token && token->type == PIPE)
+	if (tmp && tmp->type == PIPE)
 		ok = unexpected_token(code, "|");
 	while (ok && tmp)
 	{
@@ -69,5 +79,6 @@ int	syntax_ok(char *str, int *code)
 		tmp = tmp->next;
 	}
 	free_lst_token(&token);
+	post_check(ok, str);
 	return (ok);
 }
