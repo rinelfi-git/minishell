@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:33:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 23:49:57 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 16:11:04 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_path(t_env *env, t_cmd *cmd)
 	exe = cmd->args[0];
 	if (access(exe, F_OK) == 0 && access(exe, X_OK) == 0)
 		cmd->path = ft_strdup(exe);
-	if (env && !ft_getenv(env, "PATH"))
+	if (cmd->path || (env && !ft_getenv(env, "PATH")))
 		return (cmd->path);
 	paths = ft_split(ft_getenv(env, "PATH"), ':');
 	if (!paths)
