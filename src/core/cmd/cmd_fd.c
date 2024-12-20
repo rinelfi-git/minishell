@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 20:00:11 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:15:52 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,6 @@ int	get_fdout(t_mini *mini, t_token *token)
 	{
 		if (signal_manager(0, GET_MODE) == SIGINT)
 			return (-1);
-		if (token->type == INPUT)
-		{
-			parse(mini, &token->next->str, 1);
-			if (!open_file(mini, 0, token->next->str, INPUT))
-				return (-1);
-		}
 		if (token->type == APPEND || token->type == TRUNC)
 		{
 			parse(mini, &(token->next->str), 1);

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 15:11:01 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/20 20:12:23 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 static char	*get_input(t_mini *mini)
 {
 	char	*in;
+	int		code;
 
 	in = readline(MAIN_PROMPT);
 	if (!in)
 	{
+		code = mini->exit_code;
 		data_free(mini);
-		ft_putendl_fd("exit", 1);
-		exit(0);
+		exit(code);
 	}
 	return (in);
 }
