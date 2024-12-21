@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
+/*   By: ttelolah <ttelolah@student.42antananavo    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:18 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 19:16:48 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 09:14:21 by ttelolah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 #include "msutils.h"
-#include "libft.h"
 
 static int	n_argument(char *arg)
 {
@@ -35,19 +35,17 @@ int	built_echo(t_mini *mini, char **args)
 
 	end = '\n';
 	i = 1;
-	if (strarraylen(args) > 1)
+	while (args[i] && n_argument(args[i]))
 	{
-		if (n_argument(args[1]))
-		{
-			end = '\0';
-			i++;
-		}
-		while (args[i])
-		{
-			ft_putstr_fd(args[i], 1);
-			if (args[++i])
-				ft_putchar_fd(' ', 1);
-		}
+		end = '\0';
+		i++;
+	}
+	while (args[i])
+	{
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
+			ft_putchar_fd(' ', 1);
+		i++;
 	}
 	ft_putchar_fd(end, 1);
 	mini->exit_code = 0;
