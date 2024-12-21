@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 20:15:52 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 13:37:05 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static int	open_file(t_mini *mini, int *fd, char *path, int type)
 	if (fd && *fd >= 0)
 		close(*fd);
 	temp_fd = -2;
-	if (type == INPUT)
+	if (path && type == INPUT)
 		temp_fd = open(path, O_RDONLY);
-	else if (type == APPEND)
+	else if (path && type == APPEND)
 		temp_fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else if (type == TRUNC)
+	else if (path && type == TRUNC)
 		temp_fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (type == HEREDOC)
+	else if (path && type == HEREDOC)
 		temp_fd = open_heredoc(mini, path);
 	if (fd)
 		*fd = temp_fd;
