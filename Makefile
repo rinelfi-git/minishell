@@ -66,3 +66,6 @@ re : fclean all
 
 %.o : %.c
 	$(CC) $(CARG) $(INCs) -c $< -o $@
+
+debug : $(NAME)
+	@valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all -s --track-origins=yes --track-fds=yes ./$<
