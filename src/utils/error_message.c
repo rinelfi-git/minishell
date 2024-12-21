@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 16:40:57 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 22:04:49 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ void	ms_perror(char *path, int *code)
 	}
 	else
 		ft_putendl_fd("minishell: ambiguous redirect", 2);
+	printf("PERROR %d\n", errno);
 	if (code && errno == 20)
 		*code = 126;
+	if (code && errno == 2)
+		*code = 127;
 }
 
 int	export_invalid_identifier(t_mini *mini, char *id)
