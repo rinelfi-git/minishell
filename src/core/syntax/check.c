@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 20:48:30 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 08:39:27 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,11 @@ int	syntax_ok(char *str, int *code)
 	create_token_list(&token, str);
 	ok = 1;
 	tmp = token;
-	if (tmp && tmp->type == PIPE)
-		ok = unexpected_token(code, "|");
 	while (ok && tmp)
 	{
 		if (!closed_quote(tmp->str))
 			ok = unclosed_quote(code);
-		if (ok && tmp->type == PIPE && !tmp->next)
+		if (ok && tmp->type == PIPE && (!tmp->next || !tmp->prev))
 			ok = unexpected_token(code, "|");
 		if (ok)
 			ok = check_specials(tmp, code);
