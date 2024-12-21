@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 14:50:50 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:49:37 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # define CMD_ERR_DIR ": Is a directory"
 # define CMD_NOT_FILE ": No such file or directory"
 # define CMD_NOT_FOUND ": command not found"
+# define CMD_NOT_FOUND_DOT ": filename argument required"
 # define CMD_ERR_PERMISSION ": Permission denied"
 
 typedef struct s_minishell	t_mini;

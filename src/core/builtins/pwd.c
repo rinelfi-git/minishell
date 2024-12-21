@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:33:07 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:16:23 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:47:12 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	built_pwd(t_mini *mini)
 	}
 	else
 	{
-		ms_perror(ft_strdup("pwd"));
+		ms_perror(ft_strdup("pwd"), 0);
 		mini->exit_code = ENOENT;
 	}
 	return (1);

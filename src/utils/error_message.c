@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 14:53:42 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:49:50 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	command_error(t_mini *mini, char *str, char *error)
 	else if (ft_strncmp(error, CMD_NOT_FOUND, INT_MAX) == 0 ||
 		ft_strncmp(error, CMD_NOT_FILE, INT_MAX) == 0)
 		mini->exit_code = 127;
+	else if (ft_strncmp(error, CMD_NOT_FOUND_DOT, INT_MAX) == 0)
+		mini->exit_code = 2;
 	free(error);
 }
 
@@ -44,7 +46,6 @@ void	ms_perror(char *path, int *code)
 	msg = ft_strjoin("minishell: ", path);
 	perror(msg);
 	free(msg);
-	printf("ERRNO %d\n", errno);
 	if (code && errno == 20)
 		*code = 126;
 }

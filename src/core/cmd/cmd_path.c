@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:33:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 14:52:42 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:50:05 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ static int	null_args(t_cmd *cmd)
 
 static char	*get_relative(char *exe, char **error)
 {
-	if (isdir(exe))
+	if (ft_strncmp(exe, ".", 2) == 0)
+		*error = ft_strdup(CMD_NOT_FOUND_DOT);
+	if (ft_strncmp(exe, "..", 3) == 0)
+		*error = ft_strdup(CMD_NOT_FOUND);
+	if (!(*error) && isdir(exe))
 		*error = ft_strdup(CMD_ERR_DIR);
-	else if (access(exe, F_OK) == 0 && access(exe, X_OK) != 0)
+	else if (!(*error) && access(exe, F_OK) == 0 && access(exe, X_OK) != 0)
 		*error = ft_strdup(CMD_ERR_PERMISSION);
 	return (ft_strdup(exe));
 }
@@ -66,7 +70,7 @@ char	*get_path(t_env *env, t_cmd *cmd, char **error)
 	if (*error)
 		return (NULL);
 	exe = cmd->args[0];
-	if (ft_strchr(exe, '/'))
+	if (ft_strchr(exe, '.') == exe || ft_strchr(exe, '/'))
 		cmd->path = get_relative(exe, error);
 	else if (env && ft_getenv(env, "PATH"))
 		cmd->path = get_absolute(ft_getenv(env, "PATH"), exe, error);
