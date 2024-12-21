@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 09:25:22 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:16:38 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ static int	update_vars(t_mini *mini, char *old)
 
 static int	access_test(t_mini *mini, char *path)
 {
-	struct stat	stats;
-
-	stat(path, &stats);
 	if (access(path, F_OK) != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
@@ -45,7 +42,7 @@ static int	access_test(t_mini *mini, char *path)
 		mini->exit_code = 1;
 		return (0);
 	}
-	if (!S_ISDIR(stats.st_mode))
+	if (!isdir(path))
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd(path, STDERR_FILENO);
@@ -70,15 +67,14 @@ int	built_cd(t_mini *mini, char **args)
 	}
 	getcwd(old, PATH_LEN);
 	len = strarraylen(args);
-	if (len == 1 || (len == 2 && args[1][0] == '~'))
-		chdir(ft_getenv(mini->env_list, "HOME"));
-	else if (len == 2 && access_test(mini, args[1]))
+	if (len == 2 && access_test(mini, args[1]))
 	{
 		if (chdir(args[1]) == -1 && errno)
 		{
 			ms_perror(ft_strjoin("cd: ", args[1]));
 			mini->exit_code = 1;
 		}
+		return (update_vars(mini, old));
 	}
-	return (update_vars(mini, old));
+	return (1);
 }
