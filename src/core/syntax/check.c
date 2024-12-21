@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:29:12 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 16:39:17 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:40:02 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static int	check_specials(t_token *token, int *code)
 		{
 			if (!token->next && !unexpected_token(code, "newline"))
 				return (0);
-			else if (token->next && token->next->type != ARG &&
-				!unexpected_token(code, token->next->str))
+			else if (token->next && token->next->type != ARG
+				&& !unexpected_token(code, token->next->str))
 				return (0);
 		}
 	}
