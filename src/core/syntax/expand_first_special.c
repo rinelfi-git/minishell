@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 11:18:49 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 11:58:53 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:38:08 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "msutils.h"
 #define BUFFER_LEN 5
 
-int escape_special(char **out, int type, int start)
+int	escape_special(char **out, int type, int start)
 {
 	char	special[BUFFER_LEN];
 	char	*tmp;
