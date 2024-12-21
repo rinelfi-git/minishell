@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 08:44:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 20:12:23 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:58:14 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	load_history(void)
 	int		fd;
 	char	*line;
 
-	fd = open(HISTORY_FILE, O_RDONLY | O_CREAT, 0644);
+	fd = open(HISTORY_FILE, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 		return ;
 	line = get_next_line(fd);

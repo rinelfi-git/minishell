@@ -6,15 +6,13 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:49:17 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/18 22:01:41 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:34:03 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
 #include "msutils.h"
-
-static int	escape_quote(char **str, int start);
 
 static int	join_escaped_quote(char **str, char *escape, int start)
 {
@@ -29,7 +27,7 @@ static int	join_escaped_quote(char **str, char *escape, int start)
 	return (1);
 }
 
-static int	escape_quote(char **str, int start)
+int	escape_quote(char **str, int start)
 {
 	int		i;
 	char	q[4];
@@ -48,6 +46,8 @@ static int	escape_quote(char **str, int start)
 			q[2] = q[0];
 			return (join_escaped_quote(str, q, i));
 		}
+		else if (is_special((*str) + i))
+			return (escape_special(str, is_special((*str) + i), i));
 		else
 			i++;
 	}

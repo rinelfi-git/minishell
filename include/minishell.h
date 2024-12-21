@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 18:46:52 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:56:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 
 # define MAIN_PROMPT "\033[0m\033[92m~$ \033[0m"
 # define HD_PROMPT "\033[0m\033[91m> \033[0m"
-# define HISTORY_FILE "/tmp/.history"
+# define HISTORY_FILE "/tmp/minishell"
 
 # define CMD 1
 # define ARG 2
@@ -113,6 +113,8 @@ char						*get_identifier(char *str);
 int							is_valid_identifier(char *str);
 int							syntax_ok(char *str, int *code);
 int							expand_first(t_mini *mini, char **in, int start);
+int							escape_special(char **out, int type, int start);
+int							escape_quote(char **str, int start);
 int							expand(t_mini *mini, char **str);
 int							parse(t_mini *mini, char **str, int use_expand);
 

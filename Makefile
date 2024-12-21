@@ -18,6 +18,7 @@ SRCs = src/main.c \
 		src/core/cmd/list_cmd.c \
 		src/core/signal/heredoc.c \
 		src/core/signal/signal.c \
+		src/core/syntax/expand_first_special.c \
 		src/core/syntax/expand_first.c \
 		src/core/syntax/expand.c \
 		src/core/syntax/identifier.c \
