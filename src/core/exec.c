@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 12:44:50 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 18:25:39 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:54:27 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ static void	child_process(t_mini *mini, t_cmd *cmd, int *pipes)
 		fork_builtin(mini, cmd, pipes);
 	else if (cmd->args)
 	{
-		if (get_path(mini->env_list, cmd, &error))
+		if (get_path(mini->env_list, cmd, &error) && !error)
 		{
 			redirect_in_out(mini, cmd, pipes);
-			execve(cmd->path, cmd->args, mini->env_array);
+			if (execve(cmd->path, cmd->args, mini->env_array) == -1)
+				ms_perror(cmd->path, &(mini->exit_code));
 		}
 		else
 			command_error(mini, cmd->args[0], error);

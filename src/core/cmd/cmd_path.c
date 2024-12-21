@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 09:33:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 19:58:02 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:52:42 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,9 @@ static char	*get_relative(char *exe, char **error)
 {
 	if (isdir(exe))
 		*error = ft_strdup(CMD_ERR_DIR);
-	else if (access(exe, F_OK) == 0)
-	{
-		if (access(exe, X_OK) == 0)
-			return (ft_strdup(exe));
-		else
-			*error = ft_strdup(CMD_ERR_PERMISSION);
-	}
-	else
-		*error = ft_strdup(CMD_NOT_FILE);
-	return (NULL);
+	else if (access(exe, F_OK) == 0 && access(exe, X_OK) != 0)
+		*error = ft_strdup(CMD_ERR_PERMISSION);
+	return (ft_strdup(exe));
 }
 
 static char	*get_absolute(char *env_path, char *exe, char **error)

@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 13:20:49 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:53:42 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	command_error(t_mini *mini, char *str, char *error)
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd(error, 2);
 	if (ft_strncmp(error, CMD_ERR_DIR, INT_MAX) == 0 ||
-		ft_strncmp(error, CMD_ERR_PERMISSION, INT_MAX) == 0 ||
-		ft_strncmp(error, CMD_NOT_FILE, INT_MAX) == 0)
+		ft_strncmp(error, CMD_ERR_PERMISSION, INT_MAX) == 0)
 		mini->exit_code = 126;
-	else if (ft_strncmp(error, CMD_NOT_FOUND, INT_MAX) == 0)
+	else if (ft_strncmp(error, CMD_NOT_FOUND, INT_MAX) == 0 ||
+		ft_strncmp(error, CMD_NOT_FILE, INT_MAX) == 0)
 		mini->exit_code = 127;
 	free(error);
 }
@@ -37,13 +37,16 @@ void	heredoc_eof(t_doc *heredoc, int line)
 	ft_putendl_fd("')", 2);
 }
 
-void	ms_perror(char *path)
+void	ms_perror(char *path, int *code)
 {
 	char	*msg;
 
 	msg = ft_strjoin("minishell: ", path);
 	perror(msg);
 	free(msg);
+	printf("ERRNO %d\n", errno);
+	if (code && errno == 20)
+		*code = 126;
 }
 
 int	export_invalid_identifier(t_mini *mini, char *id)

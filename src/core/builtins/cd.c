@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 07:32:32 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 14:16:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 14:47:03 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,8 @@ int	built_cd(t_mini *mini, char **args)
 	len = strarraylen(args);
 	if (len == 2 && access_test(mini, args[1]))
 	{
-		if (chdir(args[1]) == -1 && errno)
-		{
-			ms_perror(ft_strjoin("cd: ", args[1]));
-			mini->exit_code = 1;
-		}
+		if (chdir(args[1]) == -1)
+			ms_perror(ft_strjoin("cd: ", args[1]), &(mini->exit_code));
 		return (update_vars(mini, old));
 	}
 	return (1);
