@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 15:49:50 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:32:51 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ void	ms_perror(char *path, int *code)
 {
 	char	*msg;
 
-	msg = ft_strjoin("minishell: ", path);
-	perror(msg);
-	free(msg);
+	if (path)
+	{
+		msg = ft_strjoin("minishell: ", path);
+		perror(msg);
+		free(msg);
+	}
+	else
+		ft_putendl_fd("minishell: ambiguous redirect", 2);
 	if (code && errno == 20)
 		*code = 126;
 }

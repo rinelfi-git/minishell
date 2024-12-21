@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 11:59:15 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 13:37:05 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:29:06 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static int	open_file(t_mini *mini, int *fd, char *path, int type)
 		*fd = temp_fd;
 	else if (temp_fd >= 0)
 		close(temp_fd);
-	if (temp_fd == -1 && errno)
+	if (temp_fd == -1 || !path)
 	{
-		ms_perror(path);
+		ms_perror(path, 0);
 		mini->exit_code = 1;
 		return (0);
 	}
