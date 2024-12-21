@@ -1,8 +1,0 @@
-/minishell
-.vscode/
-test/
-*.[ao]
-*.fuse_*
-readline.supp
-
-minishell_tester
