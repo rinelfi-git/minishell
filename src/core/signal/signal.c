@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:45:52 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 14:57:32 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:12:02 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	signal_manager(int signal, int mode)
 	static int	signal_storage = 0;
 
 	if (mode == SET_MODE)
+	{
 		signal_storage = signal;
+		return (signal);
+	}
 	else if (mode == GET_MODE)
 		return (signal_storage);
 	return (-2);
