@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 18:53:21 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 11:56:06 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:32:00 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 # define PATH_LEN 1024
 
-# define MAIN_PROMPT "\033[0m\033[92m~$ \033[0m"
-# define HD_PROMPT "\033[0m\033[91m> \033[0m"
+# define MAIN_PROMPT "minishell:~$ "
+# define HD_PROMPT "> "
 # define HISTORY_FILE "/tmp/minishell"
 
 # define CMD 1
