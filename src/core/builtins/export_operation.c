@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 12:31:54 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/20 17:54:11 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 12:52:09 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	export_print(t_env *env)
 {
 	while (env)
 	{
+		if (ft_strncmp(env->name, "_", 2) == 0)
+		{
+			env = env->next;
+			continue ;
+		}
 		printf("export %s", env->name);
 		if (env->value)
 			printf("=\"%s\"\n", env->value);
