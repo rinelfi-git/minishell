@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:31:56 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/21 16:32:51 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 16:40:57 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	command_error(t_mini *mini, char *str, char *error)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(str, 2);
 	ft_putendl_fd(error, 2);
-	if (ft_strncmp(error, CMD_ERR_DIR, INT_MAX) == 0 ||
-		ft_strncmp(error, CMD_ERR_PERMISSION, INT_MAX) == 0)
+	if (ft_strncmp(error, CMD_ERR_DIR, INT_MAX) == 0
+		|| ft_strncmp(error, CMD_ERR_PERMISSION, INT_MAX) == 0)
 		mini->exit_code = 126;
-	else if (ft_strncmp(error, CMD_NOT_FOUND, INT_MAX) == 0 ||
-		ft_strncmp(error, CMD_NOT_FILE, INT_MAX) == 0)
+	else if (ft_strncmp(error, CMD_NOT_FOUND, INT_MAX) == 0
+		|| ft_strncmp(error, CMD_NOT_FILE, INT_MAX) == 0)
 		mini->exit_code = 127;
 	else if (ft_strncmp(error, CMD_NOT_FOUND_DOT, INT_MAX) == 0)
 		mini->exit_code = 2;
