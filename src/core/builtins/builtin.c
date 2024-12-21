@@ -6,7 +6,7 @@
 /*   By: erijania <erijania@student.42antananari    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:56:36 by erijania          #+#    #+#             */
-/*   Updated: 2024/12/19 08:54:38 by erijania         ###   ########.fr       */
+/*   Updated: 2024/12/21 15:53:12 by erijania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_builtin(t_cmd *cmd)
 	char	*bins[BUILTIN_LEN];
 	int		i;
 
-	if (!cmd->args)
+	if (!cmd->args || !(cmd->args[0]))
 		return (0);
 	i = 0;
 	bins[0] = "cd";
