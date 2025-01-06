@@ -23,7 +23,7 @@ static char	*get_relative(char *exe, char **error)
 {
 	if (ft_strncmp(exe, ".", 2) == 0)
 		*error = ft_strdup(CMD_NOT_FOUND_DOT);
-	if (ft_strncmp(exe, "..", 3) == 0)
+	if (ft_strncmp(exe, "..", 3) == 0 || access(exe, F_OK) != 0)
 		*error = ft_strdup(CMD_NOT_FOUND);
 	if (!(*error) && isdir(exe))
 		*error = ft_strdup(CMD_ERR_DIR);
